@@ -97,3 +97,103 @@ resource "aws_security_group_rule" "ossp-exlb-sg-egress" {
 
     security_group_id = aws_security_group.ossp-exlb-sg.id
 }
+
+resource "aws_security_group_rule" "ossp-web-sg-ingress" {
+    type = "ingress"
+    from_port = 80
+    to_port = 80
+    protocol = "tcp"
+
+    security_group_id = aws_security_group.ossp-web-sg.id
+    source_security_group_id = aws_security_group.ossp-exlb-sg.id
+}
+
+resource "aws_security_group_rule" "ossp-web-sg-ingress2" {
+    type = "ingress"
+    from_port = 22
+    to_port = 22
+    protocol = "tcp"
+    cidr_blocks = [var.cidr_block["cidr-all"]]
+
+    security_group_id = aws_security_group.ossp-web-sg.id
+}
+
+resource "aws_security_group_rule" "ossp-web-sg-egress" {
+    type = "egress"
+    from_port = 0
+    to_port = 0
+    protocol = "-1"
+    cidr_blocks = [var.cidr_block["cidr-all"]]
+
+    security_group_id = aws_security_group.ossp-web-sg.id
+}
+
+resource "aws_security_group_rule" "ossp-inlb-sg-ingress" {
+    type = "ingress"
+    from_port = 8080
+    to_port = 8080
+    protocol = "tcp"
+
+    security_group_id = aws_security_group.ossp-inlb-sg.id
+    source_security_group_id = aws_security_group.ossp-web-sg.id
+}
+
+resource "aws_security_group_rule" "ossp-inlb-sg-egress" {
+    type = "egress"
+    from_port = 0
+    to_port = 0
+    protocol = "-1"
+    cidr_blocks = [var.cidr_block["cidr-all"]]
+
+    security_group_id = aws_security_group.ossp-inlb-sg.id
+}
+
+resource "aws_security_group_rule" "ossp-was-sg-ingress" {
+    type = "ingress"
+    from_port = 8080
+    to_port = 8080
+    protocol = "tcp"
+
+    security_group_id = aws_security_group.ossp-was-sg.id
+    source_security_group_id = aws_security_group.ossp-inlb-sg.id
+}
+
+resource "aws_security_group_rule" "ossp-was-sg-ingress2" {
+    type = "ingress"
+    from_port = 22
+    to_port = 22
+    protocol = "tcp"
+    cidr_blocks = [var.cidr_block["cidr-all"]]
+
+    security_group_id = aws_security_group.ossp-was-sg.id
+}
+
+resource "aws_security_group_rule" "ossp-was-sg-egress" {
+    type = "egress"
+    from_port = 0
+    to_port = 0
+    protocol = "-1"
+    cidr_blocks = [var.cidr_block["cidr-all"]]
+
+    security_group_id = aws_security_group.ossp-was-sg.id
+}
+
+resource "aws_security_group_rule" "ossp-db-sg-ingress" {
+    type = "ingress"
+    from_port = 3306
+    to_port = 3306
+    protocol = "tcp"
+    cidr_blocks = [var.cidr_block["cidr-all"]]
+
+    security_group_id = aws_security_group.ossp-db-sg.id
+}
+
+resource "aws_security_group_rule" "ossp-db-sg-egress" {
+    type = "egress"
+    from_port = 0
+    to_port = 0
+    protocol = "-1"
+    cidr_blocks = [var.cidr_block["cidr-all"]]
+
+    security_group_id = aws_security_group.ossp-db-sg.id
+}

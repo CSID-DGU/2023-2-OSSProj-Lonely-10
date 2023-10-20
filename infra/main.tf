@@ -7,3 +7,15 @@ terraform {
     }
     required_version = ">= 1.2.0"
 }
+
+module "vpc" {
+    source = "./vpc"
+}
+
+module "rds" {
+    source = "./rds"
+}
+
+module "ec2" {
+    source = "./ec2"
+}

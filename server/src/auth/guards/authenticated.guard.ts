@@ -7,8 +7,12 @@ import type { Request } from 'express';
 export class AuthenticatedGuard implements CanActivate {
   constructor(private reflector: Reflector) {}
 
+  /**
+   * @param context
+   * @returns true if request is authenticated
+   * @description public일 경우 authentication을 거치지 않고 통과
+   */
   public canActivate(context: ExecutionContext): boolean {
-    // https://github.com/nestjs/nest/issues/964#issuecomment-480834786
     const isPublic = this.reflector.get<boolean>('isPublic', context.getHandler());
     if (isPublic) {
       return true;
@@ -18,6 +22,11 @@ export class AuthenticatedGuard implements CanActivate {
     return request.isAuthenticated();
   }
 
+  /**
+   * @param context
+   * @returns GraphQL context or HTTP request
+   * @description GraplQL context is used for GraphQL requests, HTTP request is used for REST requests
+   */
   public getRequest(context: ExecutionContext): Request {
     if (context.getType<GqlContextType>() === 'graphql') {
       const ctx = GqlExecutionContext.create(context).getContext<{ req: Request }>();

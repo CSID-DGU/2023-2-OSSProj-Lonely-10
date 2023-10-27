@@ -5,17 +5,17 @@ import { ServeStaticModule } from '@nestjs/serve-static';
 import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { LoggerModule } from 'nestjs-pino';
 
+import { AcademicModule } from './academic';
 import { AuthModule } from './auth';
 import { BaseModule } from './base';
 import { CommonModule, ExceptionsFilter } from './common';
 import { configuration, loggerOptions } from './config';
 import { SampleModule as DebugSampleModule } from './debug';
-import { GqlModule } from './gql';
-import { SampleModule } from './sample';
-import { AcademicModule } from './academic';
 import { EclassModule } from './eclass';
-import { RegistrationModule } from './registration';
+import { GqlModule } from './gql';
 import { MainModule } from './main';
+import { RegistrationModule } from './registration';
+import { SampleModule } from './sample';
 
 @Module({
   imports: [

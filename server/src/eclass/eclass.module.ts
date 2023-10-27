@@ -1,13 +1,13 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
-import { CourseEntity } from '#entity/course';
-import { TodoEntity } from '#entity/todo';
-import { ScoreEntity } from '#entity/score';
-import { AttendanceEntity } from '#entity/attendance';
 import { AnnouncementEntity } from '#entity/announcement';
 import { AssignmentEntity } from '#entity/assignment';
+import { AttendanceEntity } from '#entity/attendance';
+import { CourseEntity } from '#entity/course';
 import { EnrolmentEntity } from '#entity/enrolment';
+import { ScoreEntity } from '#entity/score';
+import { TodoEntity } from '#entity/todo';
 
 @Module({
   imports: [

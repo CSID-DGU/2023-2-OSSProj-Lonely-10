@@ -1,1 +1,1 @@
-export * from './academic.module'
+export * from './academic.module';

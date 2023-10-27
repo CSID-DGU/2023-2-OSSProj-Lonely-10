@@ -1,1 +1,1 @@
-export * from './eclass.module'
+export * from './eclass.module';

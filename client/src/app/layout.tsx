@@ -1,11 +1,5 @@
 import React, { Suspense } from "react";
-
-// import { Alert } from '@/components/Alert';
-// import Providers from './Providers';
-// import Footer from './_common/Footer';
-import Header from "@/_common/Header";
-// import "@/styles/globals.scss";
-
+import "./globals.css";
 export const metadata = {
   metadataBase: new URL("https://localhost:3000/"),
   title: {
@@ -28,7 +22,7 @@ const RootLayout = ({ children }: Props) => {
       </head>
       <body>
         <Suspense fallback={null}>
-          <Header />
+          {/* <Header /> */}
           {children}
         </Suspense>
       </body>

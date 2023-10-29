@@ -1,0 +1,26 @@
+.navBar {
+  height: 5vh;
+  background-color: brown;
+}
+
+.listContainer {
+  margin: 0;
+  height: 100%;
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.listForm {
+  float: left;
+  align-items: center;
+  margin-right: 2vw;
+  margin-left: 2vw;
+}
+
+.listElement {
+  color: white;
+  font-size: 20px;
+  text-decoration: none;
+}

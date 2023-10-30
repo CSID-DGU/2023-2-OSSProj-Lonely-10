@@ -1,0 +1,10 @@
+.container {
+  height: 30vh;
+  width: 30vw;
+  border: 2px solid gray;
+}
+
+.title {
+  color: orange;
+  margin: 1%;
+}

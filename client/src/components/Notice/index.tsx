@@ -3,15 +3,16 @@
 import styles from "./styles.module.css";
 
 type ConatinerProps = {
-  noticeName: string;
-  contents: string;
+  noticeName?: string;
+  contents?: string;
+  children?: React.ReactNode;
 };
 
 const Container = (props: ConatinerProps) => {
   return (
     <>
       <div className={styles.container}>
-        <p className={styles.title}>{props.noticeName}</p>
+        <p className={styles.title}>{props.contents}</p>
       </div>
     </>
   );

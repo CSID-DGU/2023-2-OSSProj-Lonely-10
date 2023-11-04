@@ -1,10 +1,10 @@
-create table `db_name`.`user` (
+create table `portal`.`user` (
     `user_id` bigint primary key auto_increment,
     `user_code` bigint unique not null,
     `hashed_password` varchar(255) not null
 );
 
-create table `db_name`.`user_info` (
+create table `portal`.`user_info` (
     `user_id` bigint not null,
     `name` varchar(255) not null,
     `email` varchar(255) not null,
@@ -14,7 +14,7 @@ create table `db_name`.`user_info` (
     `phone_number` varchar(255) not null
 );
 
-create table `db_name`.`todo` (
+create table `portal`.`todo` (
     `todo_id` bigint primary key auto_increment,
     `user_id` bigint not null,
     `content` varchar(255) not null,
@@ -22,14 +22,14 @@ create table `db_name`.`todo` (
     `created_at` datetime not null
 );
 
-create table `db_name`.`schedule` (
+create table `portal`.`schedule` (
     `schedule_id` bigint primary key auto_increment,
     `title` varchar(255) not null,
     `description` varchar(255) not null,
     `date` datetime not null
 );
 
-create table `db_name`.`grade` (
+create table `portal`.`grade` (
     `grade_id` bigint primary key auto_increment,
     `user_id` bigint not null,
     `course_name` varchar(255) not null,
@@ -37,7 +37,7 @@ create table `db_name`.`grade` (
     `semester` int not null
 );
 
-create table `db_name`.`course` (
+create table `portal`.`course` (
     `course_id` bigint primary key auto_increment,
     `course_code` varchar(255) unique not null,
     `course_name` varchar(255) not null,
@@ -45,7 +45,7 @@ create table `db_name`.`course` (
     `is_online` boolean not null
 );
 
-create table `db_name`.`course_info` (
+create table `portal`.`course_info` (
     `course_id` bigint not null,
     `days` varchar(255),
     `class_room` varchar(255),
@@ -53,21 +53,21 @@ create table `db_name`.`course_info` (
     `end_time` time
 );
 
-create table `db_name`.`enrollment` (
+create table `portal`.`enrollment` (
     `enrollment_id` bigint primary key auto_increment,
     `user_id` bigint not null,
     `course_id` bigint not null,
     `status` boolean
 );
 
-create table `db_name`.`attendance` (
+create table `portal`.`attendance` (
     `attendance_id` bigint primary key auto_increment,
     `enrollment_id` bigint not null,
     `date` datetime not null,
     `status` varchar(255) not null
 );
 
-create table `db_name`.`score` (
+create table `portal`.`score` (
     `score_id` bigint primary key auto_increment,
     `enrollment_id` bigint not null,
     `date` datetime not null,
@@ -75,7 +75,7 @@ create table `db_name`.`score` (
     `score` smallint not null
 );
 
-create table `db_name`.`announcement` (
+create table `portal`.`announcement` (
     `announcement_id` bigint primary key auto_increment,
     `course_id` bigint not null,
     `title` varchar(255) not null,
@@ -84,7 +84,7 @@ create table `db_name`.`announcement` (
     `created_at` datetime not null
 );
 
-create table `db_name`.`assignment` (
+create table `portal`.`assignment` (
     `assignment_id` bigint primary key auto_increment,
     `course_id` bigint not null,
     `title` varchar(255) not null,
@@ -93,7 +93,7 @@ create table `db_name`.`assignment` (
     `created_at` datetime not null
 );
 
-create table `db_name`.`notice` (
+create table `portal`.`notice` (
     `notice_id` bigint primary key auto_increment,
     `type` varchar(255) not null,
     `title` varchar(255) not null,
@@ -102,29 +102,12 @@ create table `db_name`.`notice` (
     `created_at` datetime not null
 );
 
-create table `db_name`.`authentication` (
+create table `portal`.`authentication` (
     `authentication_id` bigint primary key auto_increment,
     `user_id` bigint not null,
     `access_token` varchar(255) not null,
     `refresh_token` varchar(255) not null,
     `expire_duration` int not null
-);
-
-create table `db_name`.`sampletable1` (
-    `id` int primary key auto_increment,
-    `title` varchar(255) not null,
-    `content` text,
-    `tags` JSON,
-    `updated_at` timestamp not null default current_timestamp,
-    `created_at` timestamp not null default current_timestamp
-);
-
-create table `db_name`.`sampletable2` (
-    `id` int primary key auto_increment,
-    `title` varchar(255) not null,
-    `content` text,
-    `updated_at` timestamp not null default current_timestamp,
-    `created_at` timestamp not null default current_timestamp
 );
 
 alter table `user_info` add foreign key (`user_id`) references `user` (`user_id`);

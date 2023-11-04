@@ -1,8 +1,8 @@
 import pandas as pd
 
-general_notice = pd.read_csv('../data/general_notice.csv')
-haksa_notice = pd.read_csv('../data/haksa_notice.csv')
-janghak_notice = pd.read_csv('../data/janghak_notice.csv')
+general_notice = pd.read_csv('../raw_data/general_notice.csv')
+haksa_notice = pd.read_csv('../raw_data/haksa_notice.csv')
+janghak_notice = pd.read_csv('../raw_data/janghak_notice.csv')
 
 general_notice.date = pd.to_datetime(general_notice.date)
 haksa_notice.date = pd.to_datetime(haksa_notice.date)

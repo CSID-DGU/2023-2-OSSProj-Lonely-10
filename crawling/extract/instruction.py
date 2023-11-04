@@ -1,5 +1,5 @@
 import pandas as pd
 
-data = pd.read_excel('data/instruction.xlsx')
+data = pd.read_excel('raw_data/instruction.xlsx')
 print(data)
-data.to_csv('data/instruction.csv', index=False)
+data.to_csv('raw_data/instruction.csv', index=False)

@@ -3,11 +3,11 @@ import pandas as pd
 import requests
 import re
 
-base_url = "https://www.dongguk.edu/article/HAKSANOTICE/list?pageIndex="
-href_url = "https://www.dongguk.edu/article/HAKSANOTICE/detail/"
+base_url = "https://www.dongguk.edu/article/GENERALNOTICES/list?pageIndex="
+href_url = "https://www.dongguk.edu/article/GENERALNOTICES/detail/"
 data = []
 
-for page_num in range(1, 23):
+for page_num in range(1, 48):
     url = base_url + str(page_num)
     response = requests.get(url)
 
@@ -32,4 +32,4 @@ for page_num in range(1, 23):
         data.append([url, title, date, administrator])
 
 dataframe = pd.DataFrame(data)
-dataframe.to_csv('data/haksa_notice.csv', encoding='utf-8')
+dataframe.to_csv('raw_data/general_notice.csv', encoding='utf-8')

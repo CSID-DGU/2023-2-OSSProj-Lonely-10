@@ -21,7 +21,7 @@ if response.status_code == 200:
             title = cells[1].contents[0].text.strip()
             detail = cells[1].find('p').text.strip()
             data.append([date, title, detail])
-        with open ("data/schedule.csv", mode="w", newline="", encoding="utf-8") as file:
+        with open ("../data/schedule.csv", mode="w", newline="", encoding="utf-8") as file:
             writer = csv.writer(file)
             writer.writerows(data)
         print("CSV 파일로 저장되었습니다.")

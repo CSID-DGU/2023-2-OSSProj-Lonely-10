@@ -17,3 +17,12 @@ spring:
         dialect: org.hibernate.dialect.MySQLDialect
         format_sql: true
         show_sql: true
+
+jwt:
+  secret: 05a673dec8a64dfc2c91a0f3b6d9035ee8a90184e873356db5b63a44652dc79dd14e5347c9ce1e4885d0534b136fe93a4905aa094b980bd5db99f23bb2e38119
+  access:
+    header: authorization
+    exp: 86400000
+  refresh:
+    exp: 604800000
+    header: reauthorization

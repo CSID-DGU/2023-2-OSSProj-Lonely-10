@@ -1,5 +1,6 @@
 package ossproj.lonely.DGU.Portal.service;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -85,6 +86,20 @@ public class UserService {
         User user = userRepository.findByUserCode(userCode).orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
         user.setRefreshToken(null);
         log.info("===== Logout Success =====");
+    }
+
+    @Transactional
+    public void refreshLogin(HttpServletRequest request, HttpServletResponse response) {
+        String refreshToken = jwtService.extractRefreshToken(request)
+                .filter(jwtService::isTokenValid)
+                .orElseThrow(() -> new CustomException(ErrorCode.INVALID_REQUEST));
+        userRepository.findByRefreshToken(refreshToken)
+                .ifPresent(user -> {
+                    TokenPair tokenPair = generateTokens(user);
+                    saveRefreshToken(user, tokenPair.getRefreshToken());
+                    sendTokensToClient(response, tokenPair);
+                    log.info("===== Refresh Login Success =====");
+                });
     }
 
 

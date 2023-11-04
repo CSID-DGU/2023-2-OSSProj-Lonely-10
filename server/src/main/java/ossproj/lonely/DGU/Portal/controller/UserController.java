@@ -1,5 +1,6 @@
 package ossproj.lonely.DGU.Portal.controller;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -24,11 +25,10 @@ public class UserController {
         userService.logout(userCode);
     }
 
-//    @PostMapping("/refresh/{userCode}")
-//    public ResponseEntity<Void> refreshLogin(@PathVariable String userCode,
-//                                             HttpServletResponse response) {
-//        userService.refreshLogin(userCode, response);
-//        return ResponseEntity.ok().build();
-//
-//    }
+    @PostMapping("/refresh")
+    public ResponseEntity<Void> refreshLogin(HttpServletRequest request,
+                                             HttpServletResponse response) {
+        userService.refreshLogin(request, response);
+        return ResponseEntity.ok().build();
+    }
 }

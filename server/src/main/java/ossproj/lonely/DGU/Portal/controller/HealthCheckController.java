@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/v1")
 @Tag(name = "HealthCheck", description = "Health Check API")
 public class HealthCheckController {
     @Operation(summary = "Health Check", description = "Health Check")

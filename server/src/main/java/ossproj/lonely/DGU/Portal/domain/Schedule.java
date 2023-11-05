@@ -3,6 +3,9 @@ package ossproj.lonely.DGU.Portal.domain;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 @Entity
 @Getter @Setter
 @Builder
@@ -23,5 +26,5 @@ public class Schedule {
     private String description;
 
     @Column(name = "date")
-    private String date;
+    private LocalDateTime date;
 }

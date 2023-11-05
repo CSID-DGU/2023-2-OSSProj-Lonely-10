@@ -40,4 +40,5 @@ dependencies {
 
 	// JSON
 	implementation 'org.json:json:20230227'
+	implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
 }

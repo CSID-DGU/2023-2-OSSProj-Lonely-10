@@ -13,5 +13,6 @@ haksa_notice['type'] = "학사"
 janghak_notice['type'] = "장학"
 
 notice = pd.concat([general_notice, haksa_notice, janghak_notice], axis=0)
+notice.drop_duplicates(inplace=True)
 
 notice.to_csv('../data/notice.csv', index=False)

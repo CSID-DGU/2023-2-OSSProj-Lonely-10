@@ -12,7 +12,9 @@ const Container = (props: ConatinerProps) => {
   return (
     <>
       <div className={styles.container}>
-        <p className={styles.title}>{props.contents}</p>
+        <p className={styles.title}>{props.noticeName}</p>
+        <hr />
+        <p>{props.children}</p>
       </div>
     </>
   );

@@ -11,6 +11,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ossproj.lonely.DGU.Portal.domain.User;
+import ossproj.lonely.DGU.Portal.dto.main.sub.InfoDto;
 import ossproj.lonely.DGU.Portal.dto.user.UserSignUpDto;
 import ossproj.lonely.DGU.Portal.exception.CustomException;
 import ossproj.lonely.DGU.Portal.exception.ErrorCode;
@@ -122,6 +123,14 @@ public class UserService {
         String accessToken = jwtService.createAccessToken(user.getUserCode());
         String refreshToken = jwtService.createRefreshToken();
         return new TokenPair(accessToken, refreshToken);
+    }
+
+    public InfoDto getInfo(String userCode) {
+        User user = userRepository.findByUserCode(userCode).orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
+        return InfoDto.builder()
+                .userName(user.getUserName())
+                .userCode(user.getUserCode())
+                .build();
     }
 
     @Getter

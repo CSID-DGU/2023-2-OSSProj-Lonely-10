@@ -77,11 +77,31 @@ const Article = () => {
   return (
     <div className={styles.article}>
       <Greeting userName={info}></Greeting>
-      <Container noticeName="일반공지">{generallNotice}</Container>
-      <Container noticeName="학사공지">{haksaNotice}</Container>
-      <Container noticeName="장학공지">{janghakNotice}</Container>
-      <Container noticeName="학사일정">{scheduleNotice}</Container>
-      <Container noticeName="오늘의 수업"></Container>
+      <Container
+        noticeName="일반공지"
+        baseURL="https://www.dongguk.edu/article/GENERALNOTICES/list"
+      >
+        {generallNotice}
+      </Container>
+      <Container
+        noticeName="학사공지"
+        baseURL="https://www.dongguk.edu/article/HAKSANOTICE/list"
+      >
+        {haksaNotice}
+      </Container>
+      <Container
+        noticeName="장학공지"
+        baseURL="https://www.dongguk.edu/article/JANGHAKNOTICE/list"
+      >
+        {janghakNotice}
+      </Container>
+      <Container
+        noticeName="학사일정"
+        baseURL="https://www.dongguk.edu/schedule/detail?schedule_info_seq=22"
+      >
+        {scheduleNotice}
+      </Container>
+      <Container noticeName="오늘의 수업 " baseURL="/home"></Container>
     </div>
   );
 };

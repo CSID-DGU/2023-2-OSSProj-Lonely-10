@@ -18,7 +18,9 @@ const Container = (props: GreetingProps) => {
         <button
           onClick={() => {
             axios.post(
-              `http://localhost:8080/api/v1/main/localStorage.getItem("user_code")`,
+              `http://localhost:8080/api/v1/main/${localStorage.getItem(
+                "user_code"
+              )}`,
               {
                 headers: {
                   Authorization: localStorage.getItem("auth"),

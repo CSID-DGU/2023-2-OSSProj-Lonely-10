@@ -1,4 +1,4 @@
-import Container from "@/components/Notice";
+import Container from "@/components/Container";
 import styles from "./article.module.css";
 
 const Article = () => {

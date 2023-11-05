@@ -14,13 +14,19 @@ const Frame = () => {
   const router = useRouter();
   const [id, setId] = useState("");
   const [pw, setPw] = useState("");
+
   const handleLogin = async () => {
     try {
       const data = {
-        username: id,
+        user_code: id,
         password: pw,
       };
-      const response = await axios.post("http://localhost:8080", data);
+      console.log(data);
+      const response = await axios.post(
+        "http://localhost:8080/api/v1/user/login",
+        data
+      );
+
       console.log("Response:", response);
       // response로 토큰 체크 후 home으로
       router.push("/home");
@@ -32,27 +38,29 @@ const Frame = () => {
   };
 
   return (
-    <div className={styles.frame}>
-      <Image src={donggukLogo} alt="dongguk" className={styles.logo} />
+    <div className={styles.container}>
       <div className={styles.modal}>
-        <div className={styles.inputContainer}>
-          <Input
-            typeStyle="text"
-            onChange={(e) => {
-              setId(e.target.value);
-            }}
-          ></Input>
-          <Input
-            typeStyle="password"
-            onChange={(e) => {
-              setPw(e.target.value);
-            }}
-          ></Input>
+        <Image src={donggukLogo} alt="dongguk" className={styles.logo} />
+        <div className={styles.frame}>
+          <div className={styles.inputContainer}>
+            <Input
+              typeStyle="text"
+              onChange={(e) => {
+                setId(e.target.value);
+              }}
+            ></Input>
+            <Input
+              typeStyle="password"
+              onChange={(e) => {
+                setPw(e.target.value);
+              }}
+            ></Input>
+          </div>
+          <LoginButton onClick={handleLogin}></LoginButton>
         </div>
-        <LoginButton onClick={handleLogin}></LoginButton>
-      </div>
-      <div className={styles.notice}>
-        <Message></Message>
+        <div className={styles.notice}>
+          <Message></Message>
+        </div>
       </div>
     </div>
   );

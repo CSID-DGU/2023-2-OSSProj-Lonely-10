@@ -21,6 +21,7 @@ const Frame = () => {
         user_code: id,
         password: pw,
       };
+      localStorage.setItem("user_code", id);
       console.log(data);
       const response = await axios.post(
         "http://localhost:8080/api/v1/user/login",
@@ -29,6 +30,10 @@ const Frame = () => {
 
       console.log("Response:", response);
       // response로 토큰 체크 후 home으로
+      localStorage.setItem(
+        "auth",
+        "response 반환 형태를 몰라서 일단은 이렇게 둡니다!"
+      );
       router.push("/home");
     } catch (error) {
       console.error("Error:", error);

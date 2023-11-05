@@ -1,6 +1,7 @@
 "use client";
 
 import axios from "axios";
+import Swal from "sweetalert2";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import styles from "./frame.module.css";
@@ -34,11 +35,24 @@ const Frame = () => {
         "auth",
         "response 반환 형태를 몰라서 일단은 이렇게 둡니다!"
       );
-      router.push("/home");
+      Swal.fire({
+        title: `반갑습니다`,
+        text: "초기 세팅 후 메인 페이지로 넘어갑니다.",
+        icon: "success",
+        timer: 1200,
+        showConfirmButton: false,
+        timerProgressBar: true,
+      }).then(() => {
+        router.push("/home");
+      });
     } catch (error) {
-      console.error("Error:", error);
-      // console.log(id, pw);
-      // window.location.href = "/home";
+      Swal.fire({
+        title: "로그인에 실패했습니다.",
+        text: `사유 : ${error}`,
+        icon: `error`,
+        confirmButtonColor: "#ed8b00",
+      });
+      console.log(id, pw);
     }
   };
 

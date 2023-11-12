@@ -16,9 +16,6 @@ public class Enrollment {
     @Column(name = "enrollment_id")
     private Long id;
 
-    @Column(name = "status")
-    private String status;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "course_id")
     private Course course;

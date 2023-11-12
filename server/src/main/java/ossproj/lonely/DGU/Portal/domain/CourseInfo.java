@@ -12,6 +12,8 @@ import lombok.*;
 @Table(name = "course_info")
 public class CourseInfo {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "course_info_id")
     private Long id;
 
     @Column(name = "days")

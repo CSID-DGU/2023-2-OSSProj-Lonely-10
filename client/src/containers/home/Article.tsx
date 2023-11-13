@@ -4,6 +4,7 @@ import Container from "@/components/Container";
 import styles from "./article.module.css";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { title } from "process";
 
 const Article = () => {
   const [info, setInfo] = useState("박세호");
@@ -79,29 +80,64 @@ const Article = () => {
       <Greeting userName={info}></Greeting>
       <Container
         noticeName="일반공지"
+        date="등록일 2023.11.06."
         baseURL="https://www.dongguk.edu/article/GENERALNOTICES/list"
       >
-        {generallNotice}
+        <h3>[카운슬링센터] 정신건강특강(4차) : 건강한 관계와 성숙한 연애</h3>
       </Container>
       <Container
         noticeName="학사공지"
         baseURL="https://www.dongguk.edu/article/HAKSANOTICE/list"
+        date="등록일 2023.11.03."
       >
-        {haksaNotice}
+        <h3>2023학년도 겨울 계절학기 중앙대학교 수학 안내</h3>
       </Container>
       <Container
         noticeName="장학공지"
         baseURL="https://www.dongguk.edu/article/JANGHAKNOTICE/list"
+        date="등록일 2023.11.02."
       >
-        {janghakNotice}
+        <h3>2024 북한이탈청소년 장학생 선발안내</h3>
       </Container>
       <Container
         noticeName="학사일정"
         baseURL="https://www.dongguk.edu/schedule/detail?schedule_info_seq=22"
       >
-        {scheduleNotice}
+        <table>
+          <tbody>
+            <tr>
+              <td>2023.11.13. ~ 2023.11.24.</td>
+              <td>재입학 신청</td>
+            </tr>
+            <tr>
+              <td>2023.11.15. ~ 2023.11.17.</td>
+              <td>겨울 계절학기 수강신청</td>
+            </tr>
+            <tr>
+              <td>2023.11.17.</td>
+              <td>학기 3/4 기준일</td>
+            </tr>
+          </tbody>
+        </table>
       </Container>
-      <Container noticeName="오늘의 수업 " baseURL="/home"></Container>
+      <Container noticeName="오늘의 수업 " baseURL="/home">
+        <table>
+          <tbody>
+            <tr>
+              <td>10:30</td>
+              <td>데이터사이언스개론</td>
+            </tr>
+            <tr>
+              <td>13:00</td>
+              <td>오픈소스소프트웨어프로젝트</td>
+            </tr>
+            <tr>
+              <td>15:00</td>
+              <td>딥러닝</td>
+            </tr>
+          </tbody>
+        </table>
+      </Container>
     </div>
   );
 };

@@ -13,7 +13,6 @@ interface Props {
   size?: "tiny" | "small";
   skin?: "primary" | "inverse" | "ghost";
 }
-
 const Button = ({
   link,
   children,

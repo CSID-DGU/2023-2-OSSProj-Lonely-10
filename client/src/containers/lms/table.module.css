@@ -1,0 +1,7 @@
+/* Table.module.css */
+
+.tableContainer {
+  border: 1px solid black; /* 외곽선 스타일 지정 */
+  max-height: 90vh;
+  overflow: auto;
+}

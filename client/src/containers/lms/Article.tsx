@@ -14,7 +14,9 @@ const Article = () => {
           <Button link="/lms/enroll">등록조회</Button>
         </SubNav>
       </div>
-      <TableTest></TableTest>
+      <div className={styles.frame}>
+        <TableTest></TableTest>
+      </div>
     </div>
   );
 };

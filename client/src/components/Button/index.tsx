@@ -1,5 +1,6 @@
 /* eslint-disable react/button-has-type */
 import { ReactNode } from "react";
+import styles from "./Button.module.css";
 import cx from "clsx";
 import Link from "next/link";
 
@@ -23,7 +24,11 @@ const Button = ({
   skin,
 }: Props) => {
   if (link) {
-    return <Link href={link}>{children}</Link>;
+    return (
+      <Link className={styles.link} href={link}>
+        {children}
+      </Link>
+    );
   }
 
   return (

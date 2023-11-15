@@ -6,6 +6,7 @@ type ConatinerProps = {
   noticeName?: string;
   baseURL: string;
   children?: React.ReactNode;
+  date?: string;
 };
 
 const Container = (props: ConatinerProps) => {
@@ -16,7 +17,8 @@ const Container = (props: ConatinerProps) => {
           {props.noticeName}
         </Link>
         <hr />
-        <p>{props.children}</p>
+        {props.children}
+        <p className={styles.pBottom}>{props.date}</p>
       </div>
     </>
   );

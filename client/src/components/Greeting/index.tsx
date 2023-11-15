@@ -1,13 +1,14 @@
 "use client";
 
 import styles from "./styles.module.css";
+import Swal from "sweetalert2";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 type GreetingProps = {
   userName: string;
 };
 
-const Container = (props: GreetingProps) => {
+const Greeting = (props: GreetingProps) => {
   const router = useRouter();
   return (
     <>
@@ -27,7 +28,16 @@ const Container = (props: GreetingProps) => {
                 },
               }
             );
-            router.push("/login");
+
+            Swal.fire({
+              title: `로그아웃`,
+              icon: "success",
+              timer: 1200,
+              showConfirmButton: false,
+              timerProgressBar: true,
+            }).then(() => {
+              router.push("/login");
+            });
           }}
           className={styles.logout}
         >
@@ -38,4 +48,4 @@ const Container = (props: GreetingProps) => {
   );
 };
 
-export default Container;
+export default Greeting;

@@ -7,7 +7,7 @@ const Nav = () => {
     <nav className={styles.navBar}>
       <ul className={styles.listContainer}>
         <li className={styles.listForm}>
-          <Link className={styles.listElement} href={"/info"}>
+          <Link className={styles.listElement} href={"/lms"}>
             학적관리
           </Link>
         </li>

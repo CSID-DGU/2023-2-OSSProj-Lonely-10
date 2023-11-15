@@ -1,11 +1,5 @@
-import Frame from "./Frame";
-
 const Enroll = () => {
-  return (
-    <>
-      <Frame></Frame>
-    </>
-  );
+  return <></>;
 };
 
 export default Enroll;

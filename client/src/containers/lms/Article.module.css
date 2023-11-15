@@ -1,0 +1,15 @@
+.layout {
+  display: grid;
+  grid-template-columns: 2fr 7fr;
+}
+
+.leftFrame {
+  display: grid;
+  grid-template-rows: 1fr 2fr;
+}
+
+/* .subNav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+} */

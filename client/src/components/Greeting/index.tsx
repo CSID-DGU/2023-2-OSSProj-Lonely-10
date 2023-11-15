@@ -8,7 +8,7 @@ type GreetingProps = {
   userName: string;
 };
 
-const Container = (props: GreetingProps) => {
+const Greeting = (props: GreetingProps) => {
   const router = useRouter();
   return (
     <>
@@ -48,4 +48,4 @@ const Container = (props: GreetingProps) => {
   );
 };
 
-export default Container;
+export default Greeting;

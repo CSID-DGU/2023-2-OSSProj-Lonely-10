@@ -1,7 +1,6 @@
 .navContainer {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   align-items: center;
   border-width: 0 1px 0 1px;
   border-color: black;

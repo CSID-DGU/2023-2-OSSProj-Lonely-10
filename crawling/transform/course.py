@@ -53,13 +53,10 @@ course_info3.drop(['수업3'], axis=1, inplace=True)
 course_info = pd.concat([course_info1, course_info2, course_info3], axis=0)
 
 course = course[['course_code', 'course_name', 'professor', 'is_online']]
-course.reset_index(inplace = True)
-course.rename(columns={'index': 'id'}, inplace = True)
 
 merge_course = pd.merge(course, course_info, on='course_code', how='left')
 
-course_info = merge_course[['id', 'days', 'start_time', 'end_time', 'classroom']]
-course_info.rename(columns={'id': 'course_id'}, inplace = True)
+course_info = merge_course[['course_code', 'days', 'start_time', 'end_time', 'classroom']]
 course_info.dropna(inplace=True)
 
 course.to_csv('../data/course.csv', index=False)

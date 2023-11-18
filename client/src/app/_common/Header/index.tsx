@@ -14,7 +14,7 @@ const Header = () => {
 
   return (
     <header className={styles.header}>
-      <Link href={"/"}>
+      <Link href={"/home"}>
         <Image src={donggukLogo} alt="dongguk" className={styles.logo} />
       </Link>
     </header>

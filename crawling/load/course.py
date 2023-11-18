@@ -13,9 +13,12 @@ database = os.getenv('DATABASE')
 engine = create_engine(f'mysql+mysqlconnector://{username}:{password}@{host}/{database}')
 
 course = pd.read_csv('../data/course.csv')
+course_info = pd.read_csv("../data/course_info.csv")
 
-course.drop(['id'], axis=1, inplace=True)
 course.to_sql(name='course', con=engine, if_exists='append', index=False)
 print('course 테이블 생성 완료')
+
+course_info.to_sql(name='course_info', con=engine, if_exists='append', index=False)
+print('course_info 테이블 생성 완료')
 
 engine.dispose()

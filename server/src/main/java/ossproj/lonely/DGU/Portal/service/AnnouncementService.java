@@ -7,6 +7,8 @@ import org.springframework.transaction.annotation.Transactional;
 import ossproj.lonely.DGU.Portal.domain.Announcement;
 import ossproj.lonely.DGU.Portal.repository.AnnouncementRepository;
 
+import java.util.List;
+
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -16,5 +18,10 @@ public class AnnouncementService {
     @Transactional
     public void save(Announcement announcement) {
         announcementRepository.save(announcement);
+    }
+
+    @Transactional
+    public List<Announcement> getAnnouncementByCourseCode(String courseCode) {
+        return announcementRepository.findByCourseCode(courseCode);
     }
 }

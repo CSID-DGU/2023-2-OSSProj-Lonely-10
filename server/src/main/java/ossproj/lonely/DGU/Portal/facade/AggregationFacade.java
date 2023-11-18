@@ -7,6 +7,9 @@ import ossproj.lonely.DGU.Portal.domain.*;
 import ossproj.lonely.DGU.Portal.dto.enrollment.response.GetCourseResponseDto;
 import ossproj.lonely.DGU.Portal.dto.enrollment.response.GetEnrollResponseDto;
 import ossproj.lonely.DGU.Portal.dto.main.MainComponentDto;
+import ossproj.lonely.DGU.Portal.dto.record.response.GetAllGradeDto;
+import ossproj.lonely.DGU.Portal.dto.record.response.GetBeforeGradeDto;
+import ossproj.lonely.DGU.Portal.dto.record.response.GetUserInfoResponseDto;
 import ossproj.lonely.DGU.Portal.dto.school.response.GetCourseDetailResponseDto;
 import ossproj.lonely.DGU.Portal.dto.school.response.GetSchoolResponseDto;
 import ossproj.lonely.DGU.Portal.service.*;
@@ -220,6 +223,47 @@ public class AggregationFacade {
                 .score(scoreDtoList)
                 .announcement(announcementDtoList)
                 .assignment(assignmentDtoList)
+                .build();
+    }
+
+    public GetUserInfoResponseDto getUserInfo(String userCode) {
+        User user = userService.findByUserCode(userCode);
+        return GetUserInfoResponseDto.builder()
+                .userCode(user.getUserCode())
+                .userName(user.getUserName())
+                .email(user.getUserEmail())
+                .semester(String.valueOf(user.getSemester()))
+                .phoneNumber(user.getPhoneNumber())
+                .department(user.getDepartment())
+                .major(user.getMajor())
+                .build();
+    }
+
+    public GetAllGradeDto getAllGrade(String userCode) {
+        List<Grade> grades = gradeService.getGrade(userCode);
+        return GetAllGradeDto.builder()
+                .allGradeDto(grades.stream()
+                        .map(grade -> GetAllGradeDto.AllGradeDto.builder()
+                                .courseName(grade.getCourseName())
+                                .score(grade.getScore())
+                                .semester(String.valueOf(grade.getSemester()))
+                                .build())
+                        .toList())
+                .build();
+    }
+
+    public GetBeforeGradeDto getGrade(String userCode) {
+        List<Grade> grades = gradeService.getGrade(userCode);
+        Long semester = userService.findByUserCode(userCode).getSemester();
+
+        return GetBeforeGradeDto.builder()
+                .beforeGradeDtoList(grades.stream()
+                        .filter(grade -> grade.getSemester().equals(semester - 1))
+                        .map(grade -> GetBeforeGradeDto.BeforeGradeDto.builder()
+                                .courseName(grade.getCourseName())
+                                .score(grade.getScore())
+                                .build())
+                        .toList())
                 .build();
     }
 }

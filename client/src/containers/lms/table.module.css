@@ -5,3 +5,14 @@
   max-height: 90vh;
   overflow: auto;
 }
+
+.tableHead,
+.tableData {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.tableHead {
+  background-color: #f2f2f2;
+}

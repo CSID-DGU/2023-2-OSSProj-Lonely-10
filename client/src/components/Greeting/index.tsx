@@ -6,13 +6,17 @@ import { useRouter } from "next/navigation";
 import axios from "axios";
 type GreetingProps = {
   userName: string;
+  width?: string;
 };
 
 const Greeting = (props: GreetingProps) => {
   const router = useRouter();
   return (
     <>
-      <div className={styles.container}>
+      <div
+        className={styles.container}
+        style={props.width ? { width: props.width } : { width: "100%" }}
+      >
         <div className={styles.userBox}>
           <p>{props.userName}님 반갑습니다.</p>
         </div>

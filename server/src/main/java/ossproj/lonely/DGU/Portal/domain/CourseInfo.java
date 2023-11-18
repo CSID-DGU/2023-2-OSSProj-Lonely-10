@@ -16,6 +16,9 @@ public class CourseInfo {
     @Column(name = "course_info_id")
     private Long id;
 
+    @Column(name = "course_code")
+    private String courseCode;
+
     @Column(name = "days")
     private String days;
 
@@ -27,9 +30,4 @@ public class CourseInfo {
 
     @Column(name = "end_time")
     private String endTime;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "course_id")
-    @ToString.Exclude
-    private Course course;
 }

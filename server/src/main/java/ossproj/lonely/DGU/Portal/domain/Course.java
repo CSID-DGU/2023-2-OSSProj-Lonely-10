@@ -32,9 +32,6 @@ public class Course {
     private boolean isOnline;
 
     @OneToMany(mappedBy = "course", fetch = FetchType.LAZY)
-    private List<CourseInfo> courseInfos;
-
-    @OneToMany(mappedBy = "course", fetch = FetchType.LAZY)
     private List<Enrollment> enrollments;
 
     @OneToMany(mappedBy = "course", fetch = FetchType.LAZY)

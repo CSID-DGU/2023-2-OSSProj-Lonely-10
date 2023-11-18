@@ -77,7 +77,7 @@ const Article = () => {
 
   return (
     <div className={styles.article}>
-      <Greeting userName={info}></Greeting>
+      <Greeting userName={info} width="30vw"></Greeting>
       <Container
         noticeName="일반공지"
         date="등록일 2023.11.06."

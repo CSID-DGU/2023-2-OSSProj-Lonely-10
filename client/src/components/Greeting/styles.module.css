@@ -1,7 +1,6 @@
 .container {
   text-align: center;
   height: 30vh;
-  /* width: 30vw; */
   border: 2px solid gray;
   display: flex;
   justify-content: center;

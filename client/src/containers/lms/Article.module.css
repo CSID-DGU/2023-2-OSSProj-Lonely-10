@@ -8,6 +8,7 @@
   max-height: 90vh;
   display: grid;
   grid-template-rows: 1fr 2fr;
+  border-right: 1px solid black;
 }
 
 .frame {

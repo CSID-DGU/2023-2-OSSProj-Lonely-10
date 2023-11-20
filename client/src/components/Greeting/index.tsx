@@ -15,7 +15,7 @@ const Greeting = (props: GreetingProps) => {
     <>
       <div
         className={styles.container}
-        style={props.width ? { width: props.width } : { width: "100%" }}
+        style={props.width ? { width: props.width } : { border: "1px" }}
       >
         <div className={styles.userBox}>
           <p>{props.userName}님 반갑습니다.</p>

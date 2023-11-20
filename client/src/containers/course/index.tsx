@@ -1,9 +1,8 @@
-import Header from "@/app/_common/Header";
-
+import Article from "./Article";
 const Course = () => {
   return (
     <>
-      <Header></Header>
+      <Article></Article>
     </>
   );
 };

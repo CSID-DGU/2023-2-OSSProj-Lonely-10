@@ -2,12 +2,9 @@ version: "3.8"
 
 services:
   nginx:
-    image: nginx:latest
-    ports:
-      - "80:80"
-    volumes:
-      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
-    restart: always
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile 
     depends_on:
       - client
       - server
@@ -29,14 +26,9 @@ services:
       - database
 
   database:
-    image: mysql:8.0.33
-    environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: portal
-      MYSQL_USER: portal
-      MYSQL_PASSWORD: qwer1234
-    ports:
-      - "4306:3306"
+    build:
+      context: ./database
+      dockerfile: Dockerfile
     volumes:
       - ./database/data:/var/lib/mysql
 

@@ -1,6 +1,5 @@
 "use client";
-
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./table.module.css";
 import { DATA1 } from "./data";
 
@@ -10,18 +9,11 @@ interface RowData {
 }
 
 const TableTest = () => {
-  // const data = DATA1.map((value, index) => (
-  //   <tr key={index}>
-  //     <>
-  //       <th className={styles.tableHead}>{value[0]}</th>
-  //       <input value={value[1]} className={styles.tableData} />
-  //     </>
-  //     <>
-  //       <th className={styles.tableHead}>{value[0]}</th>
-  //       <input value={value[1]} className={styles.tableData} />
-  //     </>
-  //   </tr>
-  // ));
+  const [clientData, setClientData] = useState([]);
+  useEffect(() => {
+    // 클라이언트에서 데이터를 로딩하고 상태를 업데이트
+    // setClientData();
+  }, []);
 
   return (
     <div className={styles.tableContainer}>

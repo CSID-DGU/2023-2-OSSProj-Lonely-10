@@ -1,7 +1,8 @@
 "use client";
 
+import React from "react";
 import styles from "./table.module.css";
-import { TEST_DATA } from "./testData";
+import { DATA1 } from "./data";
 
 interface RowData {
   header: string;
@@ -9,6 +10,19 @@ interface RowData {
 }
 
 const TableTest = () => {
+  // const data = DATA1.map((value, index) => (
+  //   <tr key={index}>
+  //     <>
+  //       <th className={styles.tableHead}>{value[0]}</th>
+  //       <input value={value[1]} className={styles.tableData} />
+  //     </>
+  //     <>
+  //       <th className={styles.tableHead}>{value[0]}</th>
+  //       <input value={value[1]} className={styles.tableData} />
+  //     </>
+  //   </tr>
+  // ));
+
   return (
     <div className={styles.tableContainer}>
       <h3>학적기본</h3>
@@ -16,35 +30,15 @@ const TableTest = () => {
         <tbody>
           <tr>
             <th className={styles.tableHead}>캠퍼스</th>
-            <input
-              type="text"
-              disabled
-              value={"서울캠퍼스"}
-              className={styles.tableData}
-            />
+            <input value={"서울캠퍼스"} className={styles.tableData} />
             <th className={styles.tableHead}>성명</th>
-            <input
-              type="text"
-              disabled
-              value={"박세호"}
-              className={styles.tableData}
-            />
+            <input value={"박세호"} className={styles.tableData} />
           </tr>
           <tr>
             <th className={styles.tableHead}>생년월일</th>
-            <input
-              type="text"
-              disabled
-              value={"2000-03-23"}
-              className={styles.tableData}
-            />
+            <input value={"2000-03-23"} className={styles.tableData} />
             <th className={styles.tableHead}>성별</th>
-            <input
-              type="text"
-              disabled
-              value={"남"}
-              className={styles.tableData}
-            />
+            <input value={"남"} className={styles.tableData} />
           </tr>
         </tbody>
       </table>
@@ -97,16 +91,6 @@ const TableTest = () => {
               className={styles.tableData}
             />
           </tr>
-          {/* {TEST_DATA.map((cell, index) => (
-            <tr>
-              <th className={styles.tableHead}>test head</th>
-              {TEST_DATA.map((cellData, index) => (
-                <td key={index} className={styles.tableData}>
-                  {cellData}
-                </td>
-              ))}
-            </tr>
-          ))} */}
         </tbody>
       </table>
     </div>

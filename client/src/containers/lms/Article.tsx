@@ -6,14 +6,10 @@ import Greeting from "@/components/Greeting";
 import TableTest from "./TableTest";
 import styles from "./Article.module.css";
 import { useEffect } from "react";
-import { getInfo } from "./testData";
 
 const Article = () => {
   useEffect(() => {
-    const test = async () => {
-      const result = await getInfo();
-      console.log(result);
-    };
+    const test = async () => {};
     test();
   }, []);
   return (

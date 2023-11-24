@@ -6,6 +6,10 @@
   padding: 1rem;
 }
 
+.rowStyle {
+  width: 100%;
+  display: grid;
+}
 .tableHead,
 .tableData {
   width: 20vw;
@@ -13,6 +17,10 @@
   border: 1px solid #ddd;
   /* padding: 8px; */
   text-align: left;
+}
+
+.tableStyle {
+  width: 100%;
 }
 
 .tableHead {

@@ -36,7 +36,7 @@ public class User {
     private String department;
 
     @Column(name = "semester")
-    private Integer semester;
+    private Long semester;
 
     @Column(name = "major")
     private String major;

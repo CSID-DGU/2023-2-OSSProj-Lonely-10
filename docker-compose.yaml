@@ -1,0 +1,36 @@
+version: "3.8"
+
+services:
+  nginx:
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile 
+    depends_on:
+      - client
+      - server
+
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"    
+
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      - database
+
+  database:
+    build:
+      context: ./database
+      dockerfile: Dockerfile
+    volumes:
+      - ./database/data:/var/lib/mysql
+
+volumes:
+  mysql-data: {}

@@ -7,6 +7,8 @@ import org.springframework.transaction.annotation.Transactional;
 import ossproj.lonely.DGU.Portal.domain.Grade;
 import ossproj.lonely.DGU.Portal.repository.GradeRepository;
 
+import java.util.List;
+
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -17,4 +19,10 @@ public class GradeService {
     public void save(Grade grade) {
         gradeRepository.save(grade);
     }
+
+    @Transactional
+    public List<Grade> getGrade(String userCode) {
+        return gradeRepository.findByUserCode(userCode);
+    }
+
 }

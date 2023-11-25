@@ -7,6 +7,8 @@ import org.springframework.transaction.annotation.Transactional;
 import ossproj.lonely.DGU.Portal.domain.CourseInfo;
 import ossproj.lonely.DGU.Portal.repository.CourseInfoRepository;
 
+import java.util.List;
+
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -16,5 +18,10 @@ public class CourseInfoService {
     @Transactional
     public void save(CourseInfo courseInfo) {
         courseInfoRepository.save(courseInfo);
+    }
+
+    @Transactional
+    public List<CourseInfo> findByCourseCode(String courseCode) {
+        return courseInfoRepository.findByCourseCode(courseCode);
     }
 }

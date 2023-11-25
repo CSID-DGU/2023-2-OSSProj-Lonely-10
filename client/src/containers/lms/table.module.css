@@ -1,16 +1,26 @@
 /* Table.module.css */
 
 .tableContainer {
-  border: 1px solid black; /* 외곽선 스타일 지정 */
   max-height: 90vh;
   overflow: auto;
+  padding: 1rem;
 }
 
+.rowStyle {
+  width: 100%;
+  display: grid;
+}
 .tableHead,
 .tableData {
+  width: 20vw;
+  height: 10vh;
   border: 1px solid #ddd;
-  padding: 8px;
+  /* padding: 8px; */
   text-align: left;
+}
+
+.tableStyle {
+  width: 100%;
 }
 
 .tableHead {

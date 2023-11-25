@@ -24,7 +24,7 @@ public class UserSignUpDto {
     private String department;
 
     @JsonProperty("semester")
-    private Integer semester;
+    private Long semester;
 
     @JsonProperty("major")
     private String major;

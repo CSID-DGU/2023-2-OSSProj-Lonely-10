@@ -4,7 +4,9 @@ services:
   nginx:
     build:
       context: ./nginx
-      dockerfile: Dockerfile 
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
     depends_on:
       - client
       - server
@@ -14,7 +16,7 @@ services:
       context: ./client
       dockerfile: Dockerfile
     ports:
-      - "3000:3000"    
+      - "3000:3000"
 
   server:
     build:
@@ -25,12 +27,26 @@ services:
     depends_on:
       - database
 
+  crawler:
+    build:
+      context: ./crawling
+      dockerfile: Dockerfile
+    depends_on:
+      - database
+
   database:
     build:
       context: ./database
       dockerfile: Dockerfile
     volumes:
       - ./database/data:/var/lib/mysql
+
+  redis:
+    build:
+      context: ./redis
+      dockerfile: Dockerfile
+    ports:
+      - "6379:6379"
 
 volumes:
   mysql-data: {}

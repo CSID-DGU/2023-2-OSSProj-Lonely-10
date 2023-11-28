@@ -4,72 +4,74 @@ import Container from "@/components/Container";
 import styles from "./article.module.css";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { title } from "process";
+
+interface InfoProps {
+  user_code: string;
+  user_name: string;
+}
+
+interface generalProps {
+  administrator: string;
+  title: string;
+  url: string;
+}
+
+interface scheduleProps {
+  date: string;
+  administrator: string;
+  title: string;
+}
 
 const Article = () => {
-  const [info, setInfo] = useState("박세호");
-  const [generallNotice, setGenerallNotice] = useState("");
-  const [janghakNotice, setJanghakNotice] = useState("");
-  const [haksaNotice, setHakasNotice] = useState("");
-  const [scheduleNotice, setScheduleNotice] = useState("");
+  const [info, setInfo] = useState<InfoProps>({
+    user_code: "",
+    user_name: "",
+  });
+  const [generallNotice, setGenerallNotice] = useState<generalProps>({
+    administrator: "",
+    title: "",
+    url: "",
+  });
+  const [scholarshipNotice, setScholarshipNotice] = useState<generalProps>({
+    administrator: "",
+    title: "",
+    url: "",
+  });
+  const [haksaNotice, setHakasNotice] = useState<generalProps>({
+    administrator: "",
+    title: "",
+    url: "",
+  });
+  const [scheduleNotice, setScheduleNotice] = useState<scheduleProps>({
+    date: "",
+    administrator: "",
+    title: "",
+  });
 
-  useEffect(() => {
+  const userCode = localStorage.getItem("user_code");
+  const auth = localStorage.getItem("Authorization");
+  //jake-seo-dev.tistory.com/138 [제이크서 위키 블로그:티스토리]
+
+  출처: https: useEffect(() => {
     const handleNotice = async () => {
       try {
-        const userCode = localStorage.getItem("user_code");
         const response = await axios.get(
-          `http://localhost:8080/api/v1/main/${userCode}`,
+          `http://localhost/api/v1/main/${userCode}`,
           {
             headers: {
-              Authorization: localStorage.getItem("auth"),
+              Authorization: auth,
             },
           }
         );
-        /**
-         * expected result
-         */
-        // {
-        //   "general_notice": [
-        //     {
-        //       "title": "string",
-        //       "url": "string",
-        //       "administrator": "string"
-        //     }, ...
-        //   ],
-        //   "janghak_notice": [
-        //     {
-        //       "title": "string",
-        //       "url": "string",
-        //       "administrator": "string"
-        //     }, ...
-        //   ],
-        //   "haksa_notice": [
-        //     {
-        //       "title": "string",
-        //       "url": "string",
-        //       "administrator": "string"
-        //     }, ...
-        //   ],
-        //   "schedule": [
-        //     {
-        //       "date": "datetime",
-        //       "title": "string",
-        //       "description": "string",
-        //     }, ...
-        //   ],
-        //   "course": [
-        //     {
-        //       "time": "time",
-        //       "course_name": "string"
-        //     }, ...
-        //   ],
-        //   "info": {
-        //     "user_name": "string",
-        //     "user_code": "string"
-        //   }
-        // }
+        setInfo(response.data.info);
+        setGenerallNotice(response.data.generalNotice[0]);
+        setHakasNotice(response.data.haksaNotice[0]);
+        setScheduleNotice(response.data.schedule[10]);
+        setScholarshipNotice(response.data.scholarshipNotice[0]);
       } catch (error) {
         console.log(error);
+        console.log(userCode);
+        console.log(auth ? auth.split("\n")[1].trim() : "not found");
       }
     };
     handleNotice();
@@ -77,48 +79,37 @@ const Article = () => {
 
   return (
     <div className={styles.article}>
-      <Greeting userName={info} width="30vw"></Greeting>
+      <Greeting
+        userName={info.user_name}
+        userCode={info.user_code}
+        width="30vw"
+      ></Greeting>
       <Container
         noticeName="일반공지"
-        date="등록일 2023.11.06."
-        baseURL="https://www.dongguk.edu/article/GENERALNOTICES/list"
+        administrator={generallNotice.administrator}
+        baseURL={generallNotice.url}
       >
-        <h3>[카운슬링센터] 정신건강특강(4차) : 건강한 관계와 성숙한 연애</h3>
+        <h3>{generallNotice.title}</h3>
       </Container>
       <Container
         noticeName="학사공지"
-        baseURL="https://www.dongguk.edu/article/HAKSANOTICE/list"
-        date="등록일 2023.11.03."
+        administrator={haksaNotice.administrator}
+        baseURL={haksaNotice.url}
       >
-        <h3>2023학년도 겨울 계절학기 중앙대학교 수학 안내</h3>
+        <h3>{haksaNotice.title}</h3>
       </Container>
       <Container
         noticeName="장학공지"
-        baseURL="https://www.dongguk.edu/article/JANGHAKNOTICE/list"
-        date="등록일 2023.11.02."
+        administrator={scholarshipNotice.administrator}
+        baseURL={scholarshipNotice.url}
       >
-        <h3>2024 북한이탈청소년 장학생 선발안내</h3>
+        <h3>{scholarshipNotice.title}</h3>
       </Container>
       <Container
         noticeName="학사일정"
         baseURL="https://www.dongguk.edu/schedule/detail?schedule_info_seq=22"
       >
-        <table>
-          <tbody>
-            <tr>
-              <td>2023.11.13. ~ 2023.11.24.</td>
-              <td>재입학 신청</td>
-            </tr>
-            <tr>
-              <td>2023.11.15. ~ 2023.11.17.</td>
-              <td>겨울 계절학기 수강신청</td>
-            </tr>
-            <tr>
-              <td>2023.11.17.</td>
-              <td>학기 3/4 기준일</td>
-            </tr>
-          </tbody>
-        </table>
+        <tr>{scheduleNotice.title}</tr>
       </Container>
       <Container noticeName="오늘의 수업 " baseURL="/home">
         <table>

@@ -5,7 +5,11 @@ import styles from "./styles.module.css";
 const Article = () => {
   return (
     <div className={styles.article}>
-      <Greeting userName={"박세호"} width="30vw"></Greeting>
+      <Greeting
+        userName={"박세호"}
+        userCode="2019112127"
+        width="30vw"
+      ></Greeting>
       <Container
         noticeName="데이터사이언스"
         baseURL="https://www.dongguk.edu/article/GENERALNOTICES/list"

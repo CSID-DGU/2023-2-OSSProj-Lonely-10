@@ -6,10 +6,11 @@
   padding: 1rem;
 }
 
-.rowStyle {
+/* .rowStyle {
   width: 100%;
   display: grid;
-}
+} */
+
 .tableHead,
 .tableData {
   width: 20vw;

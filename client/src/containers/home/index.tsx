@@ -1,4 +1,5 @@
 import Article from "./Article";
+
 const Home = () => {
   return (
     <>

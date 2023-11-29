@@ -15,6 +15,7 @@ const Frame = () => {
   const router = useRouter();
   const [id, setId] = useState("");
   const [pw, setPw] = useState("");
+  const bearerTokenRegex = /Bearer\s+([^ \n\r]+)/;
 
   const handleLogin = async () => {
     try {
@@ -22,19 +23,14 @@ const Frame = () => {
         user_code: id,
         password: pw,
       };
-      localStorage.setItem("user_code", id);
-      console.log(data);
       const response = await axios.post(
         "http://localhost:8080/api/v1/user/login",
         data
       );
-
-      console.log("Response:", response);
       // response로 토큰 체크 후 home으로
-      localStorage.setItem(
-        "auth",
-        "response 반환 형태를 몰라서 일단은 이렇게 둡니다!"
-      );
+      const token = response.headers.toString().match(bearerTokenRegex);
+      console.log(token ? token[0] : "null");
+      localStorage.setItem("Authorization", token ? token[0] : "null");
       Swal.fire({
         title: `반갑습니다`,
         text: "초기 세팅 후 메인 페이지로 넘어갑니다.",
@@ -43,7 +39,7 @@ const Frame = () => {
         showConfirmButton: false,
         timerProgressBar: true,
       }).then(() => {
-        router.push("/home");
+        router.push(`/home/${data.user_code}`);
       });
     } catch (error) {
       Swal.fire({

@@ -18,8 +18,14 @@ interface generalProps {
 
 interface scheduleProps {
   date: string;
-  administrator: string;
+  description: string;
   title: string;
+}
+
+interface courseProps {
+  course_name: string;
+  classroom: string;
+  time: string;
 }
 
 const Article = () => {
@@ -42,17 +48,13 @@ const Article = () => {
     title: "",
     url: "",
   });
-  const [scheduleNotice, setScheduleNotice] = useState<scheduleProps>({
-    date: "",
-    administrator: "",
-    title: "",
-  });
+  const [scheduleNotice, setScheduleNotice] = useState<scheduleProps[]>([]);
+  const [courseInfo, setCourseInfo] = useState<courseProps[]>([]);
 
   const userCode = localStorage.getItem("user_code");
   const auth = localStorage.getItem("Authorization");
-  //jake-seo-dev.tistory.com/138 [제이크서 위키 블로그:티스토리]
 
-  출처: https: useEffect(() => {
+  useEffect(() => {
     const handleNotice = async () => {
       try {
         const response = await axios.get(
@@ -63,11 +65,13 @@ const Article = () => {
             },
           }
         );
+        console.log(response.data);
         setInfo(response.data.info);
         setGenerallNotice(response.data.generalNotice[0]);
         setHakasNotice(response.data.haksaNotice[0]);
-        setScheduleNotice(response.data.schedule[10]);
+        setScheduleNotice(response.data.schedule.slice(4, 9));
         setScholarshipNotice(response.data.scholarshipNotice[0]);
+        setCourseInfo(response.data.course);
       } catch (error) {
         console.log(error);
         console.log(userCode);
@@ -76,7 +80,9 @@ const Article = () => {
     };
     handleNotice();
   }, []);
-
+  const removePrefix = (str: string): string => {
+    return str.replace(/^공지/, "");
+  };
   return (
     <div className={styles.article}>
       <Greeting
@@ -86,46 +92,51 @@ const Article = () => {
       ></Greeting>
       <Container
         noticeName="일반공지"
-        administrator={generallNotice.administrator}
+        administrator={`작성자 : ${generallNotice.administrator}`}
         baseURL={generallNotice.url}
       >
-        <h3>{generallNotice.title}</h3>
+        <h3>{removePrefix(generallNotice.title)}</h3>
       </Container>
       <Container
         noticeName="학사공지"
-        administrator={haksaNotice.administrator}
+        administrator={`작성자 : ${haksaNotice.administrator}`}
         baseURL={haksaNotice.url}
       >
-        <h3>{haksaNotice.title}</h3>
+        <h3>{removePrefix(haksaNotice.title)}</h3>
       </Container>
       <Container
         noticeName="장학공지"
-        administrator={scholarshipNotice.administrator}
+        administrator={`작성자 : ${scholarshipNotice.administrator}`}
         baseURL={scholarshipNotice.url}
       >
-        <h3>{scholarshipNotice.title}</h3>
+        <h3>{removePrefix(scholarshipNotice.title)}</h3>
       </Container>
       <Container
         noticeName="학사일정"
         baseURL="https://www.dongguk.edu/schedule/detail?schedule_info_seq=22"
       >
-        <tr>{scheduleNotice.title}</tr>
+        <table>
+          <tbody>
+            {scheduleNotice.map((schedule, index) => (
+              <tr key={index}>
+                <td>{schedule.title}</td>
+                <td>{schedule.description}</td>
+                <td>{schedule.date}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </Container>
       <Container noticeName="오늘의 수업 " baseURL="/home">
         <table>
           <tbody>
-            <tr>
-              <td>10:30</td>
-              <td>데이터사이언스개론</td>
-            </tr>
-            <tr>
-              <td>13:00</td>
-              <td>오픈소스소프트웨어프로젝트</td>
-            </tr>
-            <tr>
-              <td>15:00</td>
-              <td>딥러닝</td>
-            </tr>
+            {courseInfo.map((course, index) => (
+              <tr key={index}>
+                <td>{course.time}</td>
+                <td>{course.classroom}</td>
+                <td>{course.course_name}</td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </Container>
@@ -134,3 +145,7 @@ const Article = () => {
 };
 
 export default Article;
+
+/**
+ * 추가 할 일 : 기존 Array 내용도 다 볼 수 있도록 버튼 클릭시 그 다음 내용 나오도록
+ */

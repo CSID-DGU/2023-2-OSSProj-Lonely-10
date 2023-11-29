@@ -2,6 +2,7 @@ package ossproj.lonely.DGU.Portal.service;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.Getter;
@@ -65,6 +66,20 @@ public class JwtService {
 
     public void sendAccessTokenAndRefreshToken(HttpServletResponse response, String accessToken, String refreshToken) {
         response.setStatus(HttpServletResponse.SC_OK);
+
+        Cookie accessCookie = new Cookie("Authorization", accessToken);
+        accessCookie.setHttpOnly(true);
+        accessCookie.setPath("/");
+        accessCookie.setSecure(false);
+
+        Cookie refreshCookie = new Cookie("Reauthorization", refreshToken);
+        refreshCookie.setHttpOnly(true);
+        refreshCookie.setPath("/");
+        refreshCookie.setSecure(false);
+
+        response.addCookie(accessCookie);
+        response.addCookie(refreshCookie);
+
         response.setHeader(accessHeader, BEARER + accessToken);
         response.setHeader(refreshHeader, BEARER + refreshToken);
     }

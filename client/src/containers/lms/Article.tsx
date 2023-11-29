@@ -3,15 +3,10 @@
 import Button from "@/components/Button";
 import SubNav from "@/components/SubNav";
 import Greeting from "@/components/Greeting";
-import TableTest from "./TableTest";
+import TableArticle from "./TableArticle";
 import styles from "./Article.module.css";
-import { useEffect } from "react";
 
 const Article = () => {
-  useEffect(() => {
-    const test = async () => {};
-    test();
-  }, []);
   return (
     <div className={styles.layout}>
       <div className={styles.leftFrame}>
@@ -23,7 +18,7 @@ const Article = () => {
         </SubNav>
       </div>
       <div className={styles.frame}>
-        <TableTest></TableTest>
+        <TableArticle></TableArticle>
       </div>
     </div>
   );

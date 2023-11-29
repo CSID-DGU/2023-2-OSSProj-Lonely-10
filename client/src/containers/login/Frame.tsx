@@ -31,6 +31,7 @@ const Frame = () => {
       const token = response.headers.toString().match(bearerTokenRegex);
       console.log(token ? token[0] : "null");
       localStorage.setItem("Authorization", token ? token[0] : "null");
+      localStorage.setItem("user_code", data.user_code);
       Swal.fire({
         title: `반갑습니다`,
         text: "초기 세팅 후 메인 페이지로 넘어갑니다.",

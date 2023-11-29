@@ -15,7 +15,7 @@ const Article = () => {
   return (
     <div className={styles.layout}>
       <div className={styles.leftFrame}>
-        <Greeting userName="박세호"></Greeting>
+        <Greeting userName="박세호" userCode="201911127"></Greeting>
         <SubNav>
           <Button link="/lms/info">학적조회</Button>
           <Button link="/lms/grade">성적조회</Button>

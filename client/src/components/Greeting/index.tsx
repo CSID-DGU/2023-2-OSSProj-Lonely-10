@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import axios from "axios";
 type GreetingProps = {
   userName: string;
+  userCode?: string;
   width?: string;
 };
 
@@ -18,21 +19,11 @@ const Greeting = (props: GreetingProps) => {
         style={props.width ? { width: props.width } : { border: "1px" }}
       >
         <div className={styles.userBox}>
-          <p>{props.userName}님 반갑습니다.</p>
+          <tr>{props.userName}님 반갑습니다.</tr>
+          <tr>{props.userCode && `학번 : ${props.userCode} : ""`}</tr>
         </div>
         <button
           onClick={() => {
-            axios.post(
-              `http://localhost:8080/api/v1/main/${localStorage.getItem(
-                "user_code"
-              )}`,
-              {
-                headers: {
-                  Authorization: localStorage.getItem("auth"),
-                },
-              }
-            );
-
             Swal.fire({
               title: `로그아웃`,
               icon: "success",

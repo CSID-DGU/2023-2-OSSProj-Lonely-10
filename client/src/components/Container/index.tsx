@@ -7,6 +7,7 @@ type ConatinerProps = {
   baseURL: string;
   children?: React.ReactNode;
   date?: string;
+  administrator?: string;
 };
 
 const Container = (props: ConatinerProps) => {
@@ -18,7 +19,7 @@ const Container = (props: ConatinerProps) => {
         </Link>
         <hr />
         {props.children}
-        <p className={styles.pBottom}>{props.date}</p>
+        <p className={styles.pBottom}>{props.date || props.administrator}</p>
       </div>
     </>
   );

@@ -14,12 +14,12 @@ import ossproj.lonely.DGU.Portal.facade.AggregationFacade;
 @RestController
 @RequestMapping("/api/v1")
 @RequiredArgsConstructor
-public class RecordRepository {
+public class RecordController {
     private final AggregationFacade aggregationFacade;
 
-    @GetMapping("/info")
-    public ResponseEntity<GetUserInfoResponseDto> getUserInfo(@RequestBody GetUserInfoRequestDto getUserInfoRequestDto) {
-        return ResponseEntity.ok(aggregationFacade.getUserInfo(getUserInfoRequestDto.getUserCode()));
+    @GetMapping("/info/{userCode}")
+    public ResponseEntity<GetUserInfoResponseDto> getUserInfo(@PathVariable String userCode) {
+        return ResponseEntity.ok(aggregationFacade.getUserInfo(userCode));
     }
 
     @GetMapping("/grade/{userCode}")

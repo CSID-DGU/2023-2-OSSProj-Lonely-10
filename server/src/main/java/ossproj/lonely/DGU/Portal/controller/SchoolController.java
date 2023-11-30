@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ossproj.lonely.DGU.Portal.dto.school.request.GetSchoolRequestDto;
 import ossproj.lonely.DGU.Portal.dto.school.request.MakeTodoRequestDto;
 import ossproj.lonely.DGU.Portal.dto.school.request.UpdateTodoRequestDto;
 import ossproj.lonely.DGU.Portal.dto.school.response.GetCourseDetailResponseDto;
@@ -44,14 +43,14 @@ public class SchoolController {
         return ResponseEntity.ok("success");
     }
 
-    @GetMapping("/lms")
-    public ResponseEntity<GetSchoolResponseDto> getSchoolComponent(@RequestBody GetSchoolRequestDto getSchoolRequestDto) {
-        return ResponseEntity.ok(aggregationFacade.getSchoolComponent(getSchoolRequestDto.getUserCode()));
+    @GetMapping("/lms/{userCode}")
+    public ResponseEntity<GetSchoolResponseDto> getSchoolComponent(@PathVariable String userCode) {
+        return ResponseEntity.ok(aggregationFacade.getSchoolComponent(userCode));
     }
 
-    @GetMapping("/lms/{courseCode}")
-    public ResponseEntity<GetCourseDetailResponseDto> getCourseDetails(@RequestBody GetSchoolRequestDto getSchoolRequestDto,
+    @GetMapping("/lms/{userCode}/course/{courseCode}")
+    public ResponseEntity<GetCourseDetailResponseDto> getCourseDetails(@PathVariable String userCode,
                                                                        @PathVariable String courseCode) {
-        return ResponseEntity.ok(aggregationFacade.getCourseDetails(getSchoolRequestDto.getUserCode(), courseCode));
+        return ResponseEntity.ok(aggregationFacade.getCourseDetails(userCode, courseCode));
     }
 }

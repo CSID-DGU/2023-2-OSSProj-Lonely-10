@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
-@Getter @Setter
+@Getter
 @RequiredArgsConstructor
 public class UserSignUpDto {
     @JsonProperty("user_code")

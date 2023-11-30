@@ -10,7 +10,7 @@ import lombok.Setter;
 import java.util.List;
 
 @Entity
-@Getter @Setter
+@Getter
 @Builder
 @AllArgsConstructor
 @Table(name = "`user`")
@@ -57,4 +57,8 @@ public class User {
     private List<Enrollment> enrollments;
 
     public User() {}
+
+    public void logout() {
+        this.refreshToken = null;
+    }
 }

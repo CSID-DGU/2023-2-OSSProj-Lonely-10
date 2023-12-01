@@ -3,7 +3,6 @@ package ossproj.lonely.DGU.Portal.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ossproj.lonely.DGU.Portal.dto.enrollment.request.GetEnrollRequestDto;
 import ossproj.lonely.DGU.Portal.dto.enrollment.request.PostEnrollRequestDto;
 import ossproj.lonely.DGU.Portal.dto.enrollment.response.GetCourseResponseDto;
 import ossproj.lonely.DGU.Portal.dto.enrollment.request.GetCourseRequestDto;
@@ -40,8 +39,8 @@ public class EnrollmentController {
         return ResponseEntity.ok("success");
     }
 
-    @GetMapping("/enroll")
-    public ResponseEntity<GetEnrollResponseDto> getEnroll(@RequestBody GetEnrollRequestDto getEnrollRequestDto) {
-        return ResponseEntity.ok(aggregationFacade.getEnroll(getEnrollRequestDto.getUserCode()));
+    @GetMapping("/enroll/{userCode}")
+    public ResponseEntity<GetEnrollResponseDto> getEnroll(@PathVariable String userCode) {
+        return ResponseEntity.ok(aggregationFacade.getEnroll(userCode));
     }
 }

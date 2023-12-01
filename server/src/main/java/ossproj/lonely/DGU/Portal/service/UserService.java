@@ -69,23 +69,9 @@ public class UserService {
     }
 
     @Transactional
-    public void login(UserSignUpDto userSignUpDto, HttpServletResponse response) {
-        User user = userRepository.findByUserCode(userSignUpDto.getUserCode()).orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
-        authenticateUser(user);
-        if (!passwordEncoder.matches(userSignUpDto.getPassword(), user.getHashPassword())) {
-            throw new CustomException(ErrorCode.WRONG_PASSWORD);
-        }
-        TokenPair tokenPair = generateTokens(user);
-        saveRefreshToken(user, tokenPair.getRefreshToken());
-        sendTokensToClient(response, tokenPair);
-        log.info("===== Login Success =====");
-
-    }
-
-    @Transactional
     public void logout(String userCode) {
         User user = userRepository.findByUserCode(userCode).orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
-        user.setRefreshToken(null);
+        user.logout();
         log.info("===== Logout Success =====");
     }
 

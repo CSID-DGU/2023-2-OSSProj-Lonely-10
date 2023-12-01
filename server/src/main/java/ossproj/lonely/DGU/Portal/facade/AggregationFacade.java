@@ -121,7 +121,7 @@ public class AggregationFacade {
 
     public void updateTodoContent(Long todoId, String content) {
         Todo todo = todoService.findById(todoId);
-        todo.setContent(content);
+        todo.updateContent(content);
         todoService.update(todo);
     }
 
@@ -129,7 +129,7 @@ public class AggregationFacade {
         Todo todo = todoService.findById(todoId);
 
         boolean isCompleted = todo.isCompleted();
-        todo.setCompleted(!isCompleted);
+        todo.updateIsCompleted(!isCompleted);
 
         todoService.update(todo);
     }

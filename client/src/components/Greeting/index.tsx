@@ -19,8 +19,12 @@ const Greeting = (props: GreetingProps) => {
         style={props.width ? { width: props.width } : { border: "1px" }}
       >
         <div className={styles.userBox}>
-          <tr>{props.userName}님 반갑습니다.</tr>
-          <tr>{props.userCode && `학번 : ${props.userCode} : ""`}</tr>
+          <table>
+            <td>
+              <tr>{props.userName}님 반갑습니다.</tr>
+              <tr>{props.userCode && `학번 : ${props.userCode} `}</tr>
+            </td>
+          </table>
         </div>
         <button
           onClick={() => {

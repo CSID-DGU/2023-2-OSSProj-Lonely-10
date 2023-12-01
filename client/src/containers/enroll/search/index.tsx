@@ -2,6 +2,7 @@
 import { useState } from "react";
 import styles from "./search.module.css";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 interface classProps {
   online: boolean;
@@ -12,6 +13,7 @@ interface classProps {
 }
 
 const SearchFrame = () => {
+  const userCode = localStorage.getItem("user_code");
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedOption, setSelectedOption] = useState("");
   const [classData, setClassData] = useState<classProps[]>([]);
@@ -20,7 +22,7 @@ const SearchFrame = () => {
   const handleSearch = async () => {
     try {
       const response = await axios.post(
-        "http://localhost:8080/api/v1/course",
+        "http://localhost/api/v1/course",
         {
           type: selectedOption,
           search: searchTerm,
@@ -37,8 +39,35 @@ const SearchFrame = () => {
     }
   };
 
+  const handleEnroll = async (courseCode: string, courseName: string) => {
+    try {
+      const response = await axios.post(
+        "http://localhost/api/v1/enroll",
+        {
+          user_code: userCode,
+          course_code: courseCode,
+        },
+        {
+          headers: {
+            Authorization: auth,
+          },
+        }
+      );
+      Swal.fire({
+        title: `${courseCode} 수강 신청이 완료 됐습니다.`,
+        icon: "success",
+        timer: 2000,
+        showConfirmButton: true,
+        timerProgressBar: true,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
-    <div>
+    <div className={styles.frame}>
+      <h3>수강 신청 페이지</h3>
       <div className={styles.searchContainer}>
         <select
           onChange={(e) => setSelectedOption(e.target.value)}
@@ -69,7 +98,14 @@ const SearchFrame = () => {
                 <td>{classInfo.course_name}</td>
                 <td>{classInfo.professor}</td>
                 <td>{classInfo.course_code}</td>
-                <button className={styles.button}>수강 신청</button>
+                <button
+                  onClick={() =>
+                    handleEnroll(classInfo.course_code, classInfo.course_name)
+                  }
+                  className={styles.button}
+                >
+                  수강 신청
+                </button>
               </tr>
             ))}
         </tbody>

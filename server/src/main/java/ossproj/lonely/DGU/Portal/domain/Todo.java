@@ -5,7 +5,7 @@ import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 
 @Entity
-@Getter @Setter
+@Getter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -29,4 +29,12 @@ public class Todo {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
+
+    public void updateContent(String content) {
+        this.content = content;
+    }
+
+    public void updateIsCompleted(boolean isCompleted) {
+        this.isCompleted = isCompleted;
+    }
 }

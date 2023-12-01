@@ -113,7 +113,7 @@ public class JwtService {
     public void updateRefreshToken(String userCode, String refreshToken) {
         User user = userRepository.findByUserCode(userCode)
                 .orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
-        user.setRefreshToken(refreshToken);
+        user.updateRefreshToken(refreshToken);
     }
 
     public boolean isTokenValid(String token) {

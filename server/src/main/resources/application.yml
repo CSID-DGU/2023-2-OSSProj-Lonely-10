@@ -7,6 +7,9 @@ spring:
     url: jdbc:mysql://database:3306/portal?ServerTimezone=Asia/Seoul&characterEncoding=UTF-8
     username: portal
     password: qwer1234
+#    url: jdbc:mysql://localhost:3306/portal?ServerTimezone=Asia/Seoul&characterEncoding=UTF-8
+#    username: admin
+#    password: admin
     driver-class-name: com.mysql.cj.jdbc.Driver
   sql:
     init:

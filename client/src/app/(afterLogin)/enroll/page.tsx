@@ -1,1 +1,1 @@
-export { default } from "@/containers/enroll";
+export { default } from "@/containers/enroll/search";

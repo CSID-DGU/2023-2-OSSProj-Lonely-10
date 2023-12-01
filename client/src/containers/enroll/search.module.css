@@ -1,0 +1,34 @@
+/* styles/SearchBar.module.css */
+.searchContainer {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.inputBox {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.select {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.button {
+  padding: 8px 16px;
+  background-color: orange;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.button:hover {
+  background-color: darkorange;
+}

@@ -61,4 +61,8 @@ public class User {
     public void logout() {
         this.refreshToken = null;
     }
+
+    public void updateRefreshToken(String refreshToken) {
+        this.refreshToken = refreshToken;
+    }
 }

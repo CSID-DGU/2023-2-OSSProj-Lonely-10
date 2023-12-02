@@ -12,6 +12,7 @@ type GreetingProps = {
 
 const Greeting = (props: GreetingProps) => {
   const router = useRouter();
+  const userCode = localStorage.getItem("user_code");
   return (
     <>
       <div
@@ -34,9 +35,13 @@ const Greeting = (props: GreetingProps) => {
               timer: 1200,
               showConfirmButton: false,
               timerProgressBar: true,
-            }).then(() => {
-              router.push("/login");
-            });
+            })
+              .then(() => {
+                axios.post(`http://localhost/api/v1/main/${userCode}`);
+              })
+              .then(() => {
+                router.push("/login");
+              });
           }}
           className={styles.logout}
         >

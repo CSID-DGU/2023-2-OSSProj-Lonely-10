@@ -14,6 +14,8 @@ const ConfirmEnroll = () => {
   const auth = localStorage.getItem("Authorization");
   const userCode = localStorage.getItem("user_code");
   const [classInfo, setClassInfo] = useState<infoProps[]>([]);
+  const [enrollmentCancelled, setEnrollmentCancelled] =
+    useState<boolean>(false);
 
   useEffect(() => {
     const getEnroll = async () => {
@@ -27,9 +29,11 @@ const ConfirmEnroll = () => {
       );
       setClassInfo(res.data.enrollList);
     };
+    if (enrollmentCancelled) {
+      setEnrollmentCancelled(false);
+    }
     getEnroll();
-    // 완료됐다는 어떤 시그널이 있을 때, useEffect 한 번씩 불러줘야함
-  }, []);
+  }, [enrollmentCancelled]);
 
   const handleCancel = async (courseCode: string, courseName: string) => {
     console.log(courseCode, userCode);
@@ -47,21 +51,20 @@ const ConfirmEnroll = () => {
 
     if (result.isConfirmed) {
       try {
-        const response = await axios.delete(`http://localhost/api/v1/enroll/`, {
+        const response = await axios.delete(`http://localhost/api/v1/enroll`, {
+          data: { user_code: userCode, course_code: courseCode },
           headers: {
             Authorization: auth,
           },
-          data: {
-            user_code: userCode,
-            course_code: courseCode,
-          },
         });
-        console.log(response);
-        Swal.fire(
-          `${courseName} 과목이 수강 취소됐습니다.`,
-          `학수번호 ${courseCode}`,
-          "success"
-        );
+        if (response.data === "success") {
+          setEnrollmentCancelled(true);
+          Swal.fire(
+            `${courseName} 과목이 수강 취소됐습니다.`,
+            `학수번호 ${courseCode}`,
+            "success"
+          );
+        }
       } catch (error) {
         console.log(error);
       }

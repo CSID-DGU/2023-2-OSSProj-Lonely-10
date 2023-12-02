@@ -28,6 +28,11 @@ public class EnrollmentService {
     }
 
     @Transactional
+    public Enrollment getEnrollmentByUserCodeAndCourseCode(String userCode, String courseCode) {
+        return enrollmentRepository.findByUserCodeAndCourseCode(userCode, courseCode);
+    }
+
+    @Transactional
     public List<Course> getCourseByUserCode(String userCode) {
         return enrollmentRepository.findCoursesByUserCode(userCode);
     }

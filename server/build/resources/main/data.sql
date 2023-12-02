@@ -52,3 +52,7 @@ insert into portal.notice (created_at, notice_id, administrator, title, type, ur
 insert into portal.notice (created_at, notice_id, administrator, title, type, url) values ('2023-10-13', 28, '백민기', '2023학년도 겨울 계절학기 서울대학교 수학 안내', '학사', 'https://www.dongguk.edu/article/HAKSANOTICE/detail/26752449');
 insert into portal.notice (created_at, notice_id, administrator, title, type, url) values ('2023-10-12', 29, '백민기', '2023학년도 겨울 계절학기 충북대학교 수학 안내', '학사', 'https://www.dongguk.edu/article/HAKSANOTICE/detail/26752443');
 insert into portal.notice (created_at, notice_id, administrator, title, type, url) values ('2023-10-11', 30, '박수빈', '10월 12일 모의토익 고사장 및 성적 확인 방법 안내', '학사', 'https://www.dongguk.edu/article/HAKSANOTICE/detail/26752401');
+
+insert into portal.course (course_id, course_name, course_code, is_online, professor) values (1, '오픈소스소프트웨어프로젝트', 'CSE4001', 1, '김현철');
+insert into portal.course (course_id, course_name, course_code, is_online, professor) values (2, '컴퓨터그래픽스', 'CSE4002', 1, '김현철');
+insert into portal.course (course_id, course_name, course_code, is_online, professor) values (3, '컴퓨터비전', 'CSE4003', 1, '김현철');

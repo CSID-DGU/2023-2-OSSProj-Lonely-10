@@ -12,4 +12,7 @@ import java.util.List;
 public interface EnrollmentRepository extends JpaRepository<Enrollment, Long> {
     @Query("SELECT e.course FROM Enrollment e WHERE e.user.userCode = :userCode")
     List<Course> findCoursesByUserCode(@Param("userCode") String userCode);
+
+    @Query("SELECT e FROM Enrollment e WHERE e.user.userCode = :userCode AND e.course.courseCode = :courseCode")
+    Enrollment findByUserCodeAndCourseCode(@Param("userCode") String userCode, @Param("courseCode") String courseCode);
 }

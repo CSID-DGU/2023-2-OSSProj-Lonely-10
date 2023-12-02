@@ -71,6 +71,10 @@ public class AggregationFacade {
         User user = userService.findByUserCode(userCode);
         Course course = courseService.findByCourseCode(courseCode);
 
+        if (enrollmentService.getCourseByUserCode(userCode).contains(course)) {
+            return;
+        }
+
         enrollmentService.save(Enrollment.builder()
                 .user(user)
                 .course(course)
@@ -78,13 +82,8 @@ public class AggregationFacade {
     }
 
     public void deleteEnroll(String userCode, String courseCode) {
-        User user = userService.findByUserCode(userCode);
-        Course course = courseService.findByCourseCode(courseCode);
-
-        enrollmentService.delete(Enrollment.builder()
-                .user(user)
-                .course(course)
-                .build());
+        Enrollment enrollment = enrollmentService.getEnrollmentByUserCodeAndCourseCode(userCode, courseCode);
+        enrollmentService.delete(enrollment);
     }
 
     public GetEnrollResponseDto getEnroll(String userCode) {

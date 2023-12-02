@@ -54,7 +54,7 @@ const SearchFrame = () => {
         }
       );
       Swal.fire({
-        title: `${courseCode} 수강 신청이 완료 됐습니다.`,
+        title: `${courseName}과목 (${courseCode})이 수강 신청 완료 됐습니다.`,
         icon: "success",
         timer: 2000,
         showConfirmButton: true,

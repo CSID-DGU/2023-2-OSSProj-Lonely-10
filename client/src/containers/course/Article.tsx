@@ -1,16 +1,59 @@
+"use client";
 import Greeting from "@/components/Greeting";
 import Container from "@/components/Container";
 import styles from "./styles.module.css";
+import { useEffect, useState } from "react";
+import axios from "axios";
+
+interface scheduleProps {
+  time: string;
+  classroom: string;
+  days: string;
+}
+
+interface courseProps {
+  course_name: string;
+  professor: string;
+  schedules: scheduleProps[];
+}
 
 const Article = () => {
+  const auth = localStorage.getItem("Authorization");
+  const userCode = localStorage.getItem("user_code");
+  const [CourseInfo, setCourseInfo] = useState<courseProps[]>([]);
+  useEffect(() => {
+    const getCourse = async () => {
+      const res = await axios.get(`http://localhost/api/v1/lms/${userCode}`, {
+        headers: {
+          Authorization: auth,
+        },
+      });
+      console.log(res.data.user_course);
+      setCourseInfo(res.data.user_course);
+      console.log(CourseInfo);
+    };
+    getCourse();
+  }, []);
   return (
     <div className={styles.article}>
       <Greeting
         userName={"박세호"}
-        userCode="2019112127"
+        userCode={userCode ? userCode : ""}
         width="30vw"
       ></Greeting>
-      <Container
+      {CourseInfo &&
+        CourseInfo.map((data) => (
+          <Container
+            noticeName={data.course_name}
+            baseURL="https://eclass.dongguk.edu/"
+          >
+            <p>{data.professor}</p>
+            <p>{data.schedules[0].classroom}</p>
+            <p>{data.schedules[0].days}</p>
+            <p>{data.schedules[0].time}</p>
+          </Container>
+        ))}
+      {/* <Container
         noticeName="데이터사이언스"
         baseURL="https://www.dongguk.edu/article/GENERALNOTICES/list"
       >
@@ -51,7 +94,7 @@ const Article = () => {
         baseURL="https://www.dongguk.edu/schedule/detail?schedule_info_seq=22"
       >
         <h3>내용</h3>
-      </Container>
+      </Container> */}
       <Container noticeName="오늘의 수업 " baseURL="/home">
         <table>
           <tbody>

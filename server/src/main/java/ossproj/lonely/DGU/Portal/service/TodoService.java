@@ -27,8 +27,9 @@ public class TodoService {
         return todoRepository.findByUserCode(userCode);
     }
     @Transactional
-    public void save(Todo todo) {
+    public Long save(Todo todo) {
         todoRepository.save(todo);
+        return todo.getId();
     }
 
     @Transactional

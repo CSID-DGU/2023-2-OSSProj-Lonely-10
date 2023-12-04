@@ -5,3 +5,54 @@
   gap: 1vh;
   justify-items: center;
 }
+
+.title {
+  color: #ed8b00;
+  margin: 0.5rem;
+  text-decoration: none;
+}
+
+.subjectStyle {
+  display: flex;
+  justify-content: space-between;
+  margin-right: 5%;
+}
+
+.plusButton {
+  border-radius: 50%;
+  background-color: orange;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: none;
+  outline: none;
+}
+
+.orangeButton:hover {
+  background-color: darkorange;
+}
+
+/* styles.module.css */
+
+.inputBox {
+  padding: 10px;
+  border: 2px solid #f39c12;
+  border-radius: 5px;
+  outline: none;
+  width: 180px; /* 크기 조정 */
+  height: 10px;
+  font-size: 16px;
+}
+
+.orangeButton {
+  background-color: #f39c12;
+  color: #fff;
+  padding: 8px 16px; /* 크기 조정 */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-left: 8px; /* 버튼과 입력란 사이 간격 조정 */
+}

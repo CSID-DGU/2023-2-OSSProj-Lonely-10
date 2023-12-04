@@ -25,7 +25,8 @@ const Frame = () => {
       };
       const response = await axios.post(
         "http://localhost:8080/api/v1/user/login",
-        data
+        data,
+        { withCredentials: true }
       );
       // response로 토큰 체크 후 home으로
       const token = response.headers.toString().match(bearerTokenRegex);

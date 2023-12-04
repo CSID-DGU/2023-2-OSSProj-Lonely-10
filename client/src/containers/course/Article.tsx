@@ -53,48 +53,6 @@ const Article = () => {
             <p>{data.schedules[0].time}</p>
           </Container>
         ))}
-      {/* <Container
-        noticeName="데이터사이언스"
-        baseURL="https://www.dongguk.edu/article/GENERALNOTICES/list"
-      >
-        <h3>내용</h3>
-      </Container>
-      <Container
-        noticeName="공학선형대수학"
-        baseURL="https://www.dongguk.edu/article/HAKSANOTICE/list"
-      >
-        <h3>내용</h3>
-      </Container>
-      <Container
-        noticeName="오픈소스소프트웨어프로젝트"
-        baseURL="https://www.dongguk.edu/article/JANGHAKNOTICE/list"
-      >
-        <h3>내용</h3>
-      </Container>
-      <Container
-        noticeName="딥러닝"
-        baseURL="https://www.dongguk.edu/schedule/detail?schedule_info_seq=22"
-      >
-        <h3>내용</h3>
-      </Container>
-      <Container
-        noticeName="일본어"
-        baseURL="https://www.dongguk.edu/schedule/detail?schedule_info_seq=22"
-      >
-        <h3>내용</h3>
-      </Container>
-      <Container
-        noticeName="EAS"
-        baseURL="https://www.dongguk.edu/schedule/detail?schedule_info_seq=22"
-      >
-        <h3>내용</h3>
-      </Container>
-      <Container
-        noticeName="머신러닝과데이터사이언스"
-        baseURL="https://www.dongguk.edu/schedule/detail?schedule_info_seq=22"
-      >
-        <h3>내용</h3>
-      </Container> */}
       <Container noticeName="오늘의 수업 " baseURL="/home">
         <table>
           <tbody>
@@ -113,7 +71,20 @@ const Article = () => {
           </tbody>
         </table>
       </Container>
-      <Container noticeName="오늘의 할일 " baseURL="/home">
+      <Container
+        noticeName="오늘의 할일 "
+        baseURL="/home"
+        children={
+          <button
+            className={styles.plusButton}
+            onClick={() => {
+              console.log("test");
+            }}
+          >
+            +
+          </button>
+        }
+      >
         <table>
           <tbody>
             <tr>

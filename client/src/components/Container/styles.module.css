@@ -15,3 +15,21 @@
   margin: 0;
   vertical-align: bottom;
 }
+
+.subjectStyle {
+  display: flex;
+  justify-content: space-between;
+  margin-right: 5%;
+}
+
+.plusButton {
+  border-radius: 50%;
+  background-color: orange;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: none;
+  outline: none;
+}

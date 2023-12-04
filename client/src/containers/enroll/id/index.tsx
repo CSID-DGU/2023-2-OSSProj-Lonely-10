@@ -72,8 +72,9 @@ const ConfirmEnroll = () => {
   };
 
   return (
-    <div>
+    <div className={styles.frame}>
       <h3>수강 신청 조회</h3>
+      <br />
       <table>
         <tbody>
           {classInfo &&

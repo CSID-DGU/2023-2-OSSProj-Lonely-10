@@ -43,7 +43,6 @@ public class JwtService {
 
     private static final String ACCESS_TOKEN_SUBJECT = "AccessToken";
     private static final String REFRESH_TOKEN_SUBJECT = "RefreshToken";
-    private static final String EMAIL_CLAIM = "email";
     private static final String BEARER = "Bearer ";
     private static final String USER_CODE_CLAIM = "userCode";
 
@@ -70,12 +69,12 @@ public class JwtService {
         Cookie accessCookie = new Cookie("Authorization", accessToken);
         accessCookie.setHttpOnly(true);
         accessCookie.setPath("/");
-        accessCookie.setSecure(false);
+        accessCookie.setSecure(true);
 
         Cookie refreshCookie = new Cookie("Reauthorization", refreshToken);
         refreshCookie.setHttpOnly(true);
         refreshCookie.setPath("/");
-        refreshCookie.setSecure(false);
+        refreshCookie.setSecure(true);
 
         response.addCookie(accessCookie);
         response.addCookie(refreshCookie);

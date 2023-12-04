@@ -19,9 +19,7 @@ public class SchoolController {
 
     @PostMapping("/todos")
     public ResponseEntity<String> makeTodos(@RequestBody MakeTodoRequestDto makeTodoRequestDto) {
-
-        aggregationFacade.makeTodos(makeTodoRequestDto.getUserCode(), makeTodoRequestDto.getContent());
-        return ResponseEntity.ok("success");
+        return ResponseEntity.ok(aggregationFacade.makeTodos(makeTodoRequestDto.getUserCode(), makeTodoRequestDto.getContent()).toString());
     }
 
     @DeleteMapping("/todos/{todoId}")

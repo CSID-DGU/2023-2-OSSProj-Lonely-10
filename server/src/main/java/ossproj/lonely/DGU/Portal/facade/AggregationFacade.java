@@ -103,9 +103,9 @@ public class AggregationFacade {
                 .build();
     }
 
-    public void makeTodos(String userCode, String todo) {
+    public Long makeTodos(String userCode, String todo) {
         User user = userService.findByUserCode(userCode);
-        todoService.save(Todo.builder()
+        return todoService.save(Todo.builder()
                 .user(user)
                         .content(todo)
                         .createdAt(java.time.LocalDateTime.now())
@@ -139,7 +139,7 @@ public class AggregationFacade {
                 todos.stream()
                         .map(todo -> GetSchoolResponseDto.TodoDto.builder()
                                 .content(todo.getContent())
-                                .createdAt(todo.getContent())
+                                .createdAt(todo.getCreatedAt().toString())
                                 .status(todo.isCompleted() ? "completed" : "incomplete")
                                 .build())
                         .toList();

@@ -8,15 +8,20 @@ type ConatinerProps = {
   children?: React.ReactNode;
   date?: string;
   administrator?: string;
+  plusButton?: boolean;
 };
 
 const Container = (props: ConatinerProps) => {
   return (
     <>
       <div className={styles.container}>
-        <Link className={styles.title} href={props.baseURL}>
-          {props.noticeName}
-        </Link>
+        <div className={styles.subjectStyle}>
+          <span>
+            <Link className={styles.title} href={props.baseURL}>
+              {props.noticeName}
+            </Link>
+          </span>
+        </div>
         <hr />
         {props.children}
         <p className={styles.pBottom}>{props.date || props.administrator}</p>

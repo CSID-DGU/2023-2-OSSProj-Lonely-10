@@ -11,3 +11,11 @@
 .button:hover {
   background-color: darkorange;
 }
+
+.frame {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  flex-direction: column;
+}

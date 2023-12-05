@@ -91,11 +91,7 @@ const Article = () => {
 
   return (
     <div className={styles.article}>
-      <Greeting
-        userName={"박세호"}
-        userCode={userCode ? userCode : ""}
-        width="30vw"
-      ></Greeting>
+      <Greeting width="30vw"></Greeting>
       {CourseInfo &&
         CourseInfo.map((data) => (
           <Container
@@ -153,6 +149,7 @@ const Article = () => {
                   </td>
                   <td>{todo.content}</td>
                   {/* 맨 앞에는 완료 체크 박스, 수정 및 삭제 가능한 div에 spcae around 두기  */}
+                  {/* index로 url 보낼때 스택처럼 기억해놔야함... */}
                 </tr>
               ))}
           </tbody>

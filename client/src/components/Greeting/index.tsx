@@ -3,16 +3,15 @@
 import styles from "./styles.module.css";
 import Swal from "sweetalert2";
 import { useRouter } from "next/navigation";
+import { useGlobalContext } from "@/context/userContext";
 import axios from "axios";
 type GreetingProps = {
-  userName: string;
-  userCode?: string;
   width?: string;
 };
 
 const Greeting = (props: GreetingProps) => {
   const router = useRouter();
-  const userCode = localStorage.getItem("user_code");
+  const { userId, userName } = useGlobalContext();
   return (
     <>
       <div
@@ -22,8 +21,8 @@ const Greeting = (props: GreetingProps) => {
         <div className={styles.userBox}>
           <table>
             <td>
-              <tr>{props.userName}님 반갑습니다.</tr>
-              <tr>{props.userCode && `학번 : ${props.userCode} `}</tr>
+              <tr>{userName}님 반갑습니다.</tr>
+              <tr>{userId}</tr>
             </td>
           </table>
         </div>
@@ -37,7 +36,7 @@ const Greeting = (props: GreetingProps) => {
               timerProgressBar: true,
             })
               .then(() => {
-                axios.post(`http://localhost/api/v1/main/${userCode}`);
+                axios.post(`http://localhost/api/v1/main/${userId}`);
               })
               .then(() => {
                 router.push("/login");

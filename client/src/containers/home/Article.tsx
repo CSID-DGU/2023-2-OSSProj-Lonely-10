@@ -3,6 +3,7 @@ import Greeting from "@/components/Greeting";
 import Container from "@/components/Container";
 import styles from "./article.module.css";
 import axios from "axios";
+import { useGlobalContext } from "@/context/userContext";
 import { useEffect, useState } from "react";
 
 interface InfoProps {
@@ -29,6 +30,7 @@ interface courseProps {
 }
 
 const Article = () => {
+  const { setUserId, setUserName } = useGlobalContext();
   const [info, setInfo] = useState<InfoProps>({
     user_code: "",
     user_name: "",
@@ -50,10 +52,8 @@ const Article = () => {
   });
   const [scheduleNotice, setScheduleNotice] = useState<scheduleProps[]>([]);
   const [courseInfo, setCourseInfo] = useState<courseProps[]>([]);
-
-  const userCode = localStorage.getItem("user_code");
   const auth = localStorage.getItem("Authorization");
-
+  const userCode = localStorage.getItem("user_code");
   useEffect(() => {
     const handleNotice = async () => {
       try {
@@ -65,16 +65,18 @@ const Article = () => {
             },
           }
         );
-        console.log(response.data);
+        // console.log(response.data);
+        setUserId(response.data.info.user_code);
+        setUserName(response.data.info.user_name);
         setInfo(response.data.info);
         setGenerallNotice(response.data.generalNotice[0]);
         setHakasNotice(response.data.haksaNotice[0]);
         setScheduleNotice(response.data.schedule.slice(4, 9));
         setScholarshipNotice(response.data.scholarshipNotice[0]);
         setCourseInfo(response.data.course);
+        // console.log();
       } catch (error) {
         console.log(error);
-        console.log(userCode);
         console.log(auth ? auth.split("\n")[1].trim() : "not found");
       }
     };
@@ -83,13 +85,10 @@ const Article = () => {
   const removePrefix = (str: string): string => {
     return str.replace(/^공지/, "");
   };
+
   return (
     <div className={styles.article}>
-      <Greeting
-        userName={info.user_name}
-        userCode={info.user_code}
-        width="30vw"
-      ></Greeting>
+      <Greeting width="30vw"></Greeting>
       <Container
         noticeName="일반공지"
         administrator={`작성자 : ${generallNotice.administrator}`}

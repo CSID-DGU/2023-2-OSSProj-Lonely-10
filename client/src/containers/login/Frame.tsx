@@ -16,7 +16,6 @@ const Frame = () => {
   const [id, setId] = useState("");
   const [pw, setPw] = useState("");
   const bearerTokenRegex = /Bearer\s+([^ \n\r]+)/;
-
   const handleLogin = async () => {
     try {
       const data = {
@@ -30,9 +29,8 @@ const Frame = () => {
       );
       // response로 토큰 체크 후 home으로
       const token = response.headers.toString().match(bearerTokenRegex);
-      console.log(token ? token[0] : "null");
       localStorage.setItem("Authorization", token ? token[0] : "null");
-      localStorage.setItem("user_code", data.user_code);
+      localStorage.setItem("user_code", id);
       Swal.fire({
         title: `반갑습니다`,
         text: "초기 세팅 후 메인 페이지로 넘어갑니다.",
@@ -50,7 +48,6 @@ const Frame = () => {
         icon: `error`,
         confirmButtonColor: "#ed8b00",
       });
-      console.log(id, pw);
     }
   };
 

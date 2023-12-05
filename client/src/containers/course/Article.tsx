@@ -4,7 +4,7 @@ import Container from "@/components/Container";
 import Todo from "@/components/Todo";
 import Link from "next/link";
 import styles from "./styles.module.css";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 
 interface scheduleProps {
@@ -19,10 +19,20 @@ interface courseProps {
   schedules: scheduleProps[];
 }
 
+interface todoProps {
+  content: string;
+  status: string;
+  created_at: string;
+}
+
+type CheckboxChangeEvent = React.ChangeEvent<HTMLInputElement>;
+
 const Article = () => {
   const auth = localStorage.getItem("Authorization");
   const userCode = localStorage.getItem("user_code");
+  const [checkedItems, setCheckedItems] = useState<boolean[]>([]);
   const [CourseInfo, setCourseInfo] = useState<courseProps[]>([]);
+  const [todoInfo, setTodoInfo] = useState<todoProps[]>([]);
   const [todoFlag, setTodoFlag] = useState(false);
   const [todoList, setTodoList] = useState<string[]>([]);
   const [todoItem, setTodoItem] = useState("");
@@ -33,14 +43,25 @@ const Article = () => {
           Authorization: auth,
         },
       });
-      console.log(res.data.user_course);
       setCourseInfo(res.data.user_course);
-      console.log(CourseInfo);
+      setTodoInfo(res.data.todo);
     };
     getCourse();
-  }, []);
+  }, [todoList, checkedItems]);
 
-  const registerTodo = () => {
+  const registerTodo = async () => {
+    await axios.post(
+      "http://localhost/api/v1/todos",
+      {
+        user_code: userCode,
+        content: todoItem,
+      },
+      {
+        headers: {
+          Authorization: auth,
+        },
+      }
+    );
     const list = [...todoList, todoItem];
     setTodoList(list);
     setTodoItem("");
@@ -51,13 +72,26 @@ const Article = () => {
     setTodoFlag(!todoFlag);
   };
 
+  const handleCheck = async (index: number, e: CheckboxChangeEvent) => {
+    if (e.target.checked === true) {
+      await axios.post(
+        `http://localhost/api/v1/todos/${index + 1}`,
+        undefined,
+        {
+          headers: {
+            Authorization: auth,
+          },
+        }
+      );
+    }
+    const newCheckedItems = [...checkedItems];
+    newCheckedItems[index] = e.target.checked;
+    setCheckedItems(newCheckedItems);
+  };
+
   return (
     <div className={styles.article}>
-      <Greeting
-        userName={"박세호"}
-        userCode={userCode ? userCode : ""}
-        width="30vw"
-      ></Greeting>
+      <Greeting width="30vw"></Greeting>
       {CourseInfo &&
         CourseInfo.map((data) => (
           <Container
@@ -100,10 +134,22 @@ const Article = () => {
         )}
         <table>
           <tbody>
-            {todoList &&
-              todoList.map((item, index) => (
-                <tr key={index}>
-                  <td>{item}</td>
+            {todoInfo &&
+              todoInfo.map((todo, index) => (
+                <tr
+                  key={index}
+                  className={todo.status === "completed" ? styles.complete : ""}
+                >
+                  <td>
+                    <input
+                      type="checkbox"
+                      disabled={todo.status === "completed" ? true : false}
+                      onChange={(e) => handleCheck(index, e)}
+                    />
+                  </td>
+                  <td>{todo.content}</td>
+                  {/* 맨 앞에는 완료 체크 박스, 수정 및 삭제 가능한 div에 spcae around 두기  */}
+                  {/* index로 url 보낼때 스택처럼 기억해놔야함... */}
                 </tr>
               ))}
           </tbody>

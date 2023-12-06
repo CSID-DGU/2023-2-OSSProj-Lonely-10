@@ -29,7 +29,7 @@ const Container = (props: ConatinerProps) => {
           </span>
         </div>
         <hr />
-        <p className={styles.pBottom}>{props.administrator}</p>
+        {/* <p className={styles.pBottom}>{props.administrator}</p> */}
         {props.children}
       </div>
     </>

@@ -8,6 +8,7 @@ import ossproj.lonely.DGU.Portal.domain.Schedule;
 import ossproj.lonely.DGU.Portal.dto.main.sub.ScheduleDto;
 import ossproj.lonely.DGU.Portal.repository.ScheduleRepository;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,10 +25,13 @@ public class ScheduleService {
 
     @Transactional
     public List<ScheduleDto> getSchedule() {
+        LocalDate now = LocalDate.now();
+        int currentMonth = now.getMonthValue();
+
         List<Schedule> schedules = scheduleRepository.findAll();
         return schedules.stream()
+                .filter(schedule -> schedule.getDate().getMonthValue() == currentMonth)
                 .map(schedule -> new ScheduleDto(schedule.getTitle(), schedule.getDescription(), schedule.getDate()))
                 .collect(Collectors.toList());
-
     }
 }

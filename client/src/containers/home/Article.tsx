@@ -58,7 +58,7 @@ const Article = () => {
     const handleNotice = async () => {
       try {
         const response = await axios.get(
-          `http://localhost/api/v1/main/${userCode}`,
+          `https://dev-changseop.site/api/v1/main/${userCode}`,
           {
             headers: {
               Authorization: auth,

@@ -22,7 +22,7 @@ const SearchFrame = () => {
   const handleSearch = async () => {
     try {
       const response = await axios.post(
-        "http://localhost/api/v1/course",
+        "https://dev-changseop.site/api/v1/course",
         {
           type: selectedOption,
           search: searchTerm,
@@ -42,7 +42,7 @@ const SearchFrame = () => {
   const handleEnroll = async (courseCode: string, courseName: string) => {
     try {
       const response = await axios.post(
-        "http://localhost/api/v1/enroll",
+        "https://dev-changseop.site/api/v1/enroll",
         {
           user_code: userCode,
           course_code: courseCode,

@@ -36,7 +36,7 @@ const Greeting = (props: GreetingProps) => {
               timerProgressBar: true,
             })
               .then(() => {
-                axios.post(`http://localhost/api/v1/main/${userId}`);
+                axios.post(`https://dev-changseop.site/api/v1/main/${userId}`);
               })
               .then(() => {
                 router.push("/login");

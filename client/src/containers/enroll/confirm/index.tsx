@@ -4,6 +4,9 @@ import { useEffect, useState } from "react";
 import styles from "./confirm.module.css";
 import Swal from "sweetalert2";
 import { useGlobalContext } from "@/context/userContext";
+import Greeting from "@/components/Greeting";
+import SubNav from "@/components/SubNav";
+import Button from "@/components/Button";
 
 interface infoProps {
   course_code: string;
@@ -70,29 +73,38 @@ const ConfirmEnroll = () => {
   };
 
   return (
-    <div className={styles.frame}>
-      <h3>수강 신청 조회</h3>
-      <br />
-      <table>
-        <tbody>
-          {classInfo &&
-            classInfo.map((data) => (
-              <tr>
-                <td>{data.course_name}</td>
-                <td>{data.professor}</td>
-                <td>{data.course_code}</td>
-                <button
-                  onClick={() =>
-                    handleCancel(data.course_code, data.course_name)
-                  }
-                  className={styles.button}
-                >
-                  삭제 하기
-                </button>
-              </tr>
-            ))}
-        </tbody>
-      </table>
+    <div className={styles.layout}>
+      <div className={styles.leftFrame}>
+        <Greeting></Greeting>
+        <SubNav>
+          <Button link={`/enroll/search/${userId}`}>수강신청</Button>
+          <Button link={`/enroll/confirm/${userId}`}>수강신청 결과조회</Button>
+        </SubNav>
+      </div>
+      <div className={styles.frame}>
+        <h3>수강 신청 조회</h3>
+        <br />
+        <table>
+          <tbody>
+            {classInfo &&
+              classInfo.map((data) => (
+                <tr>
+                  <td>{data.course_name}</td>
+                  <td>{data.professor}</td>
+                  <td>{data.course_code}</td>
+                  <button
+                    onClick={() =>
+                      handleCancel(data.course_code, data.course_name)
+                    }
+                    className={styles.button}
+                  >
+                    삭제 하기
+                  </button>
+                </tr>
+              ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };

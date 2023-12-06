@@ -124,7 +124,7 @@ const Article = () => {
           </tbody>
         </table>
       </Container>
-      <Container noticeName="오늘의 수업 " baseURL="/home">
+      <Container noticeName="오늘의 수업 " baseURL="/course">
         <table>
           <tbody>
             {courseInfo.map((course, index) => (

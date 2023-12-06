@@ -19,8 +19,12 @@
   margin-left: 2vw;
 }
 
-.listElement {
+.listElement,
+.listElementBtn {
   color: white;
   font-size: 20px;
   text-decoration: none;
+}
+.listElementBtn {
+  cursor: pointer;
 }

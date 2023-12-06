@@ -68,14 +68,18 @@ const Article = () => {
   };
 
   const handleNoticeIndex = (noticeType: number) => {
+    let index: number;
     if (noticeType === 0) {
-      setGeneralIndex((generalIndex + 1) % (generallNotice.length - 1));
+      index = (generalIndex + 1) % (generallNotice.length - 1);
+      setGeneralIndex(index);
     }
     if (noticeType === 1) {
-      setHaksaIndex((haksaIndex + 1) % (haksaNotice.length - 1));
+      index = (haksaIndex + 1) % (haksaNotice.length - 1);
+      setHaksaIndex(index);
     }
     if (noticeType === 2) {
-      setScholarshipIndex((scholarshipIndex + 1) % (scheduleNotice.length - 1));
+      index = (scholarshipIndex + 1) % (scholarshipNotice.length - 1);
+      setScholarshipIndex(index);
     }
   };
 

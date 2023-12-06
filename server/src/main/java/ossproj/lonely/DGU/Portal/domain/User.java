@@ -1,11 +1,9 @@
 package ossproj.lonely.DGU.Portal.domain;
 
-import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.Setter;
 
 import java.util.List;
 
@@ -55,6 +53,9 @@ public class User {
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<Enrollment> enrollments;
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    private List<Registration> registerations;
 
     public User() {}
 

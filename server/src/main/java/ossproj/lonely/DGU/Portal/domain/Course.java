@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.Setter;
 
 import java.util.List;
 
@@ -39,6 +38,9 @@ public class Course {
 
     @OneToMany(mappedBy = "course", fetch = FetchType.LAZY)
     private List<Assignment> assignments;
+
+    @OneToMany(mappedBy = "course", fetch = FetchType.LAZY)
+    private List<Registration> registerations;
 
     public Course() {}
 }

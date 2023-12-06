@@ -8,9 +8,9 @@ import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 
 interface noticeProps {
-  administrator: string;
   title: string;
   url: string;
+  administrator: string;
 }
 
 interface scheduleProps {
@@ -87,33 +87,33 @@ const Article = () => {
   return (
     <div className={styles.article}>
       <Greeting width="30vw"></Greeting>
-      {/* <Container
+      <Container
         noticeName="일반공지"
-        administrator={`작성자 : ${generallNotice[generalIndex].administrator}`}
-        baseURL={generallNotice[generalIndex].url}
+        administrator={`작성자 : ${generallNotice[0].administrator}`}
+        baseURL={generallNotice[0].url}
         isButton={true}
-        title={removePrefix(generallNotice[generalIndex].title)}
+        title={removePrefix(generallNotice[0].title)}
       >
-        <button onClick={() => handleNoticeIndex(0)}>►</button>
-      </Container> */}
-      {/* <Container
+        {/* <button onClick={() => handleNoticeIndex(0)}>►</button> */}
+      </Container>
+      <Container
         noticeName="학사공지"
-        administrator={`작성자 : ${haksaNotice[haksaIndex].administrator}`}
-        baseURL={haksaNotice[haksaIndex].url}
+        administrator={`작성자 : ${haksaNotice[0].administrator}`}
+        baseURL={haksaNotice[0].url}
         isButton={true}
-        title={removePrefix(haksaNotice[haksaIndex].title)}
+        title={removePrefix(haksaNotice[0].title)}
       >
-        <button onClick={() => handleNoticeIndex(1)}>►</button>
-      </Container> */}
-      {/* <Container
+        {/* <button onClick={() => handleNoticeIndex(1)}>►</button> */}
+      </Container>
+      <Container
         noticeName="장학공지"
-        administrator={`작성자 : ${scholarshipNotice[scholarshipIndex].administrator}`}
-        baseURL={scholarshipNotice[scholarshipIndex].url}
+        administrator={`작성자 : ${scholarshipNotice[0].administrator}`}
+        baseURL={scholarshipNotice[0].url}
         isButton={true}
-        title={removePrefix(scholarshipNotice[scholarshipIndex].title)}
+        title={removePrefix(scholarshipNotice[0].title)}
       >
-        <button onClick={() => handleNoticeIndex(2)}>►</button>
-      </Container> */}
+        {/* <button onClick={() => handleNoticeIndex(2)}>►</button> */}
+      </Container>
       <Container
         noticeName="학사일정"
         baseURL="https://www.dongguk.edu/schedule/detail?schedule_info_seq=22"

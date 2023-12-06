@@ -108,9 +108,9 @@ const Article = () => {
       <Container
         noticeName="장학공지"
         // administrator={scholarshipNotice[0].administrator}
-        baseURL={scholarshipNotice[0].url}
+        baseURL={scholarshipNotice && scholarshipNotice[0].url}
         isButton={true}
-        title={removePrefix(scholarshipNotice[0].title)}
+        title={removePrefix(scholarshipNotice && scholarshipNotice[0].title)}
       >
         {/* <button onClick={() => handleNoticeIndex(2)}>►</button> */}
       </Container>

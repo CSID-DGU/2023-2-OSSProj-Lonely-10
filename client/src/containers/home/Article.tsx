@@ -30,7 +30,7 @@ const Article = () => {
   const pathname = usePathname();
   const userCode = pathname.substring("/home/".length);
 
-  const [generallNotice, setGenerallNotice] = useState<noticeProps[]>([]);
+  const [generalNotice, setGeneralNotice] = useState<noticeProps[]>([]);
   const [scholarshipNotice, setScholarshipNotice] = useState<noticeProps[]>([]);
   const [haksaNotice, setHakasNotice] = useState<noticeProps[]>([]);
   const [scheduleNotice, setScheduleNotice] = useState<scheduleProps[]>([]);
@@ -51,10 +51,10 @@ const Article = () => {
         });
         setUserId(response.data.info.user_code);
         setUserName(response.data.info.user_name);
-        setGenerallNotice(response.data.generalNotice);
-        setHakasNotice(response.data.haksaNotice);
+        setGeneralNotice(response.data.general_notice);
+        setHakasNotice(response.data.haksa_notice);
         setScheduleNotice(response.data.schedule.slice(5, 11));
-        setScholarshipNotice(response.data.scholarshipNotice);
+        setScholarshipNotice(response.data.scholarship_notice);
         setCourseInfo(response.data.course);
         console.log(response.data);
       } catch (error) {
@@ -71,7 +71,7 @@ const Article = () => {
   const handleNoticeIndex = (noticeType: number) => {
     let index: number;
     if (noticeType === 0) {
-      index = (generalIndex + 1) % (generallNotice.length - 1);
+      index = (generalIndex + 1) % (generalNotice.length - 1);
       setGeneralIndex(index);
     }
     if (noticeType === 1) {
@@ -89,10 +89,10 @@ const Article = () => {
       <Greeting width="30vw"></Greeting>
       <Container
         noticeName="일반공지"
-        administrator={generallNotice[0].administrator}
-        baseURL={generallNotice[0].url}
+        administrator={generalNotice[0].administrator}
+        baseURL={generalNotice[0].url}
         isButton={true}
-        title={removePrefix(generallNotice[0].title)}
+        title={removePrefix(generalNotice[0].title)}
       >
         {/* <button onClick={() => handleNoticeIndex(0)}>►</button> */}
       </Container>

@@ -32,4 +32,4 @@ for page_num in range(1, 24):
         data.append([url, title, date, administrator])
 
 dataframe = pd.DataFrame(data)
-dataframe.to_csv('raw_data/janghak_notice.csv', encoding='utf-8')
+dataframe.to_csv('../raw_data/janghak_notice.csv', encoding='utf-8')

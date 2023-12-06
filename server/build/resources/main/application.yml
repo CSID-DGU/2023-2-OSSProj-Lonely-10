@@ -1,35 +1,13 @@
-springdoc:
-  swagger-ui:
-    path: /api-docs
+spring.profiles.default: prod
 
-spring:
-  datasource:
-#    url: jdbc:mysql://database:3306/portal?ServerTimezone=Asia/Seoul&characterEncoding=UTF-8
-#    username: portal
-#    password: qwer1234
-    url: jdbc:mysql://localhost:3306/portal?ServerTimezone=Asia/Seoul&characterEncoding=UTF-8
-    username: admin
-    password: admin
-    driver-class-name: com.mysql.cj.jdbc.Driver
-  sql:
-    init:
-      mode: always
+---
 
-  jpa:
-    hibernate:
-      ddl-auto: create
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.MySQLDialect
-        format_sql: true
-        show_sql: true
-    defer-datasource-initialization: true
+spring.config.activate.on-profile: local
 
-jwt:
-  secret: 05a673dec8a64dfc2c91a0f3b6d9035ee8a90184e873356db5b63a44652dc79dd14e5347c9ce1e4885d0534b136fe93a4905aa094b980bd5db99f23bb2e38119
-  access:
-    header: Authorization
-    exp: 86400000
-  refresh:
-    exp: 604800000
-    header: Reauthorization
+---
+
+spring.config.activate.on-profile: dev
+
+---
+
+spring.config.activate.on-profile: prod

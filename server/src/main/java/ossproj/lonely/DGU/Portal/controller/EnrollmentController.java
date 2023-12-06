@@ -15,6 +15,11 @@ import ossproj.lonely.DGU.Portal.facade.AggregationFacade;
 public class EnrollmentController {
     private final AggregationFacade aggregationFacade;
 
+    @GetMapping("/course")
+    public ResponseEntity<GetEnrollResponseDto> getAllCourse() {
+        return ResponseEntity.ok(aggregationFacade.getAllCourse());
+    }
+
     @PostMapping("/course")
     public GetCourseResponseDto getCourse(@RequestBody GetCourseRequestDto getCourseRequestDto) {
         String search = getCourseRequestDto.getSearch();
@@ -25,6 +30,23 @@ public class EnrollmentController {
             case "course_name" -> aggregationFacade.getCourseByCourseName(search);
             default -> null;
         };
+    }
+
+    @PostMapping("/register")
+    public ResponseEntity<String> postRegister(@RequestBody PostEnrollRequestDto postEnrollRequestDto) {
+        aggregationFacade.postRegister(postEnrollRequestDto.getUserCode(), postEnrollRequestDto.getCourseCode());
+        return ResponseEntity.ok("success");
+    }
+
+    @DeleteMapping("/register")
+    public ResponseEntity<String> deleteRegister(@RequestBody PostEnrollRequestDto postEnrollRequestDto) {
+        aggregationFacade.deleteRegister(postEnrollRequestDto.getUserCode(), postEnrollRequestDto.getCourseCode());
+        return ResponseEntity.ok("success");
+    }
+
+    @GetMapping("/register/{userCode}")
+    public ResponseEntity<GetEnrollResponseDto> getRegister(@PathVariable String userCode) {
+        return ResponseEntity.ok(aggregationFacade.getRegister(userCode));
     }
 
     @PostMapping("/enroll")

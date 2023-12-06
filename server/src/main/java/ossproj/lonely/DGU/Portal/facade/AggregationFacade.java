@@ -34,15 +34,18 @@ public class AggregationFacade {
     private final AttendanceService attendanceService;
     private final CourseInfoService courseInfoService;
     private final AnnouncementService announcementService;
+    private final RegistrationService registrationService;
 
     public MainComponentDto getMainComponent(String userCode) {
+        List<Course> courses = enrollmentService.getCourseByUserCode(userCode);
+
         return MainComponentDto.builder()
                 .Info(userService.getInfo(userCode))
                 .GeneralNotice(noticeService.getGeneralNotice())
                 .ScholarshipNotice(noticeService.getScholarshipNotice())
                 .HaksaNotice(noticeService.getHaksaNotice())
                 .Schedule(scheduleService.getSchedule())
-                .Course(courseService.getCourse())
+                .Course(courseService.getCourse(courses))
                 .build();
     }
 
@@ -81,13 +84,65 @@ public class AggregationFacade {
                 .build());
     }
 
+    public void postRegister(String userCode, String courseCode) {
+        User user = userService.findByUserCode(userCode);
+        Course course = courseService.findByCourseCode(courseCode);
+
+        if (registrationService.getCourseByUserCode(userCode).contains(course)) {
+            return;
+        }
+
+        registrationService.save(Registration.builder()
+                .user(user)
+                .course(course)
+                .build());
+    }
+
     public void deleteEnroll(String userCode, String courseCode) {
         Enrollment enrollment = enrollmentService.getEnrollmentByUserCodeAndCourseCode(userCode, courseCode);
         enrollmentService.delete(enrollment);
     }
 
+    public void deleteRegister(String userCode, String courseCode) {
+        Registration registration = registrationService.getRegistrationByUserCodeAndCourseCode(userCode, courseCode);
+        registrationService.delete(registration);
+    }
+
+    public GetEnrollResponseDto getAllCourse() {
+        List<Course> courseList = courseService.findAllCourse();
+        List<GetEnrollResponseDto.EnrollDto> enrollDtoList =
+                courseList.stream()
+                        .map(course ->
+                                GetEnrollResponseDto.EnrollDto.builder()
+                                        .courseName(course.getCourseName())
+                                        .courseCode(course.getCourseCode())
+                                        .professor(course.getProfessor())
+                                        .build()
+                        ).toList();
+        return GetEnrollResponseDto.builder()
+                .enrollList(enrollDtoList)
+                .build();
+    }
+
     public GetEnrollResponseDto getEnroll(String userCode) {
         List<Course> courseList = enrollmentService.getCourseByUserCode(userCode);
+        log.info("courseList: {}", courseList);
+        List<GetEnrollResponseDto.EnrollDto> enrollDtoList =
+                courseList.stream()
+                        .map(course ->
+                                GetEnrollResponseDto.EnrollDto.builder()
+                                        .courseName(course.getCourseName())
+                                        .courseCode(course.getCourseCode())
+                                        .professor(course.getProfessor())
+                                        .build()
+                        ).toList();
+        return GetEnrollResponseDto.builder()
+                .enrollList(enrollDtoList)
+                .build();
+    }
+
+    public GetEnrollResponseDto getRegister(String userCode) {
+        List<Course> courseList = registrationService.getCourseByUserCode(userCode);
         log.info("courseList: {}", courseList);
         List<GetEnrollResponseDto.EnrollDto> enrollDtoList =
                 courseList.stream()

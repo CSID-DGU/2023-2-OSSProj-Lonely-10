@@ -54,7 +54,7 @@ const Article = () => {
         setGeneralNotice(response.data.general_notice);
         setHakasNotice(response.data.haksa_notice);
         setScheduleNotice(response.data.schedule.slice(5, 11));
-        setScholarshipNotice(response.data.scholarship_notice);
+        setScholarshipNotice(response.data.janghak_notice);
         setCourseInfo(response.data.course);
         console.log(response.data);
       } catch (error) {

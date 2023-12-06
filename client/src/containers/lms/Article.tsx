@@ -11,7 +11,7 @@ const Article = () => {
       <div className={styles.leftFrame}>
         <Greeting></Greeting>
         <SubNav>
-          <Button link="/lms/info">학적조회</Button>
+          <Button link="/lms">학적조회</Button>
           <Button link="/lms/grade">성적조회</Button>
         </SubNav>
       </div>

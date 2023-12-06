@@ -4,9 +4,6 @@
   gap: 10px;
   align-items: center;
   justify-content: center;
-  max-height: 90vh;
-  overflow: auto;
-  padding: 1rem;
 }
 
 .inputBox {
@@ -47,6 +44,7 @@
   display: grid;
   grid-template-columns: 2fr 7fr;
   max-height: 90vh;
+  overflow: auto;
 }
 
 .leftFrame {

@@ -58,7 +58,7 @@ const SearchFrame = () => {
   const handleEnroll = async (courseCode: string, courseName: string) => {
     try {
       await axios.post(
-        "/api/v1/enroll",
+        "/api/v1/register",
         {
           user_code: userId,
           course_code: courseCode,

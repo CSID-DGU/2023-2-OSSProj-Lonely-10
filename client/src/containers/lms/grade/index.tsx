@@ -1,10 +1,14 @@
 "use client";
-import Button from "@/components/Button";
 
+import Button from "@/components/Button";
 import styled from "styled-components";
 import Greeting from "@/components/Greeting";
 import SubNav from "@/components/SubNav";
 import styles from "./styles.module.css";
+
+import { useGlobalContext } from "@/context/userContext";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 const CHEADERS = [
   {
@@ -24,42 +28,69 @@ const CHEADERS = [
     value: "score",
   },
 ];
-const headerKey = CHEADERS.map((header) => header.value);
+// const headerKey = CHEADERS.map((header) => header.value);
+interface userProps {
+  user_name: string;
+  user_code: string;
+  email: string;
+  department: string;
+  major: string;
+  semester: string;
+  phone_number: string;
+}
 
 const Grade = () => {
+  const { userId } = useGlobalContext();
+  const [userData, setUserData] = useState<userProps>();
+  const auth = localStorage.getItem("Authorization");
+  useEffect(() => {
+    const getUserInfo = async () => {
+      try {
+        const response = await axios.get(`/api/v1/info/${userId}`, {
+          headers: {
+            Authorization: auth,
+          },
+        });
+        setUserData(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getUserInfo();
+  }, []);
   return (
     <div className={styles.layout}>
       <div className={styles.leftFrame}>
         <Greeting></Greeting>
         <SubNav>
-          <Button link="/lms">학적조회</Button>
-          <Button link="/lms/grade">성적조회</Button>
+          <Button link={`/lms/${userId}`}>학적조회</Button>
+          <Button link={`/lms/grade/${userId}`}>성적조회</Button>
         </SubNav>
       </div>
       <div className={styles.frame}>
         <Content>
           <QRContainer></QRContainer>
-          <Title>금학기 성적조회</Title>
+          <Title>성적조회</Title>
           <UserInfo>
             <UserContainer>
               <SubTitle>성명</SubTitle>
-              <Info>박세호</Info>
+              <Info>{userData?.user_name}</Info>
             </UserContainer>
             <UserContainer>
               <SubTitle>학번</SubTitle>
-              <Info>2019112127</Info>
+              <Info>{userId}</Info>
             </UserContainer>
             <UserContainer>
-              <SubTitle>학년</SubTitle>
-              <Info>3학년</Info>
+              <SubTitle>학기</SubTitle>
+              <Info>{userData?.semester}</Info>
             </UserContainer>
             <UserContainer>
               <SubTitle>대학</SubTitle>
-              <Info>공과대학</Info>
+              <Info>{userData?.department}</Info>
             </UserContainer>
             <UserContainer>
               <SubTitle>주전공</SubTitle>
-              <Info>정보통신공학과</Info>
+              <Info>{userData?.major}</Info>
             </UserContainer>
             <UserContainer>
               <SubTitle>복수전공</SubTitle>

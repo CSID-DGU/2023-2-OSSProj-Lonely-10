@@ -14,8 +14,20 @@
 
 .frame {
   display: flex;
-  justify-content: center;
   align-items: center;
   text-align: center;
   flex-direction: column;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 2fr 7fr;
+  max-height: 90vh;
+}
+
+.leftFrame {
+  max-height: 90vh;
+  display: grid;
+  grid-template-rows: 1fr 2fr;
+  border-right: 1px solid black;
 }

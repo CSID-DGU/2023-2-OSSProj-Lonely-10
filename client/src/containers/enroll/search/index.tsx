@@ -4,6 +4,9 @@ import { useGlobalContext } from "@/context/userContext";
 import styles from "./search.module.css";
 import axios from "axios";
 import Swal from "sweetalert2";
+import Greeting from "@/components/Greeting";
+import Button from "@/components/Button";
+import SubNav from "@/components/SubNav";
 
 interface classProps {
   online: boolean;
@@ -67,50 +70,60 @@ const SearchFrame = () => {
   };
 
   return (
-    <div className={styles.frame}>
-      <h3>수강 신청 페이지</h3>
-      <div className={styles.searchContainer}>
-        <select
-          onChange={(e) => setSelectedOption(e.target.value)}
-          className={styles.select}
-        >
-          <option value="">과목 검색 선택</option>
-          <option value="course_name">교과목</option>
-          <option value="professor">교수명</option>
-          <option value="course_code">강좌번호</option>
-        </select>
-        <input
-          type="text"
-          placeholder="검색어를 입력하세요"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          className={styles.inputBox}
-        />
-
-        <button onClick={handleSearch} className={styles.button}>
-          검색
-        </button>
+    <div className={styles.layout}>
+      <div className={styles.leftFrame}>
+        <Greeting></Greeting>
+        <SubNav>
+          <Button link={`/enroll/search/${userId}`}>수강신청</Button>
+          <Button link={`/enroll/confirm/${userId}`}>수강신청 결과조회</Button>
+        </SubNav>
       </div>
-      <table>
-        <tbody>
-          {classData &&
-            classData.map((classInfo) => (
-              <tr>
-                <td>{classInfo.course_name}</td>
-                <td>{classInfo.professor}</td>
-                <td>{classInfo.course_code}</td>
-                <button
-                  onClick={() =>
-                    handleEnroll(classInfo.course_code, classInfo.course_name)
-                  }
-                  className={styles.button}
-                >
-                  수강 신청
-                </button>
-              </tr>
-            ))}
-        </tbody>
-      </table>
+      <div className={styles.frame}>
+        <h3>수강 신청 페이지</h3>
+
+        <div className={styles.searchContainer}>
+          <select
+            onChange={(e) => setSelectedOption(e.target.value)}
+            className={styles.select}
+          >
+            <option value="">과목 검색 선택</option>
+            <option value="course_name">교과목</option>
+            <option value="professor">교수명</option>
+            <option value="course_code">강좌번호</option>
+          </select>
+          <input
+            type="text"
+            placeholder="검색어를 입력하세요"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className={styles.inputBox}
+          />
+
+          <button onClick={handleSearch} className={styles.button}>
+            검색
+          </button>
+        </div>
+        <table>
+          <tbody>
+            {classData &&
+              classData.map((classInfo) => (
+                <tr>
+                  <td>{classInfo.course_name}</td>
+                  <td>{classInfo.professor}</td>
+                  <td>{classInfo.course_code}</td>
+                  <button
+                    onClick={() =>
+                      handleEnroll(classInfo.course_code, classInfo.course_name)
+                    }
+                    className={styles.button}
+                  >
+                    수강 신청
+                  </button>
+                </tr>
+              ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };

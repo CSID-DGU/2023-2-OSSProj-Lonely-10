@@ -30,7 +30,7 @@ interface todoProps {
 type CheckboxChangeEvent = React.ChangeEvent<HTMLInputElement>;
 
 const Article = () => {
-  const { userId } = useGlobalContext();
+  const { userId, setUserId } = useGlobalContext();
   const auth = localStorage.getItem("Authorization");
   const [checkedItems, setCheckedItems] = useState<boolean[]>([]);
   const [CourseInfo, setCourseInfo] = useState<courseProps[]>([]);

@@ -38,14 +38,11 @@ const Article = () => {
   const [todoItem, setTodoItem] = useState("");
   useEffect(() => {
     const getCourse = async () => {
-      const res = await axios.get(
-        `https://dev-changseop.site/api/v1/lms/${userCode}`,
-        {
-          headers: {
-            Authorization: auth,
-          },
-        }
-      );
+      const res = await axios.get(`/api/v1/lms/${userCode}`, {
+        headers: {
+          Authorization: auth,
+        },
+      });
       setCourseInfo(res.data.user_course);
       setTodoInfo(res.data.todo);
     };
@@ -54,7 +51,7 @@ const Article = () => {
 
   const registerTodo = async () => {
     await axios.post(
-      "https://dev-changseop.site/api/v1/todos",
+      "/api/v1/todos",
       {
         user_code: userCode,
         content: todoItem,
@@ -77,15 +74,11 @@ const Article = () => {
 
   const handleCheck = async (index: number, e: CheckboxChangeEvent) => {
     if (e.target.checked === true) {
-      await axios.post(
-        `https://dev-changseop.site/api/v1/todos/${index + 1}`,
-        undefined,
-        {
-          headers: {
-            Authorization: auth,
-          },
-        }
-      );
+      await axios.post(`/api/v1/todos/${index + 1}`, undefined, {
+        headers: {
+          Authorization: auth,
+        },
+      });
     }
     const newCheckedItems = [...checkedItems];
     newCheckedItems[index] = e.target.checked;

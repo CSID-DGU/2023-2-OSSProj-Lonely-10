@@ -22,14 +22,11 @@ const TableArticle = () => {
   useEffect(() => {
     const getUserInfo = async () => {
       try {
-        const response = await axios.get(
-          `https://dev-changseop.site/api/v1/info/${userId}`,
-          {
-            headers: {
-              Authorization: auth,
-            },
-          }
-        );
+        const response = await axios.get(`/api/v1/info/${userId}`, {
+          headers: {
+            Authorization: auth,
+          },
+        });
         setUserData(response.data);
       } catch (error) {
         console.log(error);

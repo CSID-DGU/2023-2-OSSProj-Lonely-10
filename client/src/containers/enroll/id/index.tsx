@@ -19,14 +19,11 @@ const ConfirmEnroll = () => {
 
   useEffect(() => {
     const getEnroll = async () => {
-      const res = await axios.get(
-        `https://dev-changseop.site/api/v1/enroll/${userCode}`,
-        {
-          headers: {
-            Authorization: auth,
-          },
-        }
-      );
+      const res = await axios.get(`/api/v1/enroll/${userCode}`, {
+        headers: {
+          Authorization: auth,
+        },
+      });
       setClassInfo(res.data.enrollList);
     };
     if (enrollmentCancelled) {
@@ -51,15 +48,12 @@ const ConfirmEnroll = () => {
 
     if (result.isConfirmed) {
       try {
-        const response = await axios.delete(
-          `https://dev-changseop.site/api/v1/enroll`,
-          {
-            data: { user_code: userCode, course_code: courseCode },
-            headers: {
-              Authorization: auth,
-            },
-          }
-        );
+        const response = await axios.delete(`/api/v1/enroll`, {
+          data: { user_code: userCode, course_code: courseCode },
+          headers: {
+            Authorization: auth,
+          },
+        });
         if (response.data === "success") {
           setEnrollmentCancelled(true);
           Swal.fire(

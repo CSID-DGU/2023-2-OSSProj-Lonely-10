@@ -22,11 +22,9 @@ const Frame = () => {
         user_code: id,
         password: pw,
       };
-      const response = await axios.post(
-        "https://dev-changseop.site/api/v1/user/login",
-        data,
-        { withCredentials: true }
-      );
+      const response = await axios.post("/api/v1/user/login", data, {
+        withCredentials: true,
+      });
       // response로 토큰 체크 후 home으로
       const token = response.headers.toString().match(bearerTokenRegex);
       localStorage.setItem("Authorization", token ? token[0] : "null");

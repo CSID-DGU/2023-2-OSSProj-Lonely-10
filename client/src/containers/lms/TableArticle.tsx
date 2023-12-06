@@ -1,4 +1,6 @@
 "use client";
+import { useGlobalContext } from "@/context/userContext";
+
 import React, { useEffect, useState } from "react";
 import styles from "./table.module.css";
 import axios from "axios";
@@ -15,20 +17,16 @@ interface userProps {
 
 const TableArticle = () => {
   const auth = localStorage.getItem("Authorization");
-  const user_code = localStorage.getItem("user_code");
-
+  const { userId } = useGlobalContext();
   const [userData, setUserData] = useState<userProps>();
   useEffect(() => {
     const getUserInfo = async () => {
       try {
-        const response = await axios.get(
-          `http://localhost/api/v1/info/${user_code}`,
-          {
-            headers: {
-              Authorization: auth,
-            },
-          }
-        );
+        const response = await axios.get(`/api/v1/info/${userId}`, {
+          headers: {
+            Authorization: auth,
+          },
+        });
         setUserData(response.data);
       } catch (error) {
         console.log(error);

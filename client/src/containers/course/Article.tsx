@@ -4,8 +4,10 @@ import Container from "@/components/Container";
 import Todo from "@/components/Todo";
 import Link from "next/link";
 import styles from "./styles.module.css";
-import { useEffect, useState } from "react";
 import axios from "axios";
+
+import { useEffect, useState } from "react";
+import { useGlobalContext } from "@/context/userContext";
 
 interface scheduleProps {
   time: string;
@@ -28,8 +30,8 @@ interface todoProps {
 type CheckboxChangeEvent = React.ChangeEvent<HTMLInputElement>;
 
 const Article = () => {
+  const { userId } = useGlobalContext();
   const auth = localStorage.getItem("Authorization");
-  const userCode = localStorage.getItem("user_code");
   const [checkedItems, setCheckedItems] = useState<boolean[]>([]);
   const [CourseInfo, setCourseInfo] = useState<courseProps[]>([]);
   const [todoInfo, setTodoInfo] = useState<todoProps[]>([]);
@@ -38,7 +40,7 @@ const Article = () => {
   const [todoItem, setTodoItem] = useState("");
   useEffect(() => {
     const getCourse = async () => {
-      const res = await axios.get(`http://localhost/api/v1/lms/${userCode}`, {
+      const res = await axios.get(`/api/v1/lms/${userId}`, {
         headers: {
           Authorization: auth,
         },
@@ -51,9 +53,9 @@ const Article = () => {
 
   const registerTodo = async () => {
     await axios.post(
-      "http://localhost/api/v1/todos",
+      "/api/v1/todos",
       {
-        user_code: userCode,
+        user_code: userId,
         content: todoItem,
       },
       {
@@ -74,15 +76,11 @@ const Article = () => {
 
   const handleCheck = async (index: number, e: CheckboxChangeEvent) => {
     if (e.target.checked === true) {
-      await axios.post(
-        `http://localhost/api/v1/todos/${index + 1}`,
-        undefined,
-        {
-          headers: {
-            Authorization: auth,
-          },
-        }
-      );
+      await axios.post(`/api/v1/todos/${index + 1}`, undefined, {
+        headers: {
+          Authorization: auth,
+        },
+      });
     }
     const newCheckedItems = [...checkedItems];
     newCheckedItems[index] = e.target.checked;

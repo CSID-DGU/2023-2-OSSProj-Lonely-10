@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import { useGlobalContext } from "@/context/userContext";
 import styles from "./search.module.css";
 import axios from "axios";
 import Swal from "sweetalert2";
@@ -13,7 +14,7 @@ interface classProps {
 }
 
 const SearchFrame = () => {
-  const userCode = localStorage.getItem("user_code");
+  const { userId } = useGlobalContext();
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedOption, setSelectedOption] = useState("");
   const [classData, setClassData] = useState<classProps[]>([]);
@@ -22,7 +23,7 @@ const SearchFrame = () => {
   const handleSearch = async () => {
     try {
       const response = await axios.post(
-        "http://localhost/api/v1/course",
+        "/api/v1/course",
         {
           type: selectedOption,
           search: searchTerm,
@@ -42,9 +43,9 @@ const SearchFrame = () => {
   const handleEnroll = async (courseCode: string, courseName: string) => {
     try {
       const response = await axios.post(
-        "http://localhost/api/v1/enroll",
+        "/api/v1/enroll",
         {
-          user_code: userCode,
+          user_code: userId,
           course_code: courseCode,
         },
         {

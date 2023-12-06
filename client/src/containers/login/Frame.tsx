@@ -4,6 +4,7 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { useGlobalContext } from "@/context/userContext";
 import styles from "./frame.module.css";
 import LoginButton from "@/components/LoginButton";
 import Input from "@/components/Input";
@@ -13,6 +14,7 @@ import donggukLogo from "../../../public/images/dongguk.jpg";
 
 const Frame = () => {
   const router = useRouter();
+  const { setUserId } = useGlobalContext();
   const [id, setId] = useState("");
   const [pw, setPw] = useState("");
   const bearerTokenRegex = /Bearer\s+([^ \n\r]+)/;
@@ -22,15 +24,12 @@ const Frame = () => {
         user_code: id,
         password: pw,
       };
-      const response = await axios.post(
-        "http://localhost:8080/api/v1/user/login",
-        data,
-        { withCredentials: true }
-      );
+      const response = await axios.post("/api/v1/user/login", data, {
+        withCredentials: true,
+      });
       // response로 토큰 체크 후 home으로
       const token = response.headers.toString().match(bearerTokenRegex);
       localStorage.setItem("Authorization", token ? token[0] : "null");
-      localStorage.setItem("user_code", id);
       Swal.fire({
         title: `반갑습니다`,
         text: "초기 세팅 후 메인 페이지로 넘어갑니다.",
@@ -39,7 +38,8 @@ const Frame = () => {
         showConfirmButton: false,
         timerProgressBar: true,
       }).then(() => {
-        router.push(`/home/${data.user_code}`);
+        setUserId(data.user_code);
+        router.replace(`/home/${data.user_code}`);
       });
     } catch (error) {
       Swal.fire({

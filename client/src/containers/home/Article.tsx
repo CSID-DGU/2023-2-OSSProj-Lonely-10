@@ -51,10 +51,10 @@ const Article = () => {
         });
         setUserId(response.data.info.user_code);
         setUserName(response.data.info.user_name);
-        setGeneralNotice(response.data.general_notice);
-        setHakasNotice(response.data.haksa_notice);
+        setGeneralNotice(response.data.generalNotice);
+        setHakasNotice(response.data.haksaNotice);
+        setScholarshipNotice(response.data.scholarshipNotice);
         setScheduleNotice(response.data.schedule.slice(5, 11));
-        setScholarshipNotice(response.data.janghak_notice);
         setCourseInfo(response.data.course);
         console.log(response.data);
       } catch (error) {

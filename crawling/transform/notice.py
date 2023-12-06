@@ -15,4 +15,6 @@ janghak_notice['type'] = "장학"
 notice = pd.concat([general_notice, haksa_notice, janghak_notice], axis=0)
 notice.drop_duplicates(inplace=True)
 
+notice = notice[['url', 'title', 'date', 'administrator', 'type']]
+notice = notice[~notice['title'].str.startswith('공지')]
 notice.to_csv('../data/notice.csv', index=False)

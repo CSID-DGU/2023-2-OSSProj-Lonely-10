@@ -53,10 +53,10 @@ const Article = () => {
         setUserName(response.data.info.user_name);
         setGenerallNotice(response.data.generalNotice);
         setHakasNotice(response.data.haksaNotice);
-        setScheduleNotice(response.data.schedule);
+        setScheduleNotice(response.data.schedule.slice(5, 11));
         setScholarshipNotice(response.data.scholarshipNotice);
         setCourseInfo(response.data.course);
-        console.log(generallNotice, haksaNotice, scholarshipNotice);
+        console.log(response.data);
       } catch (error) {
         console.log(error);
         console.log(auth ? auth.split("\n")[1].trim() : "not found");

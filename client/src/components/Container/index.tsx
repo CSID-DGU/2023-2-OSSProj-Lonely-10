@@ -7,8 +7,9 @@ type ConatinerProps = {
   baseURL: string;
   children?: React.ReactNode;
   date?: string;
+  title?: string;
   administrator?: string;
-  plusButton?: boolean;
+  isButton?: boolean;
 };
 
 const Container = (props: ConatinerProps) => {
@@ -17,14 +18,19 @@ const Container = (props: ConatinerProps) => {
       <div className={styles.container}>
         <div className={styles.subjectStyle}>
           <span>
-            <Link className={styles.title} href={props.baseURL}>
+            <p
+              className={styles.title}
+              onClick={() => {
+                window.open(props.baseURL);
+              }}
+            >
               {props.noticeName}
-            </Link>
+            </p>
           </span>
         </div>
         <hr />
-        {props.children}
         <p className={styles.pBottom}>{props.date || props.administrator}</p>
+        {props.children}
       </div>
     </>
   );

@@ -5,11 +5,11 @@ import styles from "./article.module.css";
 import axios from "axios";
 import { useGlobalContext } from "@/context/userContext";
 import { useEffect, useState } from "react";
-
-interface InfoProps {
-  user_code: string;
-  user_name: string;
-}
+import { usePathname } from "next/navigation";
+// interface InfoProps {
+//   user_code: string;
+//   user_name: string;
+// }
 
 interface generalProps {
   administrator: string;
@@ -30,11 +30,13 @@ interface courseProps {
 }
 
 const Article = () => {
+  const pathname = usePathname();
+  const userCode = pathname.substring("/home/".length);
   const { setUserId, setUserName } = useGlobalContext();
-  const [info, setInfo] = useState<InfoProps>({
-    user_code: "",
-    user_name: "",
-  });
+  // const [info, setInfo] = useState<InfoProps>({
+  //   user_code: "",
+  //   user_name: "",
+  // });
   const [generallNotice, setGenerallNotice] = useState<generalProps>({
     administrator: "",
     title: "",
@@ -53,7 +55,6 @@ const Article = () => {
   const [scheduleNotice, setScheduleNotice] = useState<scheduleProps[]>([]);
   const [courseInfo, setCourseInfo] = useState<courseProps[]>([]);
   const auth = localStorage.getItem("Authorization");
-  const userCode = localStorage.getItem("user_code");
   useEffect(() => {
     const handleNotice = async () => {
       try {
@@ -65,7 +66,7 @@ const Article = () => {
         // console.log(response.data);
         setUserId(response.data.info.user_code);
         setUserName(response.data.info.user_name);
-        setInfo(response.data.info);
+        // setInfo(response.data.info);
         setGenerallNotice(response.data.generalNotice[0]);
         setHakasNotice(response.data.haksaNotice[0]);
         setScheduleNotice(response.data.schedule.slice(4, 9));

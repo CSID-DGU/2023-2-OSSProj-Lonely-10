@@ -87,51 +87,57 @@ const Article = () => {
   };
 
   const handleNoticeIndex = (noticeType: number) => {
-    // let index: number;
-    // if (noticeType === 0) {
-    //   index = (generalIndex + 1) % (generalNotice.length - 1);
-    //   setGeneralIndex(index);
-    // }
-    // if (noticeType === 1) {
-    //   index = (haksaIndex + 1) % (haksaNotice.length - 1);
-    //   setHaksaIndex(index);
-    // }
-    // if (noticeType === 2) {
-    //   index = (scholarshipIndex + 1) % (scholarshipNotice.length - 1);
-    //   setScholarshipIndex(index);
-    // }
+    let index: number;
+    if (noticeType === 0) {
+      index = (generalIndex + 1) % (generalNotice.length - 1);
+      setGeneralIndex(index);
+    }
+    if (noticeType === 1) {
+      index = (haksaIndex + 1) % (haksaNotice.length - 1);
+      setHaksaIndex(index);
+    }
+    if (noticeType === 2) {
+      index = (scholarshipIndex + 1) % (scholarshipNotice.length - 1);
+      setScholarshipIndex(index);
+    }
     console.log(scholarshipNotice[noticeType]);
   };
 
   return (
     <div className={styles.article}>
       <Greeting width="30vw"></Greeting>
-      {/* <Container
+      <Container
         noticeName="일반공지"
-        administrator={generalNotice[0].administrator}
-        baseURL={generalNotice[0].url}
+        baseURL={`/home/${userCode}`}
         isButton={true}
-        title={removePrefix(generalNotice[0].title)}
       >
-        <button onClick={() => handleNoticeIndex(0)}>►</button>
-      </Container> */}
-      {/* <Container
+        <h3>{removePrefix(generalNotice[generalIndex].title)}</h3>
+        <p>{generalNotice[generalIndex].administrator}</p>
+        <button className={styles.button} onClick={() => handleNoticeIndex(0)}>
+          ►
+        </button>
+      </Container>
+      <Container
         noticeName="학사공지"
-        administrator={haksaNotice[0].administrator}
-        baseURL={haksaNotice[0].url}
+        baseURL={`/home/${userCode}`}
         isButton={true}
-        title={removePrefix(haksaNotice[0].title)}
       >
-        <button onClick={() => handleNoticeIndex(1)}>►</button>
-      </Container> */}
+        <h3>{removePrefix(haksaNotice[haksaIndex].title)}</h3>
+        <p>{haksaNotice[haksaIndex].administrator}</p>
+        <button className={styles.button} onClick={() => handleNoticeIndex(1)}>
+          ►
+        </button>
+      </Container>
       <Container
         noticeName="장학공지"
         baseURL={`/home/${userCode}`}
         isButton={true}
       >
-        <h3>{removePrefix(scholarshipNotice[0].title)}</h3>
-        <p>{scholarshipNotice[0].administrator}</p>
-        <button onClick={() => handleNoticeIndex(2)}>►</button>
+        <h3>{removePrefix(scholarshipNotice[scholarshipIndex].title)}</h3>
+        <p>{scholarshipNotice[scholarshipIndex].administrator}</p>
+        <button className={styles.button} onClick={() => handleNoticeIndex(2)}>
+          ►
+        </button>
       </Container>
       <Container
         noticeName="학사일정"

@@ -87,27 +87,27 @@ const Article = () => {
   return (
     <div className={styles.article}>
       <Greeting width="30vw"></Greeting>
-      <Container
+      {/* <Container
         noticeName="일반공지"
         administrator={generalNotice[0].administrator}
         baseURL={generalNotice[0].url}
         isButton={true}
         title={removePrefix(generalNotice[0].title)}
       >
-        {/* <button onClick={() => handleNoticeIndex(0)}>►</button> */}
-      </Container>
-      <Container
+        <button onClick={() => handleNoticeIndex(0)}>►</button>
+      </Container> */}
+      {/* <Container
         noticeName="학사공지"
         administrator={haksaNotice[0].administrator}
         baseURL={haksaNotice[0].url}
         isButton={true}
         title={removePrefix(haksaNotice[0].title)}
       >
-        {/* <button onClick={() => handleNoticeIndex(1)}>►</button> */}
-      </Container>
+        <button onClick={() => handleNoticeIndex(1)}>►</button>
+      </Container> */}
       <Container
         noticeName="장학공지"
-        administrator={scholarshipNotice[0].administrator}
+        // administrator={scholarshipNotice[0].administrator}
         baseURL={scholarshipNotice[0].url}
         isButton={true}
         title={removePrefix(scholarshipNotice[0].title)}

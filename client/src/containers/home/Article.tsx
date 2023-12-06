@@ -57,14 +57,11 @@ const Article = () => {
   useEffect(() => {
     const handleNotice = async () => {
       try {
-        const response = await axios.get(
-          `https://dev-changseop.site/api/v1/main/${userCode}`,
-          {
-            headers: {
-              Authorization: auth,
-            },
-          }
-        );
+        const response = await axios.get(`/api/v1/main/${userCode}`, {
+          headers: {
+            Authorization: auth,
+          },
+        });
         // console.log(response.data);
         setUserId(response.data.info.user_code);
         setUserName(response.data.info.user_name);

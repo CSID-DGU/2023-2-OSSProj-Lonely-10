@@ -25,7 +25,7 @@ const SearchFrame = () => {
 
   useEffect(() => {
     const getAllCourse = async () => {
-      const response = await axios.get("api/v1/course", {
+      const response = await axios.get("/api/v1/course", {
         headers: {
           Authorization: auth,
         },

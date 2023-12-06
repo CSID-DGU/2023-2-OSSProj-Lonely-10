@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useGlobalContext } from "@/context/userContext";
 import styles from "./search.module.css";
 import axios from "axios";
@@ -9,19 +9,31 @@ import Button from "@/components/Button";
 import SubNav from "@/components/SubNav";
 
 interface classProps {
-  online: boolean;
+  online?: boolean;
   course_name: string;
   course_code: string;
   professor: string;
-  is_online: boolean;
+  is_online?: boolean;
 }
 
 const SearchFrame = () => {
   const { userId } = useGlobalContext();
+  const [classData, setClassData] = useState<classProps[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedOption, setSelectedOption] = useState("");
-  const [classData, setClassData] = useState<classProps[]>([]);
   const auth = localStorage.getItem("Authorization");
+
+  useEffect(() => {
+    const getAllCourse = async () => {
+      const response = await axios.get("api/v1/course", {
+        headers: {
+          Authorization: auth,
+        },
+      });
+      setClassData(response.data.enrollList);
+    };
+    getAllCourse();
+  }, []);
 
   const handleSearch = async () => {
     try {
@@ -45,7 +57,7 @@ const SearchFrame = () => {
 
   const handleEnroll = async (courseCode: string, courseName: string) => {
     try {
-      const response = await axios.post(
+      await axios.post(
         "/api/v1/enroll",
         {
           user_code: userId,

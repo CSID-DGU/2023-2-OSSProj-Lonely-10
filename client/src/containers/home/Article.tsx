@@ -6,12 +6,8 @@ import axios from "axios";
 import { useGlobalContext } from "@/context/userContext";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
-// interface InfoProps {
-//   user_code: string;
-//   user_name: string;
-// }
 
-interface generalProps {
+interface noticeProps {
   administrator: string;
   title: string;
   url: string;
@@ -25,35 +21,25 @@ interface scheduleProps {
 
 interface courseProps {
   course_name: string;
-  classroom: string;
+  classroom?: string;
   time: string;
 }
 
 const Article = () => {
+  const { setUserId, setUserName } = useGlobalContext();
   const pathname = usePathname();
   const userCode = pathname.substring("/home/".length);
-  const { setUserId, setUserName } = useGlobalContext();
-  // const [info, setInfo] = useState<InfoProps>({
-  //   user_code: "",
-  //   user_name: "",
-  // });
-  const [generallNotice, setGenerallNotice] = useState<generalProps>({
-    administrator: "",
-    title: "",
-    url: "",
-  });
-  const [scholarshipNotice, setScholarshipNotice] = useState<generalProps>({
-    administrator: "",
-    title: "",
-    url: "",
-  });
-  const [haksaNotice, setHakasNotice] = useState<generalProps>({
-    administrator: "",
-    title: "",
-    url: "",
-  });
+
+  const [generallNotice, setGenerallNotice] = useState<noticeProps[]>([]);
+  const [scholarshipNotice, setScholarshipNotice] = useState<noticeProps[]>([]);
+  const [haksaNotice, setHakasNotice] = useState<noticeProps[]>([]);
   const [scheduleNotice, setScheduleNotice] = useState<scheduleProps[]>([]);
   const [courseInfo, setCourseInfo] = useState<courseProps[]>([]);
+
+  const [generalIndex, setGeneralIndex] = useState<number>(0);
+  const [scholarshipIndex, setScholarshipIndex] = useState<number>(0);
+  const [haksaIndex, setHaksaIndex] = useState<number>(0);
+
   const auth = localStorage.getItem("Authorization");
   useEffect(() => {
     const handleNotice = async () => {
@@ -63,16 +49,13 @@ const Article = () => {
             Authorization: auth,
           },
         });
-        // console.log(response.data);
         setUserId(response.data.info.user_code);
         setUserName(response.data.info.user_name);
-        // setInfo(response.data.info);
-        setGenerallNotice(response.data.generalNotice[0]);
-        setHakasNotice(response.data.haksaNotice[0]);
-        setScheduleNotice(response.data.schedule.slice(4, 9));
-        setScholarshipNotice(response.data.scholarshipNotice[0]);
+        setGenerallNotice(response.data.generalNotice);
+        setHakasNotice(response.data.haksaNotice);
+        setScheduleNotice(response.data.schedule);
+        setScholarshipNotice(response.data.scholarshipNotice);
         setCourseInfo(response.data.course);
-        // console.log();
       } catch (error) {
         console.log(error);
         console.log(auth ? auth.split("\n")[1].trim() : "not found");
@@ -84,29 +67,47 @@ const Article = () => {
     return str.replace(/^공지/, "");
   };
 
+  const handleNoticeIndex = (noticeType: number) => {
+    if (noticeType === 0) {
+      setGeneralIndex((generalIndex + 1) % (generallNotice.length - 1));
+    }
+    if (noticeType === 1) {
+      setHaksaIndex((haksaIndex + 1) % (haksaNotice.length - 1));
+    }
+    if (noticeType === 2) {
+      setScholarshipIndex((scholarshipIndex + 1) % (scheduleNotice.length - 1));
+    }
+  };
+
   return (
     <div className={styles.article}>
       <Greeting width="30vw"></Greeting>
       <Container
         noticeName="일반공지"
-        administrator={`작성자 : ${generallNotice.administrator}`}
-        baseURL={generallNotice.url}
+        administrator={`작성자 : ${generallNotice[generalIndex].administrator}`}
+        baseURL={generallNotice[generalIndex].url}
+        isButton={true}
+        title={removePrefix(generallNotice[generalIndex].title)}
       >
-        <h3>{removePrefix(generallNotice.title)}</h3>
+        <button onClick={() => handleNoticeIndex(0)}>►</button>
       </Container>
       <Container
         noticeName="학사공지"
-        administrator={`작성자 : ${haksaNotice.administrator}`}
-        baseURL={haksaNotice.url}
+        administrator={`작성자 : ${haksaNotice[haksaIndex].administrator}`}
+        baseURL={haksaNotice[haksaIndex].url}
+        isButton={true}
+        title={removePrefix(haksaNotice[haksaIndex].title)}
       >
-        <h3>{removePrefix(haksaNotice.title)}</h3>
+        <button onClick={() => handleNoticeIndex(1)}>►</button>
       </Container>
       <Container
         noticeName="장학공지"
-        administrator={`작성자 : ${scholarshipNotice.administrator}`}
-        baseURL={scholarshipNotice.url}
+        administrator={`작성자 : ${scholarshipNotice[scholarshipIndex].administrator}`}
+        baseURL={scholarshipNotice[scholarshipIndex].url}
+        isButton={true}
+        title={removePrefix(scholarshipNotice[scholarshipIndex].title)}
       >
-        <h3>{removePrefix(scholarshipNotice.title)}</h3>
+        <button onClick={() => handleNoticeIndex(2)}>►</button>
       </Container>
       <Container
         noticeName="학사일정"
@@ -142,7 +143,3 @@ const Article = () => {
 };
 
 export default Article;
-
-/**
- * 추가 할 일 : 기존 Array 내용도 다 볼 수 있도록 버튼 클릭시 그 다음 내용 나오도록
- */

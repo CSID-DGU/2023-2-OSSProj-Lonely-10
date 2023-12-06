@@ -30,6 +30,7 @@ const SearchFrame = () => {
           Authorization: auth,
         },
       });
+      console.log(response.data);
       setClassData(response.data.enrollList);
     };
     getAllCourse();

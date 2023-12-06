@@ -3,6 +3,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import styles from "./confirm.module.css";
 import Swal from "sweetalert2";
+import { useGlobalContext } from "@/context/userContext";
 
 interface infoProps {
   course_code: string;
@@ -12,14 +13,15 @@ interface infoProps {
 
 const ConfirmEnroll = () => {
   const auth = localStorage.getItem("Authorization");
-  const userCode = localStorage.getItem("user_code");
+  const { userId } = useGlobalContext();
+
   const [classInfo, setClassInfo] = useState<infoProps[]>([]);
   const [enrollmentCancelled, setEnrollmentCancelled] =
     useState<boolean>(false);
 
   useEffect(() => {
     const getEnroll = async () => {
-      const res = await axios.get(`/api/v1/enroll/${userCode}`, {
+      const res = await axios.get(`/api/v1/enroll/${userId}`, {
         headers: {
           Authorization: auth,
         },
@@ -33,7 +35,6 @@ const ConfirmEnroll = () => {
   }, [enrollmentCancelled]);
 
   const handleCancel = async (courseCode: string, courseName: string) => {
-    console.log(courseCode, userCode);
     const result = await Swal.fire({
       title: `${courseName}과목 (${courseCode})을 수강 취소하시겠습니까?`,
       text: "취소 후 다시 되돌릴 수 없습니다.",
@@ -49,7 +50,7 @@ const ConfirmEnroll = () => {
     if (result.isConfirmed) {
       try {
         const response = await axios.delete(`/api/v1/enroll`, {
-          data: { user_code: userCode, course_code: courseCode },
+          data: { user_code: userId, course_code: courseCode },
           headers: {
             Authorization: auth,
           },

@@ -2,6 +2,7 @@ version: "3.8"
 
 services:
   client:
+    image: kurtyoon/dgu-portal-client:latest
     build:
       context: ./client
       dockerfile: Dockerfile
@@ -9,9 +10,9 @@ services:
       - "3000:3000"
 
   server:
+    image: kurtyoon/dgu-portal-server:latest
     build:
       context: ./server
       dockerfile: Dockerfile
     ports:
       - "8080:8080"
-

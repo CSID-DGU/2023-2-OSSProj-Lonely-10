@@ -4,6 +4,9 @@
   gap: 10px;
   align-items: center;
   justify-content: center;
+  max-height: 90vh;
+  overflow: auto;
+  padding: 1rem;
 }
 
 .inputBox {

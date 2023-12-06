@@ -89,7 +89,7 @@ const Article = () => {
       <Greeting width="30vw"></Greeting>
       <Container
         noticeName="일반공지"
-        administrator={`작성자 : ${generallNotice[0].administrator}`}
+        administrator={generallNotice[0].administrator}
         baseURL={generallNotice[0].url}
         isButton={true}
         title={removePrefix(generallNotice[0].title)}
@@ -98,7 +98,7 @@ const Article = () => {
       </Container>
       <Container
         noticeName="학사공지"
-        administrator={`작성자 : ${haksaNotice[0].administrator}`}
+        administrator={haksaNotice[0].administrator}
         baseURL={haksaNotice[0].url}
         isButton={true}
         title={removePrefix(haksaNotice[0].title)}
@@ -107,7 +107,7 @@ const Article = () => {
       </Container>
       <Container
         noticeName="장학공지"
-        administrator={`작성자 : ${scholarshipNotice[0].administrator}`}
+        administrator={scholarshipNotice[0].administrator}
         baseURL={scholarshipNotice[0].url}
         isButton={true}
         title={removePrefix(scholarshipNotice[0].title)}

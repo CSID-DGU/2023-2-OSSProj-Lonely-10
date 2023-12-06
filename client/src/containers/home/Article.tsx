@@ -87,19 +87,20 @@ const Article = () => {
   };
 
   const handleNoticeIndex = (noticeType: number) => {
-    let index: number;
-    if (noticeType === 0) {
-      index = (generalIndex + 1) % (generalNotice.length - 1);
-      setGeneralIndex(index);
-    }
-    if (noticeType === 1) {
-      index = (haksaIndex + 1) % (haksaNotice.length - 1);
-      setHaksaIndex(index);
-    }
-    if (noticeType === 2) {
-      index = (scholarshipIndex + 1) % (scholarshipNotice.length - 1);
-      setScholarshipIndex(index);
-    }
+    // let index: number;
+    // if (noticeType === 0) {
+    //   index = (generalIndex + 1) % (generalNotice.length - 1);
+    //   setGeneralIndex(index);
+    // }
+    // if (noticeType === 1) {
+    //   index = (haksaIndex + 1) % (haksaNotice.length - 1);
+    //   setHaksaIndex(index);
+    // }
+    // if (noticeType === 2) {
+    //   index = (scholarshipIndex + 1) % (scholarshipNotice.length - 1);
+    //   setScholarshipIndex(index);
+    // }
+    console.log(scholarshipNotice[noticeType]);
   };
 
   return (
@@ -130,7 +131,7 @@ const Article = () => {
         isButton={true}
         title={removePrefix(scholarshipNotice[0].title)}
       >
-        {/* <button onClick={() => handleNoticeIndex(2)}>►</button> */}
+        <button onClick={() => handleNoticeIndex(2)}>►</button>
       </Container>
       <Container
         noticeName="학사일정"

@@ -24,7 +24,7 @@ const ConfirmEnroll = () => {
 
   useEffect(() => {
     const getEnroll = async () => {
-      const res = await axios.get(`/api/v1/enroll/${userId}`, {
+      const res = await axios.get(`/api/v1/register/${userId}`, {
         headers: {
           Authorization: auth,
         },
@@ -52,7 +52,7 @@ const ConfirmEnroll = () => {
 
     if (result.isConfirmed) {
       try {
-        const response = await axios.delete(`/api/v1/enroll`, {
+        const response = await axios.delete(`/api/v1/register`, {
           data: { user_code: userId, course_code: courseCode },
           headers: {
             Authorization: auth,

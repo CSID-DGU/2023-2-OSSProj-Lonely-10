@@ -56,6 +56,7 @@ const Article = () => {
         setScheduleNotice(response.data.schedule);
         setScholarshipNotice(response.data.scholarshipNotice);
         setCourseInfo(response.data.course);
+        console.log(generallNotice, haksaNotice, scholarshipNotice);
       } catch (error) {
         console.log(error);
         console.log(auth ? auth.split("\n")[1].trim() : "not found");
@@ -86,7 +87,7 @@ const Article = () => {
   return (
     <div className={styles.article}>
       <Greeting width="30vw"></Greeting>
-      <Container
+      {/* <Container
         noticeName="일반공지"
         administrator={`작성자 : ${generallNotice[generalIndex].administrator}`}
         baseURL={generallNotice[generalIndex].url}
@@ -94,8 +95,8 @@ const Article = () => {
         title={removePrefix(generallNotice[generalIndex].title)}
       >
         <button onClick={() => handleNoticeIndex(0)}>►</button>
-      </Container>
-      <Container
+      </Container> */}
+      {/* <Container
         noticeName="학사공지"
         administrator={`작성자 : ${haksaNotice[haksaIndex].administrator}`}
         baseURL={haksaNotice[haksaIndex].url}
@@ -103,8 +104,8 @@ const Article = () => {
         title={removePrefix(haksaNotice[haksaIndex].title)}
       >
         <button onClick={() => handleNoticeIndex(1)}>►</button>
-      </Container>
-      <Container
+      </Container> */}
+      {/* <Container
         noticeName="장학공지"
         administrator={`작성자 : ${scholarshipNotice[scholarshipIndex].administrator}`}
         baseURL={scholarshipNotice[scholarshipIndex].url}
@@ -112,7 +113,7 @@ const Article = () => {
         title={removePrefix(scholarshipNotice[scholarshipIndex].title)}
       >
         <button onClick={() => handleNoticeIndex(2)}>►</button>
-      </Container>
+      </Container> */}
       <Container
         noticeName="학사일정"
         baseURL="https://www.dongguk.edu/schedule/detail?schedule_info_seq=22"

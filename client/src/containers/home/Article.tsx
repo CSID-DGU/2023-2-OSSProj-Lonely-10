@@ -66,6 +66,7 @@ const Article = () => {
           headers: {
             Authorization: auth,
           },
+          withCredentials: true,
         });
         setUserId(response.data.info.user_code);
         setUserName(response.data.info.user_name);

@@ -28,6 +28,7 @@ const ConfirmEnroll = () => {
         headers: {
           Authorization: auth,
         },
+        withCredentials: true,
       });
       setClassInfo(res.data.enrollList);
     };
@@ -57,6 +58,7 @@ const ConfirmEnroll = () => {
           headers: {
             Authorization: auth,
           },
+          withCredentials: true,
         });
         if (response.data === "success") {
           setEnrollmentCancelled(true);

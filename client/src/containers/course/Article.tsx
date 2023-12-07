@@ -38,15 +38,18 @@ const Article = () => {
   const [todoFlag, setTodoFlag] = useState(false);
   const [todoList, setTodoList] = useState<string[]>([]);
   const [todoItem, setTodoItem] = useState("");
+  const [today, setToday] = useState("");
   useEffect(() => {
     const getCourse = async () => {
       const res = await axios.get(`/api/v1/lms/${userId}`, {
         headers: {
           Authorization: auth,
         },
+        withCredentials: true,
       });
       setCourseInfo(res.data.user_course);
       setTodoInfo(res.data.todo);
+      setToday(res.headers.Date);
     };
     getCourse();
   }, [todoList, checkedItems]);
@@ -62,6 +65,7 @@ const Article = () => {
         headers: {
           Authorization: auth,
         },
+        withCredentials: true,
       }
     );
     const list = [...todoList, todoItem];
@@ -80,6 +84,7 @@ const Article = () => {
         headers: {
           Authorization: auth,
         },
+        withCredentials: true,
       });
     }
     const newCheckedItems = [...checkedItems];
@@ -102,7 +107,9 @@ const Article = () => {
             <p>{data.schedules[0].time}</p>
           </Container>
         ))}
-      <Container noticeName="오늘의 수업 " baseURL="/home"></Container>
+      <Container noticeName="오늘의 수업 " baseURL="/home">
+        {today}
+      </Container>
       <Todo noticeName="오늘의 할일">
         <div className={styles.subjectStyle}>
           <span className={styles.titleStyle}>

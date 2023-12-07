@@ -26,6 +26,7 @@ const TableArticle = () => {
           headers: {
             Authorization: auth,
           },
+          withCredentials: true,
         });
         setUserData(response.data);
       } catch (error) {

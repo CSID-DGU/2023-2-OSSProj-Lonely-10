@@ -12,6 +12,7 @@ type GreetingProps = {
 const Greeting = (props: GreetingProps) => {
   const router = useRouter();
   const { userId, userName } = useGlobalContext();
+  const auth = localStorage.getItem("Authorization");
   return (
     <>
       <div
@@ -36,7 +37,16 @@ const Greeting = (props: GreetingProps) => {
               timerProgressBar: true,
             })
               .then(() => {
-                axios.post(`/api/v1/main/${userId}`);
+                axios.post(
+                  `/api/v1/main/${userId}`,
+                  {},
+                  {
+                    headers: {
+                      Authorization: auth,
+                    },
+                    withCredentials: true,
+                  }
+                );
               })
               .then(() => {
                 router.push("/login");

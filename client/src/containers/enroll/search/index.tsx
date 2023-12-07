@@ -29,6 +29,7 @@ const SearchFrame = () => {
         headers: {
           Authorization: auth,
         },
+        withCredentials: true,
       });
       console.log(response.data);
       setClassData(response.data.enrollList);
@@ -48,6 +49,7 @@ const SearchFrame = () => {
           headers: {
             Authorization: auth,
           },
+          withCredentials: true,
         }
       );
       setClassData(response.data.course);
@@ -68,6 +70,7 @@ const SearchFrame = () => {
           headers: {
             Authorization: auth,
           },
+          withCredentials: true,
         }
       );
       Swal.fire({

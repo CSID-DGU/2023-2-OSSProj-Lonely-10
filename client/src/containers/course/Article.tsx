@@ -8,6 +8,7 @@ import axios from "axios";
 
 import { useEffect, useState } from "react";
 import { useGlobalContext } from "@/context/userContext";
+import { getToday } from "./getTodayClass";
 
 interface scheduleProps {
   time: string;
@@ -49,9 +50,8 @@ const Article = () => {
       });
       setCourseInfo(res.data.user_course);
       setTodoInfo(res.data.todo);
-      setToday(res.headers.date);
-      console.log(res.headers);
-      console.log(res.headers.date);
+      const tdy = getToday(res.headers.date);
+      setToday(tdy);
     };
     getCourse();
   }, [todoList, checkedItems]);

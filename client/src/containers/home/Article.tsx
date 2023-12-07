@@ -169,7 +169,7 @@ const Article = () => {
         noticeName="학사일정"
         baseURL="https://www.dongguk.edu/schedule/detail?schedule_info_seq=22"
       >
-        <table>
+        <table className={styles.tableStyle}>
           <tbody>
             {scheduleNotice.map((schedule, index) => (
               <tr key={index}>

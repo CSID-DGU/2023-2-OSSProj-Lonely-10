@@ -74,7 +74,6 @@ const Article = () => {
         setScholarshipNotice(response.data.scholarshipNotice);
         setScheduleNotice(response.data.schedule.slice(5, 11));
         setCourseInfo(response.data.course);
-        console.log(response.data);
       } catch (error) {
         console.log(error);
         console.log(auth ? auth.split("\n")[1].trim() : "not found");
@@ -89,18 +88,17 @@ const Article = () => {
   const handleNoticeIndex = (noticeType: number) => {
     let index: number;
     if (noticeType === 0) {
-      index = (generalIndex + 1) % (generalNotice.length - 1);
+      index = (generalIndex + 1) % generalNotice.length;
       setGeneralIndex(index);
     }
     if (noticeType === 1) {
-      index = (haksaIndex + 1) % (haksaNotice.length - 1);
+      index = (haksaIndex + 1) % haksaNotice.length;
       setHaksaIndex(index);
     }
     if (noticeType === 2) {
-      index = (scholarshipIndex + 1) % (scholarshipNotice.length - 1);
+      index = (scholarshipIndex + 1) % scholarshipNotice.length;
       setScholarshipIndex(index);
     }
-    console.log(scholarshipNotice[noticeType]);
   };
 
   return (

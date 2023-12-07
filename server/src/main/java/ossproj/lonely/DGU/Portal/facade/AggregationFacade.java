@@ -200,30 +200,29 @@ public class AggregationFacade {
                         .toList();
 
         List<Course> courses = enrollmentService.getCourseByUserCode(userCode);
-        List<String> courseCodes = courses.stream()
-                .map(Course::getCourseCode)
-                .toList();
         List<CourseInfo> courseInfos = new ArrayList<>();
-        for (String courseCode : courseCodes) {
-            List<CourseInfo> tmp = courseInfoService.findByCourseCode(courseCode);
+        for (Course course : courses) {
+            List<CourseInfo> tmp = courseInfoService.findByCourseCode(course.getCourseCode());
             courseInfos.addAll(tmp);
         }
-        List<GetSchoolResponseDto.UserScheduleDto> userScheduleDtoList =
-                courseInfos.stream()
-                        .map(courseInfo -> GetSchoolResponseDto.UserScheduleDto.builder()
-                                .time(courseInfo.getStartTime() + " ~ " + courseInfo.getEndTime())
-                                .classroom(courseInfo.getClassroom())
-                                .days(courseInfo.getDays())
-                                .build())
-                        .toList();
 
         List<GetSchoolResponseDto.UserCourseDto> userCourseDtos =
                 courses.stream()
-                        .map(course -> GetSchoolResponseDto.UserCourseDto.builder()
-                                .courseName(course.getCourseName())
-                                .professor(course.getProfessor())
-                                .schedules(userScheduleDtoList)
-                                .build())
+                        .map(course -> {
+                            List<GetSchoolResponseDto.UserScheduleDto> filteredSchedules = courseInfos.stream()
+                                    .filter(courseInfo -> courseInfo.getCourseCode().equals(course.getCourseCode()))
+                                    .map(courseInfo -> GetSchoolResponseDto.UserScheduleDto.builder()
+                                            .time(courseInfo.getStartTime() + " ~ " + courseInfo.getEndTime())
+                                            .classroom(courseInfo.getClassroom())
+                                            .days(courseInfo.getDays())
+                                            .build())
+                                    .toList();
+                            return GetSchoolResponseDto.UserCourseDto.builder()
+                                    .courseName(course.getCourseName())
+                                    .professor(course.getProfessor())
+                                    .schedules(filteredSchedules)
+                                    .build();
+                        })
                         .toList();
 
         return GetSchoolResponseDto.builder()

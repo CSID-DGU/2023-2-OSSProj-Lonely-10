@@ -120,10 +120,10 @@ const Article = () => {
           </Container>
         ))}
       <Container noticeName="오늘의 수업 " baseURL={`/home/${userId}`}>
-        {todayClass &&
-          todayClass.map((data) => (
-            <table className={styles.tableStyle}>
-              <tbody>
+        <table className={styles.tableStyle}>
+          <tbody>
+            {todayClass &&
+              todayClass.map((data) => (
                 <tr>
                   <td>{data.courseName}</td>
                   <td>{data.time}</td>
@@ -131,9 +131,9 @@ const Article = () => {
                     data.classroom && renamePlace(data.classroom)
                   } 강의실`}</td>
                 </tr>
-              </tbody>
-            </table>
-          ))}
+              ))}
+          </tbody>
+        </table>
       </Container>
       <Todo noticeName="오늘의 할일">
         <div className={styles.subjectStyle}>

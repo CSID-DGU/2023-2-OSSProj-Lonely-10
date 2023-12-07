@@ -30,7 +30,7 @@ interface todoProps {
 type CheckboxChangeEvent = React.ChangeEvent<HTMLInputElement>;
 
 const Article = () => {
-  const { userId, setUserId } = useGlobalContext();
+  const { userId } = useGlobalContext();
   const auth = localStorage.getItem("Authorization");
   const [checkedItems, setCheckedItems] = useState<boolean[]>([]);
   const [CourseInfo, setCourseInfo] = useState<courseProps[]>([]);
@@ -50,6 +50,7 @@ const Article = () => {
       setCourseInfo(res.data.user_course);
       setTodoInfo(res.data.todo);
       setToday(res.headers.Date);
+      console.log(res.headers);
     };
     getCourse();
   }, [todoList, checkedItems]);

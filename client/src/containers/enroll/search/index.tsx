@@ -31,7 +31,6 @@ const SearchFrame = () => {
         },
         withCredentials: true,
       });
-      console.log(response.data);
       setClassData(response.data.enrollList);
     };
     getAllCourse();

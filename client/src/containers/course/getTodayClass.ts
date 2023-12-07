@@ -28,20 +28,35 @@ export const getToday = (
   });
   const today = dayOfWeekString.replace("요일", "");
 
-  const todayClass = allClass.filter((course) => {
-    const hasToday = course.schedules.some(
-      (schedule) => schedule.days === today
-    );
-    console.log(hasToday);
-  });
-  console.log(todayClass);
+  const todayClasses: todayClassProps[] = [];
 
-  return [
-    {
-      courseName: "string",
-      professor: "string",
-      time: "string",
-      classroom: "string",
-    },
-  ];
+  const getTodayClass = () => {
+    allClass.filter((course) => {
+      const todayCourse = course.schedules.find(
+        (schedule) => schedule.days === today
+      );
+
+      if (todayCourse) {
+        todayClasses.push({
+          courseName: course.course_name,
+          professor: course.professor,
+          time: todayCourse.time,
+          classroom: todayCourse.classroom,
+        });
+      }
+    });
+  };
+  getTodayClass();
+  console.log(todayClasses);
+  return todayClasses;
 };
+
+// "course_name": "EAS1",
+// "professor": "제프벨리",
+// "schedules": [
+//          {
+//            "time": "15:30 ~ 17:30",
+//            "classroom": "207-106(혜화관 106 106 강의실)",
+//            "days": "화"
+//          },
+// ]

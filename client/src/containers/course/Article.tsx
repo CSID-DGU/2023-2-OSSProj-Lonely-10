@@ -115,7 +115,7 @@ const Article = () => {
       <Container noticeName="오늘의 수업 " baseURL={`/home/${userId}`}>
         {todayClass &&
           todayClass.map((data) => (
-            <table>
+            <table className={styles.tableStyle}>
               <tbody>
                 <tr>
                   <td>{data.courseName}</td>

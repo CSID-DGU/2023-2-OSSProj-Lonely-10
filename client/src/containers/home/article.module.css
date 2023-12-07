@@ -34,3 +34,8 @@
   align-items: end;
   padding: 0.5rem;
 }
+
+.tableStyle {
+  overflow: hidden;
+  white-space: nowrap;
+}

@@ -10,6 +10,8 @@ import ossproj.lonely.DGU.Portal.dto.enrollment.response.GetCourseResponseDto.Su
 import ossproj.lonely.DGU.Portal.dto.main.sub.CourseDto;
 import ossproj.lonely.DGU.Portal.repository.CourseRepository;
 
+import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -47,10 +49,15 @@ public class CourseService {
             List<CourseInfo> tmp = courseInfoService.findByCourseCode(courseCode);
             courseInfos.addAll(tmp);
         }
-
         return courseInfos.stream()
-                .map(courseInfo -> new CourseDto(courseInfo.getCourseCode(), courseInfo.getClassroom(), courseInfo.getStartTime() + "~" + courseInfo.getEndTime()))
+                .filter(courseInfo -> courseInfo.getDays().equals(getToday()))
+                .map(courseInfo -> new CourseDto(getCourseName(courseInfo.getCourseCode()), courseInfo.getClassroom(), courseInfo.getStartTime() + "~" + courseInfo.getEndTime()))
                 .collect(Collectors.toList());
+    }
+
+    public String getCourseName(String courseCode) {
+        Course course = courseRepository.findByCourseCode(courseCode);
+        return course.getCourseName();
     }
 
     @Transactional
@@ -73,5 +80,18 @@ public class CourseService {
         return courses.stream()
                 .map(course -> new SubCourseDto(course.getCourseName(), course.getCourseCode(), course.getProfessor(), course.isOnline()))
                 .collect(Collectors.toList());
+    }
+
+    private String getToday() {
+        DayOfWeek today = LocalDate.now().getDayOfWeek();
+        return switch (today) {
+            case MONDAY -> "월";
+            case TUESDAY -> "화";
+            case WEDNESDAY -> "수";
+            case THURSDAY -> "목";
+            case FRIDAY -> "금";
+            case SATURDAY -> "토";
+            case SUNDAY -> "일";
+        };
     }
 }

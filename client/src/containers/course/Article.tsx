@@ -86,6 +86,13 @@ const Article = () => {
     setTodoFlag(!todoFlag);
   };
 
+  const renamePlace = (input: string): string => {
+    const removePattern = (input: string): string => {
+      return input.replace(/\([^)]*\)/g, "").trim();
+    };
+    return removePattern(input);
+  };
+
   const handleCheck = async (index: number, e: CheckboxChangeEvent) => {
     if (e.target.checked === true) {
       await axios.post(`/api/v1/todos/${index + 1}`, undefined, {
@@ -120,7 +127,9 @@ const Article = () => {
                 <tr>
                   <td>{data.courseName}</td>
                   <td>{data.time}</td>
-                  <td>{data.classroom}</td>
+                  <td>{`${
+                    data.classroom && renamePlace(data.classroom)
+                  } 강의실`}</td>
                 </tr>
               </tbody>
             </table>

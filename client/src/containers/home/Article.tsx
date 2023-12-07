@@ -194,7 +194,9 @@ const Article = () => {
               <tr key={index}>
                 <td>{course.course_name}</td>
                 <td>{course.time}</td>
-                <td>{course.classroom && renamePlace(course.classroom)}</td>
+                <td>{`${
+                  course.classroom && renamePlace(course.classroom)
+                } 강의실`}</td>
               </tr>
             ))}
           </tbody>

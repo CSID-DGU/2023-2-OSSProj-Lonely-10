@@ -186,9 +186,9 @@ const Article = () => {
           <tbody>
             {courseInfo.map((course, index) => (
               <tr key={index}>
+                <td>{course.course_name}</td>
                 <td>{course.time}</td>
                 <td>{course.classroom}</td>
-                <td>{course.course_name}</td>
               </tr>
             ))}
           </tbody>

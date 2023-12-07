@@ -60,3 +60,8 @@
 .complete {
   text-decoration: line-through;
 }
+
+.tableStyle {
+  overflow: hidden;
+  white-space: nowrap;
+}

@@ -90,11 +90,7 @@ const Article = () => {
     const removePattern = (input: string): string => {
       return input.replace(/\([^)]*\)/g, "").trim();
     };
-    const removeParentheses = (input: string): string => {
-      const match = input.match(/\(([^)]*)\)/);
-      return match ? match[1].trim() : "";
-    };
-    return removeParentheses(removePattern(input));
+    return removePattern(input);
   };
 
   const handleNoticeIndex = (noticeType: number) => {

@@ -28,6 +28,13 @@ interface todoProps {
   created_at: string;
 }
 
+interface todayClassProps {
+  courseName: string;
+  professor: string;
+  time: string;
+  classroom: string;
+}
+
 type CheckboxChangeEvent = React.ChangeEvent<HTMLInputElement>;
 
 const Article = () => {
@@ -39,7 +46,7 @@ const Article = () => {
   const [todoFlag, setTodoFlag] = useState(false);
   const [todoList, setTodoList] = useState<string[]>([]);
   const [todoItem, setTodoItem] = useState("");
-  const [today, setToday] = useState("");
+  const [todayClass, setTodayClass] = useState<todayClassProps[]>([]);
   useEffect(() => {
     const getCourse = async () => {
       const res = await axios.get(`/api/v1/lms/${userId}`, {
@@ -50,8 +57,8 @@ const Article = () => {
       });
       setCourseInfo(res.data.user_course);
       setTodoInfo(res.data.todo);
-      const tdy = getToday(res.headers.date);
-      setToday(tdy);
+      const today = getToday(res.headers.date, res.data.user_course);
+      setTodayClass(today);
     };
     getCourse();
   }, [todoList, checkedItems]);
@@ -109,8 +116,20 @@ const Article = () => {
             <p>{data.schedules[0].time}</p>
           </Container>
         ))}
-      <Container noticeName="오늘의 수업 " baseURL="/home">
-        {today}
+      <Container noticeName="오늘의 수업 " baseURL={`/home/${userId}`}>
+        {todayClass &&
+          todayClass.map((data) => (
+            <table>
+              <tbody>
+                <tr>
+                  <td>{data.courseName}</td>
+                  <td>{data.professor}</td>
+                  <td>{data.time}</td>
+                  <td>{data.classroom}</td>
+                </tr>
+              </tbody>
+            </table>
+          ))}
       </Container>
       <Todo noticeName="오늘의 할일">
         <div className={styles.subjectStyle}>

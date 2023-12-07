@@ -19,3 +19,24 @@
 .button:hover {
   background-color: darkorange;
 }
+
+.contentStyle {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.contentTitle {
+  min-height: 50%;
+}
+
+.contentAdmin {
+  min-height: 30%;
+}
+
+.btnStyle {
+  display: flex;
+  justify-content: end;
+  align-items: end;
+  padding: 0.5rem;
+}

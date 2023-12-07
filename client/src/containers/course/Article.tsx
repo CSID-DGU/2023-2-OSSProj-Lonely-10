@@ -49,8 +49,9 @@ const Article = () => {
       });
       setCourseInfo(res.data.user_course);
       setTodoInfo(res.data.todo);
-      setToday(res.headers.Date);
+      setToday(res.headers.date);
       console.log(res.headers);
+      console.log(res.headers.date);
     };
     getCourse();
   }, [todoList, checkedItems]);

@@ -12,7 +12,6 @@ interface courseProps {
 
 interface todayClassProps {
   courseName: string;
-  professor: string;
   time: string;
   classroom: string;
 }
@@ -39,7 +38,6 @@ export const getToday = (
       if (todayCourse) {
         todayClasses.push({
           courseName: course.course_name,
-          professor: course.professor,
           time: todayCourse.time,
           classroom: todayCourse.classroom,
         });
@@ -47,7 +45,6 @@ export const getToday = (
     });
   };
   getTodayClass();
-  console.log(todayClasses);
   return todayClasses;
 };
 

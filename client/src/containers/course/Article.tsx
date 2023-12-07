@@ -30,7 +30,6 @@ interface todoProps {
 
 interface todayClassProps {
   courseName: string;
-  professor: string;
   time: string;
   classroom: string;
 }
@@ -111,9 +110,6 @@ const Article = () => {
             baseURL="https://eclass.dongguk.edu/"
           >
             <p>{data.professor}</p>
-            <p>{data.schedules[0].classroom}</p>
-            <p>{data.schedules[0].days}</p>
-            <p>{data.schedules[0].time}</p>
           </Container>
         ))}
       <Container noticeName="오늘의 수업 " baseURL={`/home/${userId}`}>
@@ -123,7 +119,6 @@ const Article = () => {
               <tbody>
                 <tr>
                   <td>{data.courseName}</td>
-                  <td>{data.professor}</td>
                   <td>{data.time}</td>
                   <td>{data.classroom}</td>
                 </tr>

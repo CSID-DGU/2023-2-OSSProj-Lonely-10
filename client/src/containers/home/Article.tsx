@@ -111,21 +111,19 @@ const Article = () => {
         baseURL={`https://www.dongguk.edu/article/GENERALNOTICES/list`}
         isButton={true}
       >
-        <div className={styles.contentStyle}>
-          <h3 className={styles.contentTitle}>
-            {removePrefix(generalNotice[generalIndex].title)}
-          </h3>
-          <p className={styles.contentAdmin}>
-            {generalNotice[generalIndex].administrator}
-          </p>
-          <div className={styles.btnStyle}>
-            <button
-              className={styles.button}
-              onClick={() => handleNoticeIndex(0)}
-            >
-              다음 공지
-            </button>
-          </div>
+        <h3 className={styles.contentTitle}>
+          {removePrefix(generalNotice[generalIndex].title)}
+        </h3>
+        <p className={styles.contentAdmin}>
+          {generalNotice[generalIndex].administrator}
+        </p>
+        <div className={styles.btnStyle}>
+          <button
+            className={styles.button}
+            onClick={() => handleNoticeIndex(0)}
+          >
+            다음 공지
+          </button>
         </div>
       </Container>
       <Container
@@ -133,22 +131,40 @@ const Article = () => {
         baseURL={`https://www.dongguk.edu/article/HAKSANOTICE/list`}
         isButton={true}
       >
-        <h3>{removePrefix(haksaNotice[haksaIndex].title)}</h3>
-        <p>{haksaNotice[haksaIndex].administrator}</p>
-        <button className={styles.button} onClick={() => handleNoticeIndex(1)}>
-          이전 공지
-        </button>
+        <h3 className={styles.contentTitle}>
+          {removePrefix(haksaNotice[haksaIndex].title)}
+        </h3>
+        <p className={styles.contentAdmin}>
+          {haksaNotice[haksaIndex].administrator}
+        </p>
+        <div className={styles.btnStyle}>
+          <button
+            className={styles.button}
+            onClick={() => handleNoticeIndex(1)}
+          >
+            다음 공지
+          </button>
+        </div>
       </Container>
       <Container
         noticeName="장학공지"
         baseURL={`https://www.dongguk.edu/article/JANGHAKNOTICE/list`}
         isButton={true}
       >
-        <h3>{removePrefix(scholarshipNotice[scholarshipIndex].title)}</h3>
-        <p>{scholarshipNotice[scholarshipIndex].administrator}</p>
-        <button className={styles.button} onClick={() => handleNoticeIndex(2)}>
-          다음 공지
-        </button>
+        <h3 className={styles.contentTitle}>
+          {removePrefix(scholarshipNotice[scholarshipIndex].title)}
+        </h3>
+        <p className={styles.contentAdmin}>
+          {scholarshipNotice[scholarshipIndex].administrator}
+        </p>
+        <div className={styles.btnStyle}>
+          <button
+            className={styles.button}
+            onClick={() => handleNoticeIndex(2)}
+          >
+            다음 공지
+          </button>
+        </div>
       </Container>
       <Container
         noticeName="학사일정"

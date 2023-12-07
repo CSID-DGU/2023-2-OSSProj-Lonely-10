@@ -86,6 +86,17 @@ const Article = () => {
     return str.replace(/^공지/, "");
   };
 
+  const renamePlace = (input: string): string => {
+    const removePattern = (input: string): string => {
+      return input.replace(/\([^)]*\)/g, "").trim();
+    };
+    const removeParentheses = (input: string): string => {
+      const match = input.match(/\(([^)]*)\)/);
+      return match ? match[1].trim() : "";
+    };
+    return removeParentheses(removePattern(input));
+  };
+
   const handleNoticeIndex = (noticeType: number) => {
     let index: number;
     if (noticeType === 0) {
@@ -174,7 +185,6 @@ const Article = () => {
             {scheduleNotice.map((schedule, index) => (
               <tr key={index}>
                 <td>{schedule.title}</td>
-                <td>{schedule.description}</td>
                 <td>{schedule.date}</td>
               </tr>
             ))}
@@ -182,13 +192,13 @@ const Article = () => {
         </table>
       </Container>
       <Container noticeName="오늘의 수업 " baseURL="/course">
-        <table>
+        <table className={styles.tableStyle}>
           <tbody>
             {courseInfo.map((course, index) => (
               <tr key={index}>
                 <td>{course.course_name}</td>
                 <td>{course.time}</td>
-                <td>{course.classroom}</td>
+                <td>{course.classroom && renamePlace(course.classroom)}</td>
               </tr>
             ))}
           </tbody>

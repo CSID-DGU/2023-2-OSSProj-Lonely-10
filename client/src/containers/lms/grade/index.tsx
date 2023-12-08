@@ -12,7 +12,7 @@ import axios from "axios";
 
 const CHEADERS = [
   {
-    text: "년도/학기",
+    text: "학기",
     value: "year-semester",
   },
   {
@@ -40,7 +40,8 @@ interface userProps {
 }
 
 interface gradeProps {
-  courseName: string;
+  course_name: string;
+  semester: string;
   score: string;
 }
 
@@ -126,8 +127,8 @@ const Grade = () => {
                   userGrade.map((data, index) => (
                     <tr key={index}>
                       <TD>2023-1</TD>
-                      <TD>{data.courseName}</TD>
-                      <TD>3</TD>
+                      <TD>{data.course_name}</TD>
+                      <TD>{data.semester}</TD>
                       <TD>{data.score}</TD>
                     </tr>
                   ))}

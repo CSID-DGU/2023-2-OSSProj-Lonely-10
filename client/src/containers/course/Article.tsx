@@ -61,7 +61,7 @@ interface courseDetail {
   course_name: string;
   professor: string;
   attendance: attendaceProps[];
-  anouncement: anouncementProps[];
+  announcement: anouncementProps[];
   assignment: assignmentProps[];
 }
 
@@ -169,7 +169,7 @@ const Article = () => {
             {courseDetail[index] && (
               <table>
                 <tbody>
-                  {courseDetail[index].anouncement.map((something) => (
+                  {courseDetail[index].announcement.map((something) => (
                     <tr>
                       <td>{something.title}</td>
                       <td>{something.content}</td>

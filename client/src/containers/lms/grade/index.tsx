@@ -20,10 +20,6 @@ const CHEADERS = [
     value: "name",
   },
   {
-    text: "학점",
-    value: "grade",
-  },
-  {
     text: "성적",
     value: "score",
   },
@@ -126,9 +122,8 @@ const Grade = () => {
                 {userGrade &&
                   userGrade.map((data, index) => (
                     <tr key={index}>
-                      <TD>2023-1</TD>
-                      <TD>{data.course_name}</TD>
                       <TD>{data.semester}</TD>
+                      <TD>{data.course_name}</TD>
                       <TD>{data.score}</TD>
                     </tr>
                   ))}

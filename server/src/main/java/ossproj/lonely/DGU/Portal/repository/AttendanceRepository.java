@@ -8,6 +8,5 @@ import ossproj.lonely.DGU.Portal.domain.Enrollment;
 import java.util.List;
 
 public interface AttendanceRepository extends JpaRepository<Attendance, Long> {
-    @Query("select a from Attendance a where a.enrollment =: enrollment")
     List<Attendance> findAttendanceByEnrollment(Enrollment enrollment);
 }

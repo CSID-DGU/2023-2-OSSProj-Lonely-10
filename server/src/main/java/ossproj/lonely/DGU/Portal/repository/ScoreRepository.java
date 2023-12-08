@@ -8,6 +8,5 @@ import ossproj.lonely.DGU.Portal.domain.Score;
 import java.util.List;
 
 public interface ScoreRepository extends JpaRepository<Score, Long> {
-    @Query("select s from Score s where s.enrollment =: enrollment")
     List<Score> findScoreByEnrollment(Enrollment enrollment);
 }

@@ -233,8 +233,11 @@ public class AggregationFacade {
 
     public GetCourseDetailResponseDto getCourseDetails(String userCode, String courseCode) {
         Course course = courseService.findByCourseCode(courseCode);
-        List<Attendance> attendances = attendanceService.getAttendance(userCode, courseCode);
-        List<Score> scores = scoreService.getScore(userCode, courseCode);
+        Enrollment enrollment = enrollmentService.getEnrollmentByUserCodeAndCourseCode(userCode, courseCode);
+
+        List<Attendance> attendances = attendanceService.getAttendance(enrollment);
+        List<Score> scores = scoreService.getScore(enrollment);
+
         List<Announcement> announcements = announcementService.getAnnouncementByCourseCode(courseCode);
         List<Assignment> assignments = assignmentService.getAssignmentByCourseCode(courseCode);
 

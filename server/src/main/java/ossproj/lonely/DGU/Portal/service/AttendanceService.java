@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ossproj.lonely.DGU.Portal.domain.Attendance;
+import ossproj.lonely.DGU.Portal.domain.Enrollment;
 import ossproj.lonely.DGU.Portal.repository.AttendanceRepository;
 
 import java.util.List;
@@ -21,7 +22,7 @@ public class AttendanceService {
     }
 
     @Transactional
-    public List<Attendance> getAttendance(String courseCode, String userCode) {
-        return attendanceRepository.findAttendanceByCourseCodeAndUserCode(courseCode, userCode);
+    public List<Attendance> getAttendance(Enrollment enrollment) {
+        return attendanceRepository.findAttendanceByEnrollment(enrollment);
     }
 }

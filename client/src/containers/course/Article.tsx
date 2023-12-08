@@ -10,6 +10,9 @@ import { useEffect, useState } from "react";
 import { useGlobalContext } from "@/context/userContext";
 import { getToday } from "./getTodayClass";
 
+const COURSE_CODE: string[] = ["SCS4045-01"];
+const ORDER = ["attendance", "anouncement", "assignment"];
+
 interface scheduleProps {
   time: string;
   classroom: string;
@@ -34,6 +37,35 @@ interface todayClassProps {
   classroom: string;
 }
 
+interface attendaceProps {
+  date: string;
+  status: string;
+}
+
+interface anouncementProps {
+  title: string;
+  content: string;
+  writer: string;
+  created_at: string;
+}
+
+interface assignmentProps {
+  title: string;
+  content: string;
+  duration: string;
+  created_at: string;
+}
+
+interface courseDetail {
+  course_id: string;
+  course_code: string;
+  course_name: string;
+  professor: string;
+  attendance: attendaceProps[];
+  anouncement: anouncementProps[];
+  assignment: assignmentProps[];
+}
+
 type CheckboxChangeEvent = React.ChangeEvent<HTMLInputElement>;
 
 const Article = () => {
@@ -46,6 +78,7 @@ const Article = () => {
   const [todoList, setTodoList] = useState<string[]>([]);
   const [todoItem, setTodoItem] = useState("");
   const [todayClass, setTodayClass] = useState<todayClassProps[]>([]);
+  const [courseDetail, setCourseDetail] = useState<courseDetail[]>([]);
   useEffect(() => {
     const getCourse = async () => {
       const res = await axios.get(`/api/v1/lms/${userId}`, {
@@ -59,7 +92,24 @@ const Article = () => {
       const today = getToday(res.headers.date, res.data.user_course);
       setTodayClass(today);
     };
+    const getDetail = () => {
+      COURSE_CODE.forEach(async (data) => {
+        const response = await axios.get(
+          `/api/v1/lms/${userId}/course/${data}`,
+          {
+            headers: {
+              Authorization: auth,
+            },
+            withCredentials: true,
+          }
+        );
+        const prevData = [...courseDetail];
+        prevData.push(response.data);
+        setCourseDetail(prevData);
+      });
+    };
     getCourse();
+    getDetail();
   }, [todoList, checkedItems]);
 
   const registerTodo = async () => {
@@ -111,12 +161,12 @@ const Article = () => {
     <div className={styles.article}>
       <Greeting width="30vw"></Greeting>
       {CourseInfo &&
-        CourseInfo.map((data) => (
+        CourseInfo.map((data, index) => (
           <Container
             noticeName={data.course_name}
             baseURL="https://eclass.dongguk.edu/"
           >
-            <p>{data.professor}</p>
+            {courseDetail[index] && <p>{`${courseDetail}.${ORDER[0]}`}</p>}
           </Container>
         ))}
       <Container noticeName="오늘의 수업 " baseURL={`/home/${userId}`}>

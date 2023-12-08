@@ -11,7 +11,6 @@ import { useGlobalContext } from "@/context/userContext";
 import { getToday } from "./getTodayClass";
 
 const COURSE_CODE: string[] = ["SCS4045-01"];
-const ORDER = ["attendance", "anouncement", "assignment"];
 
 interface scheduleProps {
   time: string;
@@ -79,6 +78,7 @@ const Article = () => {
   const [todoItem, setTodoItem] = useState("");
   const [todayClass, setTodayClass] = useState<todayClassProps[]>([]);
   const [courseDetail, setCourseDetail] = useState<courseDetail[]>([]);
+
   useEffect(() => {
     const getCourse = async () => {
       const res = await axios.get(`/api/v1/lms/${userId}`, {
@@ -166,7 +166,20 @@ const Article = () => {
             noticeName={data.course_name}
             baseURL="https://eclass.dongguk.edu/"
           >
-            {courseDetail[index] && <p>{`${courseDetail}.${ORDER[0]}`}</p>}
+            {courseDetail[index] && (
+              <table>
+                <tbody>
+                  {courseDetail[index].anouncement.map((something) => (
+                    <tr>
+                      <td>{something.title}</td>
+                      <td>{something.content}</td>
+                      <td>{something.writer}</td>
+                      <td>{something.created_at}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            )}
           </Container>
         ))}
       <Container noticeName="오늘의 수업 " baseURL={`/home/${userId}`}>

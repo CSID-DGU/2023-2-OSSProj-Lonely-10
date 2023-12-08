@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ossproj.lonely.DGU.Portal.domain.Enrollment;
 import ossproj.lonely.DGU.Portal.domain.Score;
 import ossproj.lonely.DGU.Portal.repository.ScoreRepository;
 
@@ -21,7 +22,7 @@ public class ScoreService {
     }
 
     @Transactional
-    public List<Score> getScore(String userCode, String courseCode) {
-        return scoreRepository.findScoreByUserCodeAndCourseCode(userCode, courseCode);
+    public List<Score> getScore(Enrollment enrollment) {
+        return scoreRepository.findScoreByEnrollment(enrollment);
     }
 }

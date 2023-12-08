@@ -39,19 +39,34 @@ interface userProps {
   phone_number: string;
 }
 
+interface gradeProps {
+  courseName: string;
+  score: string;
+}
+
 const Grade = () => {
   const { userId } = useGlobalContext();
   const [userData, setUserData] = useState<userProps>();
+  const [userGrade, setUserGrade] = useState<gradeProps[]>([]);
   const auth = localStorage.getItem("Authorization");
   useEffect(() => {
     const getUserInfo = async () => {
       try {
-        const response = await axios.get(`/api/v1/info/${userId}`, {
+        const infoRes = await axios.get(`/api/v1/info/${userId}`, {
           headers: {
             Authorization: auth,
           },
+          withCredentials: true,
         });
-        setUserData(response.data);
+        const gradeRes = await axios.get(`/api/v1/grade/${userId}`, {
+          headers: {
+            Authorization: auth,
+          },
+          withCredentials: true,
+        });
+
+        setUserData(infoRes.data);
+        setUserGrade(gradeRes.data.grade);
       } catch (error) {
         console.log(error);
       }
@@ -107,24 +122,15 @@ const Grade = () => {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <TD>2023-2</TD>
-                  <TD>오픈소스소프트웨어프로젝트</TD>
-                  <TD>3</TD>
-                  <TD>미공개</TD>
-                </tr>
-                <tr>
-                  <TD>2023-2</TD>
-                  <TD>딥러닝</TD>
-                  <TD>3</TD>
-                  <TD>A+</TD>
-                </tr>
-                <tr>
-                  <TD>2023-2</TD>
-                  <TD>데이터사이언스개론</TD>
-                  <TD>3</TD>
-                  <TD>A+</TD>
-                </tr>
+                {userGrade &&
+                  userGrade.map((data, index) => (
+                    <tr key={index}>
+                      <TD>2023-1</TD>
+                      <TD>{data.courseName}</TD>
+                      <TD>3</TD>
+                      <TD>{data.score}</TD>
+                    </tr>
+                  ))}
               </tbody>
             </Table>
           </TableContainer>

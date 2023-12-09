@@ -123,9 +123,9 @@ const SearchFrame = () => {
             {classData &&
               classData.map((classInfo) => (
                 <tr>
-                  <td>{classInfo.course_name}</td>
-                  <td>{classInfo.professor}</td>
-                  <td>{classInfo.course_code}</td>
+                  <td className={styles.TD}>{classInfo.course_name}</td>
+                  <td className={styles.TD}>{classInfo.professor}</td>
+                  <td className={styles.TD}>{classInfo.course_code}</td>
                   <button
                     onClick={() =>
                       handleEnroll(classInfo.course_code, classInfo.course_name)

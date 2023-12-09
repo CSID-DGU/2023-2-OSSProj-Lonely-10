@@ -7,11 +7,13 @@ type inputProps = {
 
 const Input = (props: inputProps) => {
   return (
-    <input
-      type={props.typeStyle}
-      onChange={props.onChange}
-      className={styles.input}
-    ></input>
+    <div className={styles.inputGroup}>
+      <input
+        type={props.typeStyle}
+        onChange={props.onChange}
+        className={styles.input}
+      ></input>
+    </div>
   );
 };
 

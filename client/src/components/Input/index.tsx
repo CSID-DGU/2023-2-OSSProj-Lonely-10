@@ -3,6 +3,7 @@ import styles from "./input.module.css";
 type inputProps = {
   typeStyle: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  labelName?: string;
 };
 
 const Input = (props: inputProps) => {
@@ -13,6 +14,9 @@ const Input = (props: inputProps) => {
         onChange={props.onChange}
         className={styles.input}
       ></input>
+      <label className={styles.label}>
+        {props.labelName && props.labelName}
+      </label>
     </div>
   );
 };

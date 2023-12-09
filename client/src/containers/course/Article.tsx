@@ -93,7 +93,7 @@ const Article = () => {
     };
     const getDetail = async () => {
       try {
-        const promises = CourseInfo.map(async (data) => {
+        CourseInfo.map(async (data) => {
           const response = await axios.get(
             `/api/v1/lms/${userId}/course/${data.course_code}`,
             {
@@ -103,17 +103,13 @@ const Article = () => {
               withCredentials: true,
             }
           );
-          return response.data;
+          setCourseDetail([...courseDetail, response.data]);
+          console.log(courseDetail);
         });
-
-        const dataResults = await Promise.all(promises);
-        console.log(dataResults);
-        setCourseDetail(dataResults);
       } catch (error) {
         console.error("Error fetching course details:", error);
       }
     };
-
     getCourse();
     getDetail();
   }, [todoList, checkedItems]);

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import ossproj.lonely.DGU.Portal.dto.main.sub.CourseDto;
 
 import java.util.List;
 
@@ -15,6 +16,8 @@ public class GetSchoolResponseDto {
     List<UserCourseDto> userCourses;
     @JsonProperty("todo")
     List<TodoDto> todos;
+    @JsonProperty("course_schedule")
+    List<CourseDto> courseSchedules;
 
     @Getter @Builder
     @AllArgsConstructor

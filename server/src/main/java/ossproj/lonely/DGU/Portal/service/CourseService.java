@@ -82,7 +82,7 @@ public class CourseService {
                 .collect(Collectors.toList());
     }
 
-    private String getToday() {
+    public static String getToday() {
         DayOfWeek today = LocalDate.now().getDayOfWeek();
         return switch (today) {
             case MONDAY -> "월";

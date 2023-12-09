@@ -93,7 +93,7 @@ const Article = () => {
     };
     const getDetail = async () => {
       try {
-        const promises = CourseInfo.map(async (data) => {
+        CourseInfo.map(async (data) => {
           const response = await axios.get(
             `/api/v1/lms/${userId}/course/${data.course_code}`,
             {
@@ -103,17 +103,13 @@ const Article = () => {
               withCredentials: true,
             }
           );
-          return response.data;
+          setCourseDetail([...courseDetail, response.data]);
+          console.log(courseDetail);
         });
-
-        const dataResults = await Promise.all(promises);
-        console.log(dataResults);
-        setCourseDetail(dataResults);
       } catch (error) {
         console.error("Error fetching course details:", error);
       }
     };
-
     getCourse();
     getDetail();
   }, [todoList, checkedItems]);
@@ -205,16 +201,10 @@ const Article = () => {
       </Container>
       <Todo noticeName="오늘의 할일">
         <div className={styles.subjectStyle}>
-          <span className={styles.titleStyle}>
-            <Link className={styles.title} href={""}>
-              오늘의 할 일
-            </Link>
-          </span>
-          <span>
-            <button className={styles.plusButton} onClick={addTodo}>
-              {todoFlag ? "x" : "+"}
-            </button>
-          </span>
+          <p className={styles.title}>오늘의 할 일</p>
+          <button className={styles.plusButton} onClick={addTodo}>
+            {todoFlag ? "x" : "﹢"}
+          </button>
         </div>
         <hr />
         {todoFlag && (

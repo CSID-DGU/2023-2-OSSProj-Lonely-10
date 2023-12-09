@@ -91,25 +91,29 @@ const Article = () => {
       const today = getToday(res.headers.date, res.data.user_course);
       setTodayClass(today);
     };
-    const getDetail = () => {
-      CourseInfo.forEach(async (data) => {
-        const response = await axios.get(
-          `/api/v1/lms/${userId}/course/${data.course_code}`,
-          {
-            headers: {
-              Authorization: auth,
-            },
-            withCredentials: true,
-          }
-        );
-        console.log(response.data);
-        const prevData = [...courseDetail];
-        console.log(prevData);
-        prevData.push(response.data);
-        setCourseDetail(prevData);
-        console.log(courseDetail);
-      });
+    const getDetail = async () => {
+      try {
+        const promises = CourseInfo.map(async (data) => {
+          const response = await axios.get(
+            `/api/v1/lms/${userId}/course/${data.course_code}`,
+            {
+              headers: {
+                Authorization: auth,
+              },
+              withCredentials: true,
+            }
+          );
+          return response.data;
+        });
+
+        const dataResults = await Promise.all(promises);
+        console.log(dataResults);
+        setCourseDetail(dataResults);
+      } catch (error) {
+        console.error("Error fetching course details:", error);
+      }
     };
+
     getCourse();
     getDetail();
   }, [todoList, checkedItems]);

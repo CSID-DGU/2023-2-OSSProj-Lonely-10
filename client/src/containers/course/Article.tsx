@@ -80,20 +80,28 @@ const Article = () => {
 
   useEffect(() => {
     const getCourse = async () => {
-      const res = await axios.get(`/api/v1/lms/${userId}`, {
-        headers: {
-          Authorization: auth,
-        },
-        withCredentials: true,
-      });
-      setCourseInfo(res.data.user_course);
-      setTodoInfo(res.data.todo);
-      const today = getToday(res.headers.date, res.data.user_course);
-      setTodayClass(today);
+      try {
+        const res = await axios.get(`/api/v1/lms/${userId}`, {
+          headers: {
+            Authorization: auth,
+          },
+          withCredentials: true,
+        });
+        setCourseInfo(res.data.user_course);
+        setTodoInfo(res.data.todo);
+        const today = getToday(res.headers.date, res.data.user_course);
+        setTodayClass(today);
+        return res.data.user_course; // 반환값으로 user_course를 전달
+      } catch (error) {
+        console.error("Error fetching course data:", error);
+        throw error; // 에러를 상위로 전파
+      }
     };
+
     const getDetail = async () => {
       try {
-        CourseInfo.map(async (data) => {
+        const userCourses = await getCourse();
+        const detailPromises = userCourses.map(async (data: courseProps) => {
           const response = await axios.get(
             `/api/v1/lms/${userId}/course/${data.course_code}`,
             {
@@ -103,14 +111,17 @@ const Article = () => {
               withCredentials: true,
             }
           );
-          setCourseDetail([...courseDetail, response.data]);
-          console.log(courseDetail);
+          return response.data; // 반환값으로 course detail을 전달
         });
+
+        const details = await Promise.all(detailPromises);
+        setCourseDetail(details);
+        console.log(details);
       } catch (error) {
         console.error("Error fetching course details:", error);
       }
     };
-    getCourse();
+
     getDetail();
   }, [todoList, checkedItems]);
 

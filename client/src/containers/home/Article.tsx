@@ -157,19 +157,21 @@ const Article = () => {
         baseURL={`https://www.dongguk.edu/article/JANGHAKNOTICE/list`}
         isButton={true}
       >
-        <h3 className={styles.contentTitle}>
-          {removePrefix(scholarshipNotice[scholarshipIndex].title)}
-        </h3>
-        <p className={styles.contentAdmin}>
-          {scholarshipNotice[scholarshipIndex].administrator}
-        </p>
-        <div className={styles.btnStyle}>
-          <button
-            className={styles.button}
-            onClick={() => handleNoticeIndex(2)}
-          >
-            다음 공지
-          </button>
+        <div className={styles.containerBox}>
+          <h3 className={styles.contentTitle}>
+            {removePrefix(scholarshipNotice[scholarshipIndex].title)}
+          </h3>
+          <p className={styles.contentAdmin}>
+            {scholarshipNotice[scholarshipIndex].administrator}
+          </p>
+          <div className={styles.btnStyle}>
+            <button
+              className={styles.button}
+              onClick={() => handleNoticeIndex(2)}
+            >
+              next
+            </button>
+          </div>
         </div>
       </Container>
       <Container

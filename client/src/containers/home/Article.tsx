@@ -169,7 +169,7 @@ const Article = () => {
               className={styles.button}
               onClick={() => handleNoticeIndex(2)}
             >
-              next
+              다음 공지
             </button>
           </div>
         </div>

@@ -55,3 +55,9 @@
   grid-template-rows: 1fr 2fr;
   border-right: 1px solid black;
 }
+
+.table {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

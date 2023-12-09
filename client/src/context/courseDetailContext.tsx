@@ -1,4 +1,5 @@
-// CourseDetailContext.js
+"use client";
+
 import React, {
   createContext,
   useContext,

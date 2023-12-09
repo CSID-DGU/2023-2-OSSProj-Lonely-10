@@ -102,9 +102,12 @@ const Article = () => {
             withCredentials: true,
           }
         );
+        console.log(response.data);
         const prevData = [...courseDetail];
+        console.log(prevData);
         prevData.push(response.data);
         setCourseDetail(prevData);
+        console.log(courseDetail);
       });
     };
     getCourse();

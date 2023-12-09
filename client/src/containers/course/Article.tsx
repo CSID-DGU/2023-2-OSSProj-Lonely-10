@@ -176,6 +176,7 @@ const Article = () => {
       {CourseInfo &&
         CourseInfo.map((data, index) => (
           <Container
+            isCourse={true}
             noticeName={data.course_name}
             baseURL="https://eclass.dongguk.edu/"
           >

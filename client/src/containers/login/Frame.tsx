@@ -62,12 +62,14 @@ const Frame = () => {
               onChange={(e) => {
                 setId(e.target.value);
               }}
+              labelName="학번"
             ></Input>
             <Input
               typeStyle="password"
               onChange={(e) => {
                 setPw(e.target.value);
               }}
+              labelName="비밀번호"
             ></Input>
           </div>
           <LoginButton onClick={handleLogin}></LoginButton>

@@ -229,6 +229,7 @@ public class AggregationFacade {
         return GetSchoolResponseDto.builder()
                 .todos(todoDtoList)
                 .userCourses(userCourseDtos)
+                .courseSchedules(courseService.getCourse(courses))
                 .build();
     }
 

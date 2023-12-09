@@ -43,8 +43,7 @@ const Frame = () => {
       });
     } catch (error) {
       Swal.fire({
-        title: "로그인에 실패했습니다.",
-        text: `사유 : ${error}`,
+        title: "학번, 비밀번호를 확인해주세요!",
         icon: `error`,
         confirmButtonColor: "#ed8b00",
       });

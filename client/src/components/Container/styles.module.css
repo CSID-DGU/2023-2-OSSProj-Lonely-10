@@ -3,6 +3,7 @@
   width: 30vw;
   border: 2px solid gray;
   padding: 0.5rem;
+  border-radius: 15px;
 }
 
 .title {

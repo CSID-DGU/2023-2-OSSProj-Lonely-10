@@ -118,7 +118,7 @@ const SearchFrame = () => {
             검색
           </button>
         </div>
-        <table>
+        <table className={styles.table}>
           <tbody>
             {classData &&
               classData.map((classInfo) => (

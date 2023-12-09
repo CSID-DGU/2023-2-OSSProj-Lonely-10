@@ -2,7 +2,8 @@
   height: 30vh;
   width: 30vw;
   border: 2px solid gray;
-  padding-top: 0.5rem;
+  padding: 0.5rem;
+  border-radius: 15px;
 }
 
 .title {

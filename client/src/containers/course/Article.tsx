@@ -2,12 +2,12 @@
 import Greeting from "@/components/Greeting";
 import Container from "@/components/Container";
 import Todo from "@/components/Todo";
-import Link from "next/link";
 import styles from "./styles.module.css";
 import axios from "axios";
 
 import { useEffect, useState } from "react";
 import { useGlobalContext } from "@/context/userContext";
+import { useCourseDetailContext } from "@/context/courseDetailContext";
 import { getToday } from "./getTodayClass";
 
 interface scheduleProps {
@@ -68,6 +68,7 @@ type CheckboxChangeEvent = React.ChangeEvent<HTMLInputElement>;
 
 const Article = () => {
   const { userId } = useGlobalContext();
+  const { courseDetail, setCourseDetail } = useCourseDetailContext();
   const auth = localStorage.getItem("Authorization");
   const [checkedItems, setCheckedItems] = useState<boolean[]>([]);
   const [CourseInfo, setCourseInfo] = useState<courseProps[]>([]);
@@ -76,7 +77,7 @@ const Article = () => {
   const [todoList, setTodoList] = useState<string[]>([]);
   const [todoItem, setTodoItem] = useState("");
   const [todayClass, setTodayClass] = useState<todayClassProps[]>([]);
-  const [courseDetail, setCourseDetail] = useState<courseDetail[]>([]);
+  // const [courseDetail, setCourseDetail] = useState<courseDetail[]>([]);
 
   useEffect(() => {
     const getCourse = async () => {
@@ -179,21 +180,8 @@ const Article = () => {
             isCourse={true}
             noticeName={data.course_name}
             baseURL="https://eclass.dongguk.edu/"
-          >
-            {courseDetail[index] && (
-              <table>
-                <tbody>
-                  {/* 어떤 인덱스 속성을 통해, 지금 보여주는 컴포넌트를 결정해야함. */}
-                  {courseDetail[index].announcement.map((something) => (
-                    <tr>
-                      <td>{something.title}</td>
-                      <td>{something.content}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            )}
-          </Container>
+            courseIndex={index}
+          ></Container>
         ))}
       <Container noticeName="오늘의 수업 " baseURL={`/home/${userId}`}>
         <table className={styles.tableStyle}>

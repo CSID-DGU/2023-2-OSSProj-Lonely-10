@@ -1,5 +1,6 @@
 import React, { Suspense } from "react";
 import { GlobalContextProvier } from "@/context/userContext";
+import { CourseDetailProvider } from "@/context/courseDetailContext";
 import "./globals.css";
 export const metadata = {
   metadataBase: new URL("https://localhost:3000/"),
@@ -23,7 +24,9 @@ const RootLayout = ({ children }: Props) => {
       </head>
       <body>
         <GlobalContextProvier>
-          <Suspense fallback={null}>{children}</Suspense>
+          <CourseDetailProvider>
+            <Suspense fallback={null}>{children}</Suspense>
+          </CourseDetailProvider>
         </GlobalContextProvier>
       </body>
     </html>

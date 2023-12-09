@@ -32,6 +32,8 @@ public class GetSchoolResponseDto {
     public static class UserCourseDto {
         @JsonProperty("course_name")
         private String courseName;
+        @JsonProperty("course_code")
+        private String courseCode;
         @JsonProperty("professor")
         private String professor;
         @JsonProperty("schedules")

@@ -219,6 +219,7 @@ public class AggregationFacade {
                                     .toList();
                             return GetSchoolResponseDto.UserCourseDto.builder()
                                     .courseName(course.getCourseName())
+                                    .courseCode(course.getCourseCode())
                                     .professor(course.getProfessor())
                                     .schedules(filteredSchedules)
                                     .build();

@@ -17,6 +17,8 @@
   align-items: center;
   margin-right: 2vw;
   margin-left: 2vw;
+  position: relative;
+  padding: 6px 12px;
 }
 
 .listElement,
@@ -27,4 +29,20 @@
 }
 .listElementBtn {
   cursor: pointer;
+}
+
+.listForm::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%);
+  width: 0%;
+  height: 4px;
+  background-color: white;
+  transition: all 0.5s ease-out;
+}
+
+.listForm:hover::after {
+  width: 100%;
 }

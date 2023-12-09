@@ -10,6 +10,7 @@ type ConatinerProps = {
   title?: string;
   administrator?: string;
   isButton?: boolean;
+  isCourse?: boolean;
 };
 
 const Container = (props: ConatinerProps) => {
@@ -17,16 +18,21 @@ const Container = (props: ConatinerProps) => {
     <>
       <div className={styles.container}>
         <div className={styles.subjectStyle}>
-          <span>
-            <p
-              className={styles.title}
-              onClick={() => {
-                window.open(props.baseURL);
-              }}
-            >
-              {props.noticeName}
-            </p>
-          </span>
+          <p
+            className={styles.title}
+            onClick={() => {
+              window.open(props.baseURL);
+            }}
+          >
+            {props.noticeName}
+          </p>
+          {props.isCourse && (
+            <div className={styles.select}>
+              <span className={styles.selectDetail}>공지</span>
+              <span className={styles.selectDetail}>과제</span>
+              <span className={styles.selectDetail}>출결</span>
+            </div>
+          )}
         </div>
         <hr />
         <div className={styles.contents}>{props.children}</div>

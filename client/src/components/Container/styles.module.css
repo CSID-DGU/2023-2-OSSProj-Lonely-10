@@ -2,23 +2,29 @@
   height: 30vh;
   width: 30vw;
   border: 2px solid gray;
-  padding-top: 0.5rem;
+  padding: 0.5rem;
 }
 
 .title {
   color: #ed8b00;
   margin: 0.5rem;
-  font-size: 1.2rem;
+  font-size: 1rem;
   cursor: pointer;
 }
 
-.pBottom {
-  margin: 0;
-  vertical-align: bottom;
-}
-
 .subjectStyle {
+  height: 12%;
   display: flex;
   justify-content: space-between;
   margin-right: 5%;
 }
+
+.contents {
+  height: 75%;
+  position: relative;
+}
+/* 
+.pBottom {
+  margin: 0;
+  vertical-align: bottom;
+} */

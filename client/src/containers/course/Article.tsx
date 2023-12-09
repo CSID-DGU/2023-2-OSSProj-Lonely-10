@@ -10,8 +10,6 @@ import { useEffect, useState } from "react";
 import { useGlobalContext } from "@/context/userContext";
 import { getToday } from "./getTodayClass";
 
-const COURSE_CODE: string[] = ["SCS4045-01"];
-
 interface scheduleProps {
   time: string;
   classroom: string;
@@ -20,6 +18,7 @@ interface scheduleProps {
 
 interface courseProps {
   course_name: string;
+  course_code: string;
   professor: string;
   schedules: scheduleProps[];
 }
@@ -93,9 +92,9 @@ const Article = () => {
       setTodayClass(today);
     };
     const getDetail = () => {
-      COURSE_CODE.forEach(async (data) => {
+      CourseInfo.forEach(async (data) => {
         const response = await axios.get(
-          `/api/v1/lms/${userId}/course/${data}`,
+          `/api/v1/lms/${userId}/course/${data.course_code}`,
           {
             headers: {
               Authorization: auth,
@@ -169,12 +168,11 @@ const Article = () => {
             {courseDetail[index] && (
               <table>
                 <tbody>
+                  {/* 어떤 인덱스 속성을 통해, 지금 보여주는 컴포넌트를 결정해야함. */}
                   {courseDetail[index].announcement.map((something) => (
                     <tr>
                       <td>{something.title}</td>
                       <td>{something.content}</td>
-                      <td>{something.writer}</td>
-                      <td>{something.created_at}</td>
                     </tr>
                   ))}
                 </tbody>

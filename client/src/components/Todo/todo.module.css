@@ -9,6 +9,7 @@
 .title {
   color: #ed8b00;
   margin: 0.5rem;
+  font-size: 1rem;
   text-decoration: none;
 }
 
@@ -19,6 +20,8 @@
 
 .subjectStyle {
   display: flex;
+  height: 12%;
+
   justify-content: space-between;
   margin-right: 5%;
 }

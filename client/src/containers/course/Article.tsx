@@ -201,16 +201,10 @@ const Article = () => {
       </Container>
       <Todo noticeName="오늘의 할일">
         <div className={styles.subjectStyle}>
-          <span className={styles.titleStyle}>
-            <Link className={styles.title} href={""}>
-              오늘의 할 일
-            </Link>
-          </span>
-          <span>
-            <button className={styles.plusButton} onClick={addTodo}>
-              {todoFlag ? "x" : "+"}
-            </button>
-          </span>
+          <p className={styles.title}>오늘의 할 일</p>
+          <button className={styles.plusButton} onClick={addTodo}>
+            {todoFlag ? "x" : "﹢"}
+          </button>
         </div>
         <hr />
         {todoFlag && (

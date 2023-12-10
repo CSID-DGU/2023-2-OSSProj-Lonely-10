@@ -14,6 +14,7 @@ import ossproj.lonely.DGU.Portal.dto.school.response.GetCourseDetailResponseDto;
 import ossproj.lonely.DGU.Portal.dto.school.response.GetSchoolResponseDto;
 import ossproj.lonely.DGU.Portal.service.*;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -192,6 +193,7 @@ public class AggregationFacade {
         List<Todo> todos = todoService.findByUserCode(userCode);
         List<GetSchoolResponseDto.TodoDto> todoDtoList =
                 todos.stream()
+                        .filter(todo -> todo.getCreatedAt().getDayOfYear() == LocalDateTime.now().getDayOfYear())
                         .map(todo -> GetSchoolResponseDto.TodoDto.builder()
                                 .content(todo.getContent())
                                 .createdAt(todo.getCreatedAt().toString())

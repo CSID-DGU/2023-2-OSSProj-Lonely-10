@@ -5,8 +5,7 @@ import styled from "styled-components";
 import Greeting from "@/components/Greeting";
 import SubNav from "@/components/SubNav";
 import styles from "./styles.module.css";
-
-import { useGlobalContext } from "@/context/userContext";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
@@ -42,7 +41,8 @@ interface gradeProps {
 }
 
 const Grade = () => {
-  const { userId } = useGlobalContext();
+  const pathname = usePathname();
+  const userId = pathname.substring("/home/grade/".length);
   const [userData, setUserData] = useState<userProps>();
   const [userGrade, setUserGrade] = useState<gradeProps[]>([]);
   const auth = localStorage.getItem("Authorization");

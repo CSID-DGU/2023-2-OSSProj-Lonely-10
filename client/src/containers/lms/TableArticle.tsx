@@ -1,9 +1,9 @@
 "use client";
-import { useGlobalContext } from "@/context/userContext";
 
 import React, { useEffect, useState } from "react";
 import styles from "./table.module.css";
 import axios from "axios";
+import { usePathname } from "next/navigation";
 
 interface userProps {
   user_name: string;
@@ -17,7 +17,8 @@ interface userProps {
 
 const TableArticle = () => {
   const auth = localStorage.getItem("Authorization");
-  const { userId } = useGlobalContext();
+  const pathname = usePathname();
+  const userId = pathname.substring("/lms/".length);
   const [userData, setUserData] = useState<userProps>();
   useEffect(() => {
     const getUserInfo = async () => {

@@ -1,9 +1,9 @@
 "use client";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import styles from "./confirm.module.css";
 import Swal from "sweetalert2";
-import { useGlobalContext } from "@/context/userContext";
 import Greeting from "@/components/Greeting";
 import SubNav from "@/components/SubNav";
 import Button from "@/components/Button";
@@ -16,7 +16,8 @@ interface infoProps {
 
 const ConfirmEnroll = () => {
   const auth = localStorage.getItem("Authorization");
-  const { userId } = useGlobalContext();
+  const pathname = usePathname();
+  const userId = pathname.substring("/enroll/confirm/".length);
 
   const [classInfo, setClassInfo] = useState<infoProps[]>([]);
   const [enrollmentCancelled, setEnrollmentCancelled] =

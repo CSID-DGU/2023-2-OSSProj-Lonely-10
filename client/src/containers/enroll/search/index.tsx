@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
-import { useGlobalContext } from "@/context/userContext";
+import { usePathname } from "next/navigation";
 import styles from "./search.module.css";
 import axios from "axios";
 import Swal from "sweetalert2";
@@ -17,11 +17,12 @@ interface classProps {
 }
 
 const SearchFrame = () => {
-  const { userId } = useGlobalContext();
   const [classData, setClassData] = useState<classProps[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedOption, setSelectedOption] = useState("");
   const auth = localStorage.getItem("Authorization");
+  const pathname = usePathname();
+  const userId = pathname.substring("/enroll/search/".length);
 
   useEffect(() => {
     const getAllCourse = async () => {

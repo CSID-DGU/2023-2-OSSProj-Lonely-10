@@ -3,16 +3,37 @@
 import styles from "./styles.module.css";
 import Swal from "sweetalert2";
 import { useRouter } from "next/navigation";
-import { useGlobalContext } from "@/context/userContext";
+import { usePathname } from "next/navigation";
 import axios from "axios";
+import { useEffect, useState } from "react";
 type GreetingProps = {
   width?: string;
 };
 
 const Greeting = (props: GreetingProps) => {
+  const [userName, setUserName] = useState<string>("");
   const router = useRouter();
-  const { userId, userName } = useGlobalContext();
+  const pathname = usePathname();
+  const regex = /\/([^\/]+)\/?$/;
+  const matchResult = pathname.match(regex);
+  const userId = matchResult ? matchResult[1] : null;
   const auth = localStorage.getItem("Authorization");
+  useEffect(() => {
+    const getUserName = async () => {
+      try {
+        const response = await axios.get(`/api/v1/info/${userId}`, {
+          headers: {
+            Authorization: auth,
+          },
+          withCredentials: true,
+        });
+        setUserName(response.data.user_name);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getUserName();
+  }, []);
   return (
     <>
       <div

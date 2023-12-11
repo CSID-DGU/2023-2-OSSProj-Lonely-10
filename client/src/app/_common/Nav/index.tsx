@@ -7,7 +7,8 @@ import { usePathname } from "next/navigation";
 const Nav = () => {
   const pathname = usePathname();
   const regex = /\/([^\/]+)\/?$/;
-  const userId = pathname.match(regex);
+  const matchResult = pathname.match(regex);
+  const userId = matchResult ? matchResult[1] : null;
   return (
     <nav className={styles.navBar}>
       <ul className={styles.listContainer}>

@@ -6,9 +6,9 @@ import styles from "./styles.module.css";
 import axios from "axios";
 
 import { useEffect, useState } from "react";
-import { useGlobalContext } from "@/context/userContext";
 import { useCourseDetailContext } from "@/context/courseDetailContext";
 import { getToday } from "./getTodayClass";
+import { usePathname } from "next/navigation";
 
 interface scheduleProps {
   time: string;
@@ -67,8 +67,9 @@ interface courseDetail {
 type CheckboxChangeEvent = React.ChangeEvent<HTMLInputElement>;
 
 const Article = () => {
-  const { userId } = useGlobalContext();
-  const { courseDetail, setCourseDetail } = useCourseDetailContext();
+  const pathname = usePathname();
+  const userId = pathname.substring("/course/".length);
+  const { setCourseDetail } = useCourseDetailContext();
   const auth = localStorage.getItem("Authorization");
   const [checkedItems, setCheckedItems] = useState<boolean[]>([]);
   const [CourseInfo, setCourseInfo] = useState<courseProps[]>([]);
@@ -94,7 +95,6 @@ const Article = () => {
         setTodayClass(today);
         return res.data.user_course; // 반환값으로 user_course를 전달
       } catch (error) {
-        console.error("Error fetching course data:", error);
         throw error; // 에러를 상위로 전파
       }
     };
@@ -117,7 +117,6 @@ const Article = () => {
 
         const details = await Promise.all(detailPromises);
         setCourseDetail(details);
-        console.log(details);
       } catch (error) {
         console.error("Error fetching course details:", error);
       }

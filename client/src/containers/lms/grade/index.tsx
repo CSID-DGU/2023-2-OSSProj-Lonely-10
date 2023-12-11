@@ -42,7 +42,7 @@ interface gradeProps {
 
 const Grade = () => {
   const pathname = usePathname();
-  const userId = pathname.substring("/home/grade/".length);
+  const userId = pathname.substring("/lms/grade/".length);
   const [userData, setUserData] = useState<userProps>();
   const [userGrade, setUserGrade] = useState<gradeProps[]>([]);
   const auth = localStorage.getItem("Authorization");

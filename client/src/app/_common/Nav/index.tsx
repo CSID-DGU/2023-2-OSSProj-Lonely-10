@@ -2,12 +2,12 @@
 
 import styles from "./styles.module.css";
 import Link from "next/link";
-import { useGlobalContext } from "@/context/userContext";
-import { useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 const Nav = () => {
-  const { userId } = useGlobalContext();
-  const router = useRouter();
+  const pathname = usePathname();
+  const regex = /\/([^\/]+)\/?$/;
+  const userId = pathname.match(regex);
   return (
     <nav className={styles.navBar}>
       <ul className={styles.listContainer}>

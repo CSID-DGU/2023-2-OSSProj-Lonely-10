@@ -4,10 +4,13 @@ import SubNav from "@/components/SubNav";
 import Greeting from "@/components/Greeting";
 import TableArticle from "./TableArticle";
 import styles from "./Article.module.css";
-import { useGlobalContext } from "@/context/userContext";
+import { usePathname } from "next/navigation";
 
 const Article = () => {
-  const { userId } = useGlobalContext();
+  const pathname = usePathname();
+  const regex = /\/([^\/]+)\/?$/;
+  const matchResult = pathname.match(regex);
+  const userId = matchResult ? matchResult[1] : null;
   return (
     <div className={styles.layout}>
       <div className={styles.leftFrame}>

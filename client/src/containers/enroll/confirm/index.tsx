@@ -17,7 +17,9 @@ interface infoProps {
 const ConfirmEnroll = () => {
   const auth = localStorage.getItem("Authorization");
   const pathname = usePathname();
-  const userId = pathname.substring("/enroll/confirm/".length);
+  const regex = /\/([^\/]+)\/?$/;
+  const matchResult = pathname.match(regex);
+  const userId = matchResult ? matchResult[1] : null;
 
   const [classInfo, setClassInfo] = useState<infoProps[]>([]);
   const [enrollmentCancelled, setEnrollmentCancelled] =

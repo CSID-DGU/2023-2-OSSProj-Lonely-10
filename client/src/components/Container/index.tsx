@@ -23,6 +23,9 @@ const Container = (props: ConatinerProps) => {
     setDisplayStatus(status);
   };
 
+  const getNewDate = (prevDate: string): string => {
+    return prevDate.split("T")[0];
+  };
   return (
     <>
       <div className={styles.container}>
@@ -94,7 +97,7 @@ const Container = (props: ConatinerProps) => {
                       props.courseIndex ? props.courseIndex : 0
                     ].attendance.map((something) => (
                       <tr>
-                        <td>{something.date}</td>
+                        <td>{getNewDate(something.date)}</td>
                         <td>{something.status}</td>
                       </tr>
                     ))}

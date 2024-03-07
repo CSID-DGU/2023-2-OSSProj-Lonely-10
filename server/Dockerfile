@@ -4,6 +4,6 @@ WORKDIR /usr/src
 RUN gradle wrapper --gradle-version 8.2.1
 RUN ./gradlew build
 
-FROM openjdk:17-jdk-alpine
+FROM openjdk:17-jdk-slim
 COPY --from=builder /usr/src/build/libs/DGU-Portal-0.0.1-SNAPSHOT.jar /usr/app/app.jar
 ENTRYPOINT ["java","-jar","/usr/app/app.jar"]

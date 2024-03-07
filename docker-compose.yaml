@@ -2,6 +2,7 @@ version: "3.8"
 
 services:
   nginx:
+    image: kurtyoon/dgu-portal-nginx:latest
     build:
       context: ./nginx
       dockerfile: Dockerfile
@@ -12,6 +13,7 @@ services:
       - server
 
   client:
+    image: kurtyoon/dgu-portal-client:latest
     build:
       context: ./client
       dockerfile: Dockerfile
@@ -19,6 +21,7 @@ services:
       - "3000:3000"
 
   server:
+    image: kurtyoon/dgu-portal-server:latest
     build:
       context: ./server
       dockerfile: Dockerfile
@@ -28,6 +31,7 @@ services:
       - database
 
   crawler:
+    image: kurtyoon/dgu-portal-crawler:latest
     build:
       context: ./crawling
       dockerfile: Dockerfile
@@ -35,6 +39,7 @@ services:
       - database
 
   database:
+    image: kurtyoon/dgu-portal-database:latest
     build:
       context: ./database
       dockerfile: Dockerfile
